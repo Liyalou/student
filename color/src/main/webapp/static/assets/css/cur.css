@@ -1,0 +1,85 @@
+/*流程状态展示*/
+.modal-dialog{
+    position: relative;
+}
+#freezTips{
+    position: absolute;
+    top:100px;
+    z-index: 1000;
+}
+/*流程状态展示*/
+.btns{
+   position: fixed;
+   left:92%;
+   top:18%;
+}
+.btns button{
+  width: 18%;
+  margin: 1% 0;
+  font-size: 1rem;
+}
+#dis_agree{
+  display: none;
+}
+#dis_dotAgree{
+  display: none;
+}
+#chooseCAR{
+  display: none;
+}
+#dis_reply{
+  display: none;
+}
+#back{
+  display: none;
+}
+textarea{
+  resize: none;
+}
+label {
+   font-size: 12px;
+}
+
+@media screen and (max-width: 1550px) {
+   label{
+        font-size: 10px;
+    }
+    .table > tbody > tr > td {
+        padding: 0;
+        vertical-align: top;
+        line-height: 24px;
+        border: 1px solid #bbb;
+        text-align: center;
+    }
+    .table>tbody>tr>td>input{
+        border: none;
+    }
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+    -webkit-appearance: none !important;margin: 0;
+}
+.info{
+  display: none;
+}
+.table > tbody > tr > td {
+    padding: 0;
+    vertical-align: top;
+    line-height: 24px;
+    text-align: center;
+}
+.table>tbody>tr>td>input{
+    border: none;
+}
+@media print {
+    .no-print { display: none; }
+    .tab-content{  border:none;}
+    #breadcrumbs,.footer-inner{display: none;}
+    .table > tbody > tr > td {
+        padding: 0;
+        vertical-align: top;
+        line-height: 24px;
+        border: 1px solid #bbb;
+        text-align: left;
+    }
+}
