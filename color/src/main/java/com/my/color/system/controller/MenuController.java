@@ -28,7 +28,7 @@ public class MenuController {
 	 */
 	@RequestMapping("/index")
 	public ModelAndView index() {
-		
+		System.out.println("提交测试");
 		return layout.layout("menu", menuId);
 	}
 	
