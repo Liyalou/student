@@ -8,7 +8,7 @@
 <div id="navbar" class="navbar navbar-default">
 	<div class="navbar-container" id="navbar-container">
 	    <div class="navbar-header">
-          <a class="navbar-brand" href="#">ENJOYUS后台管理系统</a>
+          <a class="navbar-brand" href="#">嘉义大学后台管理系统</a>
         </div>
 	    <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">

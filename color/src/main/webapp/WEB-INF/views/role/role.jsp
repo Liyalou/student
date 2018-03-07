@@ -48,12 +48,12 @@
 	<div class="well table-responsive" style="background-color: white;">
 		<table class="table table-bordered table-hover">
 			<thead>
-				<tr>
-					<th>roleName</th>
-					<th>roleName</th>
-					<th>roleName</th>
-					<th>roleName</th>
-					<th>roleName</th>
+				<tr >
+					<th style = "text-align: center;">roleName</th>
+					<th style = "text-align: center;">roleName</th>
+					<th style = "text-align: center;">roleName</th>
+					<th style = "text-align: center;">roleName</th>
+					<th style = "text-align: center;">roleName</th>
 				</tr>
 			</thead>
 			<tbody>

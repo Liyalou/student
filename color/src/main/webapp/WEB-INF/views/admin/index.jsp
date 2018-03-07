@@ -8,7 +8,7 @@ pageEncoding="UTF-8"%>
 <html lang="zh-CN">
 <head>
 	<meta charset="utf-8">
-    <title>ENJOYUS后台管理系统</title>
+    <title>嘉义大学后台管理系统</title>
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -38,7 +38,7 @@ pageEncoding="UTF-8"%>
 		<div class="dialog" style="margin-top: 0em;padding-top:15em;">
 			<div class="center">
 				<h1>
-					<span style="font-size:30px;font-family: georgia, serif;"><Strong>ENJOYUS</Strong></span>
+					<span style="font-size:30px;font-family: georgia, serif;"><Strong>嘉义大学</Strong></span>
 					<span style="font-size:20px;">后台管理系统</span>
 				</h1>
 			</div>
@@ -48,11 +48,11 @@ pageEncoding="UTF-8"%>
 	                <form id="login-form" action="${ctx}/user/login" method="post">
 	                    <div class="form-group">
 							<label for="username">账号</label> 
-							<input type="text" class="form-control" id="username" name="username" placeholder="账号" >
+							<input type="text" class="form-control" id="username" name="username" >
 						</div>
 						<div class="form-group">
 							<label for="password">密码</label> 
-							<input type="password" class="form-control" id="password" name="password" placeholder="密码">
+							<input type="password" class="form-control" id="password" name="password" >
 						</div>
 						<div class="form-group">
 							<p class="text-right" style="font-size: 12px;"><a>忘记密码</a></p>

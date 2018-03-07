@@ -33,13 +33,13 @@ public class RoleController {
 	@Autowired
 	private MainLayout layout;
 	
-	@RequestMapping("/index")
+	@RequestMapping("/roleIndex")
 	public ModelAndView roleIndex(ModelMap model,Page<Role> page){
 		page.startPage(page);
 		List<Role> list = roleService.getRoleList();
 		PageInfo<Role> pageList = page.listToPage(list);
 		model.put(Constant.PAGE_LIST, pageList);
-		model.put(Constant.PAGE_URL, "/admin/role/index");
+		model.put(Constant.PAGE_URL, "/admin/role/roleIndex");
 		return layout.layout("role",MENU_ID);
 	}
 	
