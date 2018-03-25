@@ -48,22 +48,22 @@
 	<div class="well table-responsive" style="background-color: white;">
 		<table class="table table-bordered table-hover">
 			<thead>
-				<tr >
-					<th style = "text-align: center;">roleName</th>
-					<th style = "text-align: center;">roleName</th>
-					<th style = "text-align: center;">roleName</th>
-					<th style = "text-align: center;">roleName</th>
-					<th style = "text-align: center;">roleName</th>
+				<tr>
+					<th style = "text-align: center;">创建时间</th>
+					<th style = "text-align: center;">角色名称</th>
+					<th style = "text-align: center;">角色编码</th>
+					<th style = "text-align: center;">状态</th>
+					<th style = "text-align: center;">操作</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${pageList.list}" var="role">
 					<tr>
-						<td>${role.roleId}</td>
+						<td>${role.roleCreateTime}</td>
 						<td>${role.roleName}</td>
 						<td>${role.roleCode}</td>
 						<td>${role.roleIsValid}</td>
-						<td>${role.roleCreateTime}</td>
+						<td><a>删除</a>&nbsp;<a>修改</a>&nbsp;<a>授权</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

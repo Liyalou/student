@@ -1,5 +1,10 @@
 package com.my.color.role.dao.po;
 
+/**
+ * 角色
+ * @author lyl
+ *
+ */
 public class Role {
     /**角色id*/
     private String roleId;

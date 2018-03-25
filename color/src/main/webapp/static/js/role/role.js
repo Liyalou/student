@@ -3,3 +3,7 @@ $("#roleAdd").on('click', function (event) {
 
 	});
 });
+
+/*$("#submitRole").on('click', function(event){
+	$("#wrapForm").submit();
+});*/
