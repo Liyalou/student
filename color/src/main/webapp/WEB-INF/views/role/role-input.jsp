@@ -51,10 +51,10 @@
     </table>
     <div class="modal-footer">
 	    <div class="center">
-	        <button class="btn btn-sm btn-primary" type="submit" id="submitRole">
+	        <button class="btn btn-sm btn-primary" type="submit"  id="submitRole">
 	            <i class="icon-ok bigger-110"></i>保存
 	        </button>
-	        <button class="btn btn-sm btn-primary btn-grey btn_close" data-dismiss="modal">取消</button>
+	        <button class="btn btn-sm btn-primary btn-grey btn_close" type='button' data-dismiss="modal">取消</button>
 	    </div>
 	</div>
 </form>
