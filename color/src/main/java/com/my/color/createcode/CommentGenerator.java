@@ -1,5 +1,8 @@
 package com.my.color.createcode;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.Field;
@@ -16,8 +19,7 @@ public class CommentGenerator extends DefaultCommentGenerator {
     public void addFieldComment(Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
         // 添加字段注释
         if (introspectedColumn.getRemarks() != null)
-        	System.out.println(introspectedColumn.getRemarks());
-        field.addJavaDocLine("/**" + introspectedColumn.getRemarks()+"*/");
+        	field.addJavaDocLine("/**" + introspectedColumn.getRemarks() +"*/");
     }
 	
 	@Override

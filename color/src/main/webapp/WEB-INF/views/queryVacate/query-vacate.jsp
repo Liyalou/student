@@ -49,7 +49,7 @@
 		<table class="table table-bordered table-hover">
 			<thead>
 				<tr>
-					<th style = "text-align: center;">姓名（学生管理）</th>
+					<th style = "text-align: center;">姓名（请假统计）</th>
 					<th style = "text-align: center;">性别</th>
 					<th style = "text-align: center;">籍贯</th>
 					<th style = "text-align: center;">身份号</th>
