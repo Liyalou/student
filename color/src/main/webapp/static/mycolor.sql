@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2018-03-27 17:39:25
+Date: 2018-03-28 17:06:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -60,14 +60,42 @@ CREATE TABLE `e_menu_role` (
 -- ----------------------------
 -- Records of e_menu_role
 -- ----------------------------
-INSERT INTO `e_menu_role` VALUES ('MENU_ACCOUNT', '3089cdfd3f51478e87d51995b93d0c03');
+INSERT INTO `e_menu_role` VALUES ('MENU_MAIN', '231cd593031e4c4faf48e4d725e45181');
 INSERT INTO `e_menu_role` VALUES ('MENU_MAIN', '3089cdfd3f51478e87d51995b93d0c03');
+INSERT INTO `e_menu_role` VALUES ('MENU_MAIN', 'cc2958f8ce6e4114a10300cd7ab1b798');
+INSERT INTO `e_menu_role` VALUES ('MENU_MAIN', 'e0f9553f149041a5a4ee19a2c50110f9');
+INSERT INTO `e_menu_role` VALUES ('MENU_MAIN', 'f491f2d85398437db55551e410961f3d');
 INSERT INTO `e_menu_role` VALUES ('MENU_MANGE', '3089cdfd3f51478e87d51995b93d0c03');
+INSERT INTO `e_menu_role` VALUES ('MENU_QUERY_VACATE', '3089cdfd3f51478e87d51995b93d0c03');
 INSERT INTO `e_menu_role` VALUES ('MENU_ROLE', '3089cdfd3f51478e87d51995b93d0c03');
-INSERT INTO `e_menu_role` VALUES ('MENU_USER', '3089cdfd3f51478e87d51995b93d0c03');
-INSERT INTO `e_menu_role` VALUES ('TOP_CUSTORMER', '3089cdfd3f51478e87d51995b93d0c03');
+INSERT INTO `e_menu_role` VALUES ('MENU_SALARY_MANAGE', '231cd593031e4c4faf48e4d725e45181');
+INSERT INTO `e_menu_role` VALUES ('MENU_SALARY_MANAGE', '3089cdfd3f51478e87d51995b93d0c03');
+INSERT INTO `e_menu_role` VALUES ('MENU_SALARY_MANAGE', 'cc2958f8ce6e4114a10300cd7ab1b798');
+INSERT INTO `e_menu_role` VALUES ('MENU_SALARY_MANAGE', 'e0f9553f149041a5a4ee19a2c50110f9');
+INSERT INTO `e_menu_role` VALUES ('MENU_SCHOOL_CLASS', '3089cdfd3f51478e87d51995b93d0c03');
+INSERT INTO `e_menu_role` VALUES ('MENU_SCHOOL_CLASS', 'f491f2d85398437db55551e410961f3d');
+INSERT INTO `e_menu_role` VALUES ('MENU_STUDENT_RECORD', '231cd593031e4c4faf48e4d725e45181');
+INSERT INTO `e_menu_role` VALUES ('MENU_STUDENT_RECORD', '3089cdfd3f51478e87d51995b93d0c03');
+INSERT INTO `e_menu_role` VALUES ('MENU_STUDENT_RECORD', 'cc2958f8ce6e4114a10300cd7ab1b798');
+INSERT INTO `e_menu_role` VALUES ('MENU_STUDENT_RECORD', 'f491f2d85398437db55551e410961f3d');
+INSERT INTO `e_menu_role` VALUES ('MENU_STUDENT_VACATE', '3089cdfd3f51478e87d51995b93d0c03');
+INSERT INTO `e_menu_role` VALUES ('MENU_STUDENT_VACATE', 'e0f9553f149041a5a4ee19a2c50110f9');
+INSERT INTO `e_menu_role` VALUES ('MENU_TEACHER', '3089cdfd3f51478e87d51995b93d0c03');
+INSERT INTO `e_menu_role` VALUES ('MENU_TEACHER', 'f491f2d85398437db55551e410961f3d');
+INSERT INTO `e_menu_role` VALUES ('TOP_MAIN', '231cd593031e4c4faf48e4d725e45181');
 INSERT INTO `e_menu_role` VALUES ('TOP_MAIN', '3089cdfd3f51478e87d51995b93d0c03');
+INSERT INTO `e_menu_role` VALUES ('TOP_MAIN', 'cc2958f8ce6e4114a10300cd7ab1b798');
+INSERT INTO `e_menu_role` VALUES ('TOP_MAIN', 'e0f9553f149041a5a4ee19a2c50110f9');
+INSERT INTO `e_menu_role` VALUES ('TOP_MAIN', 'f491f2d85398437db55551e410961f3d');
+INSERT INTO `e_menu_role` VALUES ('TOP_SALARY_MANAGE', '231cd593031e4c4faf48e4d725e45181');
+INSERT INTO `e_menu_role` VALUES ('TOP_SALARY_MANAGE', '3089cdfd3f51478e87d51995b93d0c03');
+INSERT INTO `e_menu_role` VALUES ('TOP_SALARY_MANAGE', 'cc2958f8ce6e4114a10300cd7ab1b798');
+INSERT INTO `e_menu_role` VALUES ('TOP_SALARY_MANAGE', 'e0f9553f149041a5a4ee19a2c50110f9');
 INSERT INTO `e_menu_role` VALUES ('TOP_SYSTEM', '3089cdfd3f51478e87d51995b93d0c03');
+INSERT INTO `e_menu_role` VALUES ('TOP_TEACH', '231cd593031e4c4faf48e4d725e45181');
+INSERT INTO `e_menu_role` VALUES ('TOP_TEACH', '3089cdfd3f51478e87d51995b93d0c03');
+INSERT INTO `e_menu_role` VALUES ('TOP_TEACH', 'cc2958f8ce6e4114a10300cd7ab1b798');
+INSERT INTO `e_menu_role` VALUES ('TOP_TEACH', 'f491f2d85398437db55551e410961f3d');
 
 -- ----------------------------
 -- Table structure for e_role
@@ -85,19 +113,11 @@ CREATE TABLE `e_role` (
 -- ----------------------------
 -- Records of e_role
 -- ----------------------------
-INSERT INTO `e_role` VALUES ('3089cdfd3f51478e87d51995b93d0c03', '系统管理员', 'system', '1', '2017-12-14 10:10:51');
-INSERT INTO `e_role` VALUES ('3089cdfd3f51478e87d51995b93d0c11', '系统管理员1', 'system', '1', '2017-12-14 10:10:51');
-INSERT INTO `e_role` VALUES ('3089cdfd3f51478e87d51995b93d0c12', '系统管理员2', 'system', '1', '2017-12-14 10:10:51');
-INSERT INTO `e_role` VALUES ('3089cdfd3f51478e87d51995b93d0c13', '系统管理员3', 'system', '1', '2017-12-14 10:10:51');
-INSERT INTO `e_role` VALUES ('3089cdfd3f51478e87d51995b93d0c14', '系统管理员4', 'system', '1', '2017-12-14 10:10:51');
-INSERT INTO `e_role` VALUES ('3089cdfd3f51478e87d51995b93d0c15', '系统管理员5', 'system', '1', '2017-12-14 10:10:51');
-INSERT INTO `e_role` VALUES ('3089cdfd3f51478e87d51995b93d0c16', '系统管理员6', 'system', '1', '2017-12-14 10:10:51');
-INSERT INTO `e_role` VALUES ('3089cdfd3f51478e87d51995b93d0c17', '系统管理员7', 'system', '1', '2017-12-14 10:10:51');
-INSERT INTO `e_role` VALUES ('3089cdfd3f51478e87d51995b93d0c18', '系统管理员8', 'system', '1', '2017-12-14 10:10:51');
-INSERT INTO `e_role` VALUES ('3089cdfd3f51478e87d51995b93d0c19', '系统管理员9', 'system', '1', '2017-12-14 10:10:51');
-INSERT INTO `e_role` VALUES ('3089cdfd3f51478e87d51995b93d0c21', '系统管理员21', 'system', '1', '2017-12-14 10:10:51');
-INSERT INTO `e_role` VALUES ('3089cdfd3f51478e87d51995b93d0c22', '系统管理员222', 'system', '1', '2017-12-14 10:10:51');
-INSERT INTO `e_role` VALUES ('3089cdfd3f51478e87d51995b93d0c23', '系统管理员23', 'system', '1', '2017-12-14 10:10:51');
+INSERT INTO `e_role` VALUES ('231cd593031e4c4faf48e4d725e45181', '任课老师', 'role_teacher', '1', '2017-12-14 10:10:51');
+INSERT INTO `e_role` VALUES ('3089cdfd3f51478e87d51995b93d0c03', '系统管理员', 'role_system', '1', '2017-12-14 10:10:51');
+INSERT INTO `e_role` VALUES ('cc2958f8ce6e4114a10300cd7ab1b798', '教务管理员', 'role_teach', '1', '2017-12-14 10:10:51');
+INSERT INTO `e_role` VALUES ('e0f9553f149041a5a4ee19a2c50110f9', '学生', 'role_student', '1', '2017-12-14 10:10:51');
+INSERT INTO `e_role` VALUES ('f491f2d85398437db55551e410961f3d', '辅导员', 'role_instructor', '1', '2017-12-14 10:10:51');
 
 -- ----------------------------
 -- Table structure for e_salary_manage
@@ -285,7 +305,7 @@ CREATE TABLE `e_user` (
 -- ----------------------------
 -- Records of e_user
 -- ----------------------------
-INSERT INTO `e_user` VALUES ('0555137b929047769255c519912b232b', '系统管理员', 'admin', '223ce7b851123353479d85757fbbf4e320d1e251', '1', null, '123456789', null, null, null, null, null, null, '1', '2017-12-04 11:15:17', '2018-03-17 09:16:23', null);
+INSERT INTO `e_user` VALUES ('0555137b929047769255c519912b232b', '系统管理员', 'admin', '223ce7b851123353479d85757fbbf4e320d1e251', '1', null, '123456789', null, null, null, null, null, null, '1', '2017-12-04 11:15:17', '2018-03-28 16:49:08', null);
 
 -- ----------------------------
 -- Table structure for e_user_role
