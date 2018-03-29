@@ -1,7 +1,5 @@
 package com.my.color.teacher.dao.po;
 
-import java.util.Date;
-
 public class TeachTeacher {
     /**教务老师档案id*/
     private String teachTeacherId;
@@ -43,7 +41,7 @@ public class TeachTeacher {
     private String teacherIsValid;
 
     /**创建时间*/
-    private Date teacherCreateTime;
+    private String teacherCreateTime;
 
     /**创建人id*/
     private String teacherCreateUserId;
@@ -52,7 +50,7 @@ public class TeachTeacher {
     private String teacherCreateUserName;
 
     /**修改时间*/
-    private Date teacherUpdateTime;
+    private String teacherUpdateTime;
 
     /**修改人id*/
     private String teacherUpdateUserId;
@@ -191,12 +189,12 @@ public class TeachTeacher {
     }
 
     
-    public Date getTeacherCreateTime() {
+    public String getTeacherCreateTime() {
         return teacherCreateTime;
     }
 
     
-    public void setTeacherCreateTime(Date teacherCreateTime) {
+    public void setTeacherCreateTime(String teacherCreateTime) {
         this.teacherCreateTime = teacherCreateTime;
     }
 
@@ -221,12 +219,12 @@ public class TeachTeacher {
     }
 
     
-    public Date getTeacherUpdateTime() {
+    public String getTeacherUpdateTime() {
         return teacherUpdateTime;
     }
 
     
-    public void setTeacherUpdateTime(Date teacherUpdateTime) {
+    public void setTeacherUpdateTime(String teacherUpdateTime) {
         this.teacherUpdateTime = teacherUpdateTime;
     }
 

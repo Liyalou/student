@@ -20,7 +20,7 @@ import com.my.color.teachClass.dao.po.SchoolClass;
  * @author lyl
  *
  */
-@RequestMapping("admin/schoolClass")
+@RequestMapping("/admin/schoolClass")
 @Controller
 public class SchoolClassController {
 

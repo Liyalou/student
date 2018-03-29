@@ -98,4 +98,31 @@ public class UserService {
 		}
 		return breadCrumb;
 	}
+	
+	/**
+	 * 保存
+	 * @param user
+	 * @return
+	 */
+	public int insertSelective(User user){
+		return userMapper.insertSelective(user);
+	}
+	
+	/**
+	 * 查询
+	 * @param user
+	 * @return
+	 */
+	public User selectByPrimaryKey(String userId){
+		return userMapper.selectByPrimaryKey(userId);
+	}
+	
+	/**
+	 * xiuagi
+	 * @param user
+	 * @return
+	 */
+	public int updateByPrimaryKeySelective(User user){
+		return userMapper.updateByPrimaryKeySelective(user);
+	}
 }

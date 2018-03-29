@@ -25,4 +25,7 @@ public interface RoleMapper {
     
     
     List<Role> getRoleList();
+    
+    
+    Role selectByRoleCode(String roleCode);
 }

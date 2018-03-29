@@ -5,6 +5,6 @@
 <tiles-definitions>
     <definition extends="base.definition" name="studentRecord">
     	<put-attribute name="body"  value="/WEB-INF/views/teach/student/student-record.jsp" />
-        <put-attribute name="custom-js" value="/WEB-INF/views/role/role-js.jsp" />
+        <put-attribute name="custom-js" value="/WEB-INF/views/teach/student/student-record-js.jsp" />
     </definition>
 </tiles-definitions>

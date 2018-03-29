@@ -5,6 +5,6 @@
 <tiles-definitions>
     <definition extends="base.definition" name="querySalary">
     	<put-attribute name="body"  value="/WEB-INF/views/querySalary/query-salary.jsp" />
-        <put-attribute name="custom-js" value="/WEB-INF/views/queryVacate/query-salary-js.jsp" />
+        <put-attribute name="custom-js" value="/WEB-INF/views/querySalary/query-salary-js.jsp" />
     </definition>
 </tiles-definitions>

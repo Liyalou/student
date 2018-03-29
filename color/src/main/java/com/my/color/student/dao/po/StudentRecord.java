@@ -3,70 +3,70 @@ package com.my.color.student.dao.po;
 import java.util.Date;
 
 public class StudentRecord {
-    /**Ñ§Éúµµ°¸id*/
+    /**å­¦ç”Ÿæ¡£æ¡ˆid*/
     private String studentRecordId;
 
-    /**ĞÕÃû*/
+    /**å§“å*/
     private String studentRecordName;
 
-    /**ĞÔ±ğ*/
+    /**æ€§åˆ«*/
     private String studentRecordSex;
 
-    /**³öÉúÄêÔÂ*/
+    /**å‡ºç”Ÿå¹´æœˆ*/
     private String studentBirthYears;
 
-    /**Éí¸ß*/
+    /**èº«é«˜*/
     private Integer studentRecordHeight;
 
-    /**Éí·İÖ¤*/
+    /**èº«ä»½è¯*/
     private String studentIdCard;
 
-    /**Ãñ×å*/
+    /**æ°‘æ—*/
     private String studentRecordNation;
 
-    /**¼®¹á*/
+    /**ç±è´¯*/
     private String studentNativePlace;
 
-    /**ÁªÏµµç»°*/
+    /**è”ç³»ç”µè¯*/
     private String studentPhone;
 
-    /**¼Ò³¤ÁªÏµµç»°*/
+    /**å®¶é•¿è”ç³»ç”µè¯*/
     private String studentPatriarchPhone;
 
-    /**¼ÒÍ¥×¡Ö·*/
+    /**å®¶åº­ä½å€*/
     private String studentFamilyAddress;
 
-    /**¸öÈË¼ò½é*/
+    /**ä¸ªäººç®€ä»‹*/
     private String studentRemark;
 
-    /**Ñ§ÉúuserId*/
+    /**å­¦ç”ŸuserId*/
     private String studentUserId;
 
-    /**ÊÇ·ñÓĞĞ§*/
+    /**æ˜¯å¦æœ‰æ•ˆ*/
     private String studentIsVaild;
 
-    /**°à¼¶ID*/
+    /**ç­çº§ID*/
     private String studentClassId;
 
-    /**°à¼¶Ãû³Æ*/
+    /**ç­çº§åç§°*/
     private String studentClassName;
 
-    /**´´½¨Ê±¼ä*/
+    /**åˆ›å»ºæ—¶é—´*/
     private Date studentCreateTime;
 
-    /**´´½¨ÈËid*/
+    /**åˆ›å»ºäººid*/
     private String studentCreateUid;
 
-    /**´´½¨ÈË*/
+    /**åˆ›å»ºäºº*/
     private String studentCreateUname;
 
-    /**ĞŞ¸ÄÈËid*/
+    /**ä¿®æ”¹äººid*/
     private String studentLastUpuid;
 
-    /**ĞŞ¸ÄÈË*/
+    /**ä¿®æ”¹äºº*/
     private String studentLastUpuname;
 
-    /**ĞŞ¸ÄÊ±¼ä*/
+    /**ä¿®æ”¹æ—¶é—´*/
     private Date studentLastUptime;
 
     

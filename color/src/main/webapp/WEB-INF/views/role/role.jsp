@@ -39,7 +39,7 @@
 		</div>
 	</div>
 	<div class="hr hr10 hr-dotted"></div>
-	<c:if test="${alertMsg}">
+	<c:if test="${not empty alertType}">
 		<div class="alert alert-${alertType}">
 			<button type="button" class="close" data-dismiss="alert">×</button>
 			<strong>提示:</strong>${alertMsg}

@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.my.color.base.util.DateUtils;
+import com.my.color.base.util.MessageUtils;
 import com.my.color.base.util.StringUtils;
 import com.my.color.base.util.UUIDUtils;
 import com.my.color.role.dao.RoleMapper;
@@ -22,9 +24,12 @@ public class RoleService {
 	@Autowired
 	private RoleMapper roleMapper;
 	
-	
 	public List<Role> getRoleList(){
 		return roleMapper.getRoleList();
+	}
+	
+	public Role getRoleByCode(String roleCode){
+		return roleMapper.selectByRoleCode(roleCode);
 	}
 	
 	/**
@@ -32,7 +37,7 @@ public class RoleService {
 	 * @param role
 	 * @return
 	 */
-	public int submitRole(Role role){
+	public void submitRole(RedirectAttributes attributes,Role role){
 		int result = 0;
 		if(!StringUtils.isEmpty(role.getRoleId())){
 			result = roleMapper.updateByPrimaryKeySelective(role);
@@ -42,6 +47,6 @@ public class RoleService {
 			role.setRoleCreateTime(DateUtils.getTime());
 			result = roleMapper.insertSelective(role);
 		}
-		return result;
+		MessageUtils.getMessage(attributes, result);
 	}
 }

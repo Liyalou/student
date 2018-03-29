@@ -21,7 +21,7 @@ import com.my.color.vacate.dao.po.StudentVacate;
  *
  */
 @Controller
-@RequestMapping("admin/studentVacate")
+@RequestMapping("/admin/studentVacate")
 public class StudentVacateController {
 	
 	private static final String MENU_ID = "MENU_STUDENT_VACATE";

@@ -25,7 +25,7 @@ import com.my.color.role.service.RoleService;
  * @author lyl
  *
  */
-@RequestMapping("admin/role")
+@RequestMapping("/admin/role")
 @Controller
 public class RoleController {
 	
@@ -37,31 +37,50 @@ public class RoleController {
 	@Autowired
 	private MainLayout layout;
 	
+	/**
+	 * 列表查询
+	 * @param model
+	 * @param page
+	 * @return
+	 */
 	@RequestMapping("/roleIndex")
 	public ModelAndView roleIndex(ModelMap model,Page<Role> page){
-		page.startPage(page);
-		List<Role> list = roleService.getRoleList();
-		PageInfo<Role> pageList = page.listToPage(list);
-		model.put(Constant.PAGE_LIST, pageList);
-		model.put(Constant.PAGE_URL, "/admin/role/roleIndex");
+		try {
+			page.startPage(page);
+			List<Role> list = roleService.getRoleList();
+			PageInfo<Role> pageList = page.listToPage(list);
+			model.put(Constant.PAGE_LIST, pageList);
+			model.put(Constant.PAGE_URL, "/admin/role/roleIndex");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return layout.layout("role",MENU_ID);
 	}
 	
+	/**
+	 * 添加页面
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/roleInput")
 	public ModelAndView roleInput(ModelMap model){
 		return layout.layout("role/role-input",MENU_ID);
 	}
 	
+	/**
+	 * 保存修改
+	 * @param request
+	 * @param role
+	 * @param attributes
+	 * @return
+	 */
 	@RequestMapping("/submitRole")
-	public RedirectView submitRole(HttpServletRequest request,Role role, 
-			RedirectAttributes attributes){
-		int result = roleService.submitRole(role);
-		if(result == 1){
-			attributes.addFlashAttribute("alertType", "success");
-			attributes.addFlashAttribute("alertMsg", "操作成功");
-		}else{
-			attributes.addFlashAttribute("alertType", "danger");
-			attributes.addFlashAttribute("alertMsg", "操作失败");
+	public RedirectView submitRole(RedirectAttributes attributes,HttpServletRequest request,
+			Role role){
+		try {
+			roleService.submitRole(attributes,role);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return new RedirectView(request.getContextPath()+"/admin/role/roleIndex");
 	}
