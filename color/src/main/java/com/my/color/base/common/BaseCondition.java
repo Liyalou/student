@@ -8,7 +8,7 @@ import com.my.color.base.util.StringUtils;
 public class BaseCondition {
 
 	private String userName;
-
+	
 	public String getUserName() {
 		return userName;
 	}

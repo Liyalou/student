@@ -1,5 +1,8 @@
 package com.my.color.teachClass.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import com.my.color.teachClass.dao.po.SchoolClass;
 
 public interface SchoolClassMapper {
@@ -20,4 +23,7 @@ public interface SchoolClassMapper {
 
     
     int updateByPrimaryKey(SchoolClass record);
+    
+    
+    List<SchoolClass> getSchoolClassList(Map<String,Object> conditionMap);
 }

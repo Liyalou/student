@@ -1,18 +1,23 @@
-package com.my.color.teacher.controller;
+package com.my.color.${projectPakcageName}.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.collections4.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
+import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.github.pagehelper.PageInfo;
 import com.my.color.base.common.BaseCondition;
 import com.my.color.base.common.Constant;
@@ -20,24 +25,25 @@ import com.my.color.base.layout.MainLayout;
 import com.my.color.base.page.Page;
 import com.my.color.base.util.StringUtils;
 import com.my.color.teacher.dao.po.TeachTeacher;
-import com.my.color.teacher.service.TeachTeacherService;
+import com.my.color.${projectPakcageName}.dao.po.${domain};
+import com.my.color.${projectPakcageName}.service.${domain}Service;
 
 /**
- * 教务老师管理
+ * ${domainName}
  * @author lyl
  *
  */
-@RequestMapping("/admin/teachTeacher")
 @Controller
-public class TeachTeacherController {
+@RequestMapping("/admin/${lowTableName}")
+public class ${domain}Controller {
+	
+	private static final String MENU_ID = "菜单";
 
-	private static final String MENU_ID = "MENU_TEACHER";
+	@Autowired
+	private ${domain}Service ${lowerDomain}Service;
 	
 	@Autowired
 	private MainLayout layout;
-	
-	@Autowired
-	private TeachTeacherService teachTeacherService;
 	
 	/**
 	 * 列表查询
@@ -72,14 +78,10 @@ public class TeachTeacherController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("/teacherInput")
-	public ModelAndView teacherInput(ModelMap model,String teachTeacherId){
-		TeachTeacher teachTeacher = new TeachTeacher();
-		if(!StringUtils.isEmpty(teachTeacherId)){
-			teachTeacher = teachTeacherService.selectByPrimaryKey(teachTeacherId);
-		}
-		model.put("teachTeacher", teachTeacher);
-		return layout.layout("teach/teacher/teacher-input",MENU_ID);
+	@RequestMapping("/addInput")
+	public ModelAndView addInput(ModelMap model,String Id){
+		
+		return layout.layout("",MENU_ID);
 	}
 	
 	/**
@@ -90,12 +92,11 @@ public class TeachTeacherController {
 	 * @return
 	 */
 	@RequestMapping("/submitTeacher")
-	public RedirectView submitTeacher(RedirectAttributes attributes,HttpServletRequest request,
-			TeachTeacher teachTeacher,String roleCode){
+	public RedirectView submitTeacher(RedirectAttributes attributes,HttpServletRequest request){
 		try {
-			int result = teachTeacherService.submitTeacher(attributes, teachTeacher, roleCode);
+			int result = 
 			if(result == 0){
-				attributes.addFlashAttribute("teachTeacher", teachTeacher);
+				attributes.addFlashAttribute("teachTeacher", );
 				attributes.addFlashAttribute("roleCode", roleCode);
 				return new RedirectView(request.getContextPath()+"/admin/teachTeacher/teacherInput");
 			}
@@ -115,9 +116,9 @@ public class TeachTeacherController {
 	 * @return
 	 */
 	@RequestMapping("/deleteTeacher")
-	public RedirectView deleteTeacher(RedirectAttributes attributes,HttpServletRequest request,String teachTeacherId){
+	public RedirectView deleteTeacher(RedirectAttributes attributes,HttpServletRequest request,String Id){
 		try {
-			teachTeacherService.deleteTeacher(attributes, teachTeacherId);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -131,9 +132,8 @@ public class TeachTeacherController {
 	 * @return
 	 */
 	@RequestMapping("/getTeacherInfo")
-	public ModelAndView getTeacherInfo(ModelMap model,String teachTeacherId){
-		TeachTeacher teachTeacher = teachTeacherService.selectByPrimaryKey(teachTeacherId);
-		model.put("teachTeacher", teachTeacher);
+	public ModelAndView getTeacherInfo(ModelMap model,String id){
+		
 		return layout.layout("teach/teacher/teacher-info",MENU_ID);
 	}
 }

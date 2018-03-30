@@ -11,30 +11,30 @@ import org.apache.velocity.app.Velocity;
 
 public class CreateCode {
 	// 1.那些domain需要生成代码
-	private String[] domains = { "CashLedger" };
-	private String[] domainName = { "现金台账" };
-	private String[] projectPakcageName = {"item.ledger"};
-	private String[] packagePath = {"com.hd.hderp.item.ledger"};
-	private String[] tableName = {"e_cash_ledger"};
-	private String[] lowTableName = {"cashLedger"};
-	private String[] pageName = {"ledger"};
+	private String[] domains = { "SchoolClass" };
+	private String[] domainName = { "班级管理" };
+	private String[] projectPakcageName = {"teachClass"};
+	private String[] packagePath = {"com.my.color.teachClass"};
+	private String[] tableName = {"e_school_class"};
+	private String[] lowTableName = {"schoolClass"};
+	private String[] pageName = {"schoolClass"};
 	// 2.定义固定的目录路径:都是使用相对路径,规范：路径前面都不加/,路径的后面都加/
 	private static final String SRC = "src/main/java/";
-	private static final String PACKAGE = "com/hd/hderp/item/";//相应的类的路径
+	private static final String PACKAGE = "com/my/color/teachClass/";//相应的类的路径
 	private static final String RESOURCES = "src/main/resources/";
 	private static final String WEBAPP = "src/main/webapp/";
 	// 3.有那些模板需要生成
-	private String[] templates = {"Controller.java", /*"Condition.java", "Mapper.java",*/"Service.java", "test.txt"};
+	private String[] templates = {/*"Controller.java", "Condition.java", "Mapper.java",*/"Service.java"/*, "test.txt"*/};
 	// 4.模板文件对应的生成文件路径
-	private String[] filePath = { SRC + PACKAGE + "ledger/controller/",
-			SRC + PACKAGE + "ledger/dao/po/", /*SRC + PACKAGE + "borrowing/dao/",*/
-			SRC + PACKAGE + "ledger/server/",
-			SRC + PACKAGE + "ledger/server/"
+	private String[] filePath = { /*SRC + PACKAGE + "ledger/controller/",*/
+			/*SRC + PACKAGE + "teachClass/dao/po/", *//*SRC + PACKAGE + "borrowing/dao/",*/
+			SRC + PACKAGE + "service/"/*,
+			SRC + PACKAGE + "ledger/server/"*/
 	};
 
 	public static void main(String[] args) throws Exception {
 		CreateCode createCode = new CreateCode();
-		String table ="e_cash_ledger";
+		String table ="e_school_class";
 		createCode.create(table);
 	}
 
@@ -43,7 +43,7 @@ public class CreateCode {
         String user = "root"; 
         String pwd = "Erp#2017"; 
         String url = "jdbc:mysql://192.168.1.220:3306/hderp"+"?useUnicode=true&characterEncoding=UTF-8"; 
-        String domainPackageName = "com.hd.hderp.item.ledger.dao.po.CashLedger";
+        String domainPackageName = "com.my.color.teachClass.dao.po.SchoolClass";
 		List<String> list = DbInfoUtil.getTableInfo(driver, url, user, pwd, table);
 		List<String> fields = Test.getFiled(domainPackageName);
 		VelocityContext context = new VelocityContext();

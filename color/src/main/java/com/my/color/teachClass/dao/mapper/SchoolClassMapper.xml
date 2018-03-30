@@ -12,15 +12,15 @@
     <result column="class_specialty" jdbcType="VARCHAR" property="classSpecialty" />
     <result column="class_student_number" jdbcType="INTEGER" property="classStudentNumber" />
     <result column="class_train_scheme" jdbcType="VARCHAR" property="classTrainScheme" />
-    <result column="class_graduation_time" jdbcType="TIMESTAMP" property="classGraduationTime" />
+    <result column="class_graduation_time" jdbcType="VARCHAR" property="classGraduationTime" />
     <result column="class_instructor_uid" jdbcType="VARCHAR" property="classInstructorUid" />
     <result column="class_instructor_uname" jdbcType="VARCHAR" property="classInstructorUname" />
-    <result column="class_create_time" jdbcType="TIMESTAMP" property="classCreateTime" />
+    <result column="class_create_time" jdbcType="VARCHAR" property="classCreateTime" />
     <result column="class_create_uid" jdbcType="VARCHAR" property="classCreateUid" />
     <result column="class_create_uname" jdbcType="VARCHAR" property="classCreateUname" />
     <result column="class_last_upuid" jdbcType="VARCHAR" property="classLastUpuid" />
     <result column="class_last_upuname" jdbcType="VARCHAR" property="classLastUpuname" />
-    <result column="class_last_uptime" jdbcType="TIMESTAMP" property="classLastUptime" />
+    <result column="class_last_uptime" jdbcType="VARCHAR" property="classLastUptime" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--
@@ -64,10 +64,10 @@
       )
     values (#{schoolClassId,jdbcType=VARCHAR}, #{schoolGradeNumber,jdbcType=VARCHAR}, 
       #{schoolClassNumber,jdbcType=VARCHAR}, #{classSpecialty,jdbcType=VARCHAR}, #{classStudentNumber,jdbcType=INTEGER}, 
-      #{classTrainScheme,jdbcType=VARCHAR}, #{classGraduationTime,jdbcType=TIMESTAMP}, 
+      #{classTrainScheme,jdbcType=VARCHAR}, #{classGraduationTime,jdbcType=VARCHAR}, 
       #{classInstructorUid,jdbcType=VARCHAR}, #{classInstructorUname,jdbcType=VARCHAR}, 
-      #{classCreateTime,jdbcType=TIMESTAMP}, #{classCreateUid,jdbcType=VARCHAR}, #{classCreateUname,jdbcType=VARCHAR}, 
-      #{classLastUpuid,jdbcType=VARCHAR}, #{classLastUpuname,jdbcType=VARCHAR}, #{classLastUptime,jdbcType=TIMESTAMP}
+      #{classCreateTime,jdbcType=VARCHAR}, #{classCreateUid,jdbcType=VARCHAR}, #{classCreateUname,jdbcType=VARCHAR}, 
+      #{classLastUpuid,jdbcType=VARCHAR}, #{classLastUpuname,jdbcType=VARCHAR}, #{classLastUptime,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.my.color.teachClass.dao.po.SchoolClass">
@@ -143,7 +143,7 @@
         #{classTrainScheme,jdbcType=VARCHAR},
       </if>
       <if test="classGraduationTime != null">
-        #{classGraduationTime,jdbcType=TIMESTAMP},
+        #{classGraduationTime,jdbcType=VARCHAR},
       </if>
       <if test="classInstructorUid != null">
         #{classInstructorUid,jdbcType=VARCHAR},
@@ -152,7 +152,7 @@
         #{classInstructorUname,jdbcType=VARCHAR},
       </if>
       <if test="classCreateTime != null">
-        #{classCreateTime,jdbcType=TIMESTAMP},
+        #{classCreateTime,jdbcType=VARCHAR},
       </if>
       <if test="classCreateUid != null">
         #{classCreateUid,jdbcType=VARCHAR},
@@ -167,7 +167,7 @@
         #{classLastUpuname,jdbcType=VARCHAR},
       </if>
       <if test="classLastUptime != null">
-        #{classLastUptime,jdbcType=TIMESTAMP},
+        #{classLastUptime,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -194,7 +194,7 @@
         class_train_scheme = #{classTrainScheme,jdbcType=VARCHAR},
       </if>
       <if test="classGraduationTime != null">
-        class_graduation_time = #{classGraduationTime,jdbcType=TIMESTAMP},
+        class_graduation_time = #{classGraduationTime,jdbcType=VARCHAR},
       </if>
       <if test="classInstructorUid != null">
         class_instructor_uid = #{classInstructorUid,jdbcType=VARCHAR},
@@ -203,7 +203,7 @@
         class_instructor_uname = #{classInstructorUname,jdbcType=VARCHAR},
       </if>
       <if test="classCreateTime != null">
-        class_create_time = #{classCreateTime,jdbcType=TIMESTAMP},
+        class_create_time = #{classCreateTime,jdbcType=VARCHAR},
       </if>
       <if test="classCreateUid != null">
         class_create_uid = #{classCreateUid,jdbcType=VARCHAR},
@@ -218,7 +218,7 @@
         class_last_upuname = #{classLastUpuname,jdbcType=VARCHAR},
       </if>
       <if test="classLastUptime != null">
-        class_last_uptime = #{classLastUptime,jdbcType=TIMESTAMP},
+        class_last_uptime = #{classLastUptime,jdbcType=VARCHAR},
       </if>
     </set>
     where school_class_id = #{schoolClassId,jdbcType=VARCHAR}
@@ -234,15 +234,29 @@
       class_specialty = #{classSpecialty,jdbcType=VARCHAR},
       class_student_number = #{classStudentNumber,jdbcType=INTEGER},
       class_train_scheme = #{classTrainScheme,jdbcType=VARCHAR},
-      class_graduation_time = #{classGraduationTime,jdbcType=TIMESTAMP},
+      class_graduation_time = #{classGraduationTime,jdbcType=VARCHAR},
       class_instructor_uid = #{classInstructorUid,jdbcType=VARCHAR},
       class_instructor_uname = #{classInstructorUname,jdbcType=VARCHAR},
-      class_create_time = #{classCreateTime,jdbcType=TIMESTAMP},
+      class_create_time = #{classCreateTime,jdbcType=VARCHAR},
       class_create_uid = #{classCreateUid,jdbcType=VARCHAR},
       class_create_uname = #{classCreateUname,jdbcType=VARCHAR},
       class_last_upuid = #{classLastUpuid,jdbcType=VARCHAR},
       class_last_upuname = #{classLastUpuname,jdbcType=VARCHAR},
-      class_last_uptime = #{classLastUptime,jdbcType=TIMESTAMP}
+      class_last_uptime = #{classLastUptime,jdbcType=VARCHAR}
     where school_class_id = #{schoolClassId,jdbcType=VARCHAR}
   </update>
+  
+  <select id="getSchoolClassList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from e_school_class
+    where 1=1
+    <if test="userName != null and userName !=''">
+      and class_instructor_uname LIKE CONCAT('%',#{userName,jdbcType=VARCHAR},'%')
+    </if>
+  </select>
 </mapper>

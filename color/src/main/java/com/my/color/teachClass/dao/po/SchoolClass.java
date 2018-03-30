@@ -1,7 +1,5 @@
 package com.my.color.teachClass.dao.po;
 
-import java.util.Date;
-
 public class SchoolClass {
     /**班级管理id*/
     private String schoolClassId;
@@ -22,7 +20,7 @@ public class SchoolClass {
     private String classTrainScheme;
 
     /**毕业时间*/
-    private Date classGraduationTime;
+    private String classGraduationTime;
 
     /**辅导员id*/
     private String classInstructorUid;
@@ -31,7 +29,7 @@ public class SchoolClass {
     private String classInstructorUname;
 
     /**创建时间*/
-    private Date classCreateTime;
+    private String classCreateTime;
 
     /**创建人id*/
     private String classCreateUid;
@@ -46,7 +44,7 @@ public class SchoolClass {
     private String classLastUpuname;
 
     /**修改时间*/
-    private Date classLastUptime;
+    private String classLastUptime;
 
     
     public String getSchoolClassId() {
@@ -109,12 +107,12 @@ public class SchoolClass {
     }
 
     
-    public Date getClassGraduationTime() {
+    public String getClassGraduationTime() {
         return classGraduationTime;
     }
 
     
-    public void setClassGraduationTime(Date classGraduationTime) {
+    public void setClassGraduationTime(String classGraduationTime) {
         this.classGraduationTime = classGraduationTime;
     }
 
@@ -139,12 +137,12 @@ public class SchoolClass {
     }
 
     
-    public Date getClassCreateTime() {
+    public String getClassCreateTime() {
         return classCreateTime;
     }
 
     
-    public void setClassCreateTime(Date classCreateTime) {
+    public void setClassCreateTime(String classCreateTime) {
         this.classCreateTime = classCreateTime;
     }
 
@@ -189,12 +187,12 @@ public class SchoolClass {
     }
 
     
-    public Date getClassLastUptime() {
+    public String getClassLastUptime() {
         return classLastUptime;
     }
 
     
-    public void setClassLastUptime(Date classLastUptime) {
+    public void setClassLastUptime(String classLastUptime) {
         this.classLastUptime = classLastUptime;
     }
 }
