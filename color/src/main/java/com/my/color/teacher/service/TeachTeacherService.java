@@ -64,7 +64,7 @@ public class TeachTeacherService {
 	 * @param role
 	 * @return
 	 */
-	public void submitTeacher(RedirectAttributes attributes,TeachTeacher teachTeacher,
+	public Integer submitTeacher(RedirectAttributes attributes,TeachTeacher teachTeacher,
 			String roleCode)throws Exception{
 		int result = 0;
 		User user = new User();
@@ -72,6 +72,7 @@ public class TeachTeacherService {
 		user.setUserAccount(teachTeacher.getTeachTeacherPhone());
 		user.setUserIdCard(teachTeacher.getTeachTeacherIdCard());
 		user.setUserPhone(teachTeacher.getTeachTeacherPhone());
+		
 		if(!StringUtils.isEmpty(teachTeacher.getTeachTeacherId())){
 			result = teachTeacherMapper.updateByPrimaryKeySelective(teachTeacher);
 			if(result == 1){
@@ -86,6 +87,7 @@ public class TeachTeacherService {
 			teachTeacher.setTeacherCreateUserId(UserToken.getLoginUser().getUserId());
 			teachTeacher.setTeacherCreateUserName(UserToken.getLoginUser().getUserName());
 			result = teachTeacherMapper.insertSelective(teachTeacher);
+			
 			if(result == 1){
 				user.setUserPassword(PasswordUtils.SHA1("123456", teachTeacher.getTeachTeacherPhone()));
 				user.setUserSex(teachTeacher.getTeachTeacherSex());
@@ -101,6 +103,7 @@ public class TeachTeacherService {
 			}
 		}
 		MessageUtils.getMessage(attributes, result);
+		return result;
 	}
 	
 	

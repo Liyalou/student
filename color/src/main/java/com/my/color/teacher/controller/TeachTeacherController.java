@@ -93,7 +93,12 @@ public class TeachTeacherController {
 	public RedirectView submitTeacher(RedirectAttributes attributes,HttpServletRequest request,
 			TeachTeacher teachTeacher,String roleCode){
 		try {
-			teachTeacherService.submitTeacher(attributes, teachTeacher, roleCode);
+			int result = teachTeacherService.submitTeacher(attributes, teachTeacher, roleCode);
+			if(result == 0){
+				attributes.addFlashAttribute("teachTeacher", teachTeacher);
+				attributes.addFlashAttribute("roleCode", roleCode);
+				return new RedirectView(request.getContextPath()+"/admin/teachTeacher/teacherInput");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -117,5 +122,18 @@ public class TeachTeacherController {
 			e.printStackTrace();
 		}
 		return new RedirectView(request.getContextPath()+"/admin/teachTeacher/index");
+	}
+	
+	/**
+	 * 查看详情
+	 * @param model
+	 * @param teachTeacherId
+	 * @return
+	 */
+	@RequestMapping("/getTeacherInfo")
+	public ModelAndView getTeacherInfo(ModelMap model,String teachTeacherId){
+		TeachTeacher teachTeacher = teachTeacherService.selectByPrimaryKey(teachTeacherId);
+		model.put("teachTeacher", teachTeacher);
+		return layout.layout("teach/teacher/teacher-info",MENU_ID);
 	}
 }
