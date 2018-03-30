@@ -74,6 +74,9 @@ public class TeachTeacherService {
 		user.setUserPhone(teachTeacher.getTeachTeacherPhone());
 		
 		if(!StringUtils.isEmpty(teachTeacher.getTeachTeacherId())){
+			teachTeacher.setTeacherUpdateTime(DateUtils.getTime());
+			teachTeacher.setTeacherUpdateUserId(UserToken.getLoginUser().getUserId());
+			teachTeacher.setTeacherUpdateUserName(UserToken.getLoginUser().getUserName());
 			result = teachTeacherMapper.updateByPrimaryKeySelective(teachTeacher);
 			if(result == 1){
 				userService.updateByPrimaryKeySelective(user);

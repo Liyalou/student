@@ -1,7 +1,5 @@
 package com.my.color.student.dao.po;
 
-import java.util.Date;
-
 public class StudentRecord {
     /**学生档案id*/
     private String studentRecordId;
@@ -52,7 +50,7 @@ public class StudentRecord {
     private String studentClassName;
 
     /**创建时间*/
-    private Date studentCreateTime;
+    private String studentCreateTime;
 
     /**创建人id*/
     private String studentCreateUid;
@@ -67,7 +65,7 @@ public class StudentRecord {
     private String studentLastUpuname;
 
     /**修改时间*/
-    private Date studentLastUptime;
+    private String studentLastUptime;
 
     
     public String getStudentRecordId() {
@@ -230,12 +228,12 @@ public class StudentRecord {
     }
 
     
-    public Date getStudentCreateTime() {
+    public String getStudentCreateTime() {
         return studentCreateTime;
     }
 
     
-    public void setStudentCreateTime(Date studentCreateTime) {
+    public void setStudentCreateTime(String studentCreateTime) {
         this.studentCreateTime = studentCreateTime;
     }
 
@@ -280,12 +278,12 @@ public class StudentRecord {
     }
 
     
-    public Date getStudentLastUptime() {
+    public String getStudentLastUptime() {
         return studentLastUptime;
     }
 
     
-    public void setStudentLastUptime(Date studentLastUptime) {
+    public void setStudentLastUptime(String studentLastUptime) {
         this.studentLastUptime = studentLastUptime;
     }
 }

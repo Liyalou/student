@@ -1,5 +1,8 @@
 package com.my.color.student.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import com.my.color.student.dao.po.StudentRecord;
 
 public interface StudentRecordMapper {
@@ -20,4 +23,7 @@ public interface StudentRecordMapper {
 
     
     int updateByPrimaryKey(StudentRecord record);
+    
+    
+    List<StudentRecord> getStudentRecordList(Map<String,Object> conditionMap);
 }
