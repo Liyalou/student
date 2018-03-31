@@ -1,4 +1,4 @@
-package com.my.color.${projectPakcageName}.servivce;
+package com.my.color.${projectPakcageName}.service;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;

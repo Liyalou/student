@@ -1,7 +1,5 @@
 package com.my.color.vacate.dao.po;
 
-import java.util.Date;
-
 public class StudentVacate {
     /**学生请假id*/
     private String studentVacateId;
@@ -21,17 +19,17 @@ public class StudentVacate {
     /**辅导员姓名*/
     private String studentInstructorUname;
 
-    /**请假类型*/
+    /**请假类型:1节次，2天数*/
     private String vacateType;
 
     /**节次/天数*/
     private Double vacateNumber;
 
     /**请假开始时间*/
-    private Date vacateStartTime;
+    private String vacateStartTime;
 
     /**请假结束时间*/
-    private Date vacateEndTime;
+    private String vacateEndTime;
 
     /**课时名称*/
     private String vacateCourseName;
@@ -42,11 +40,11 @@ public class StudentVacate {
     /**是否有效*/
     private String vacateIsVaild;
 
-    /**请假状态*/
+    /**请假状态：1未发送，2待查看，3已查看*/
     private String vacateState;
 
     /***/
-    private Date vacateCreateTime;
+    private String vacateCreateTime;
 
     
     public String getStudentVacateId() {
@@ -129,22 +127,22 @@ public class StudentVacate {
     }
 
     
-    public Date getVacateStartTime() {
+    public String getVacateStartTime() {
         return vacateStartTime;
     }
 
     
-    public void setVacateStartTime(Date vacateStartTime) {
+    public void setVacateStartTime(String vacateStartTime) {
         this.vacateStartTime = vacateStartTime;
     }
 
     
-    public Date getVacateEndTime() {
+    public String getVacateEndTime() {
         return vacateEndTime;
     }
 
     
-    public void setVacateEndTime(Date vacateEndTime) {
+    public void setVacateEndTime(String vacateEndTime) {
         this.vacateEndTime = vacateEndTime;
     }
 
@@ -189,12 +187,12 @@ public class StudentVacate {
     }
 
     
-    public Date getVacateCreateTime() {
+    public String getVacateCreateTime() {
         return vacateCreateTime;
     }
 
     
-    public void setVacateCreateTime(Date vacateCreateTime) {
+    public void setVacateCreateTime(String vacateCreateTime) {
         this.vacateCreateTime = vacateCreateTime;
     }
 }

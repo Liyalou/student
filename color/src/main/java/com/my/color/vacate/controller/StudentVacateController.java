@@ -1,19 +1,26 @@
 package com.my.color.vacate.controller;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.github.pagehelper.PageInfo;
+import com.my.color.base.common.BaseCondition;
 import com.my.color.base.common.Constant;
 import com.my.color.base.layout.MainLayout;
 import com.my.color.base.page.Page;
+import com.my.color.base.util.StringUtils;
 import com.my.color.vacate.dao.po.StudentVacate;
+import com.my.color.vacate.service.StudentVacateService;
 
 /**
  * 请假申请
@@ -29,13 +36,93 @@ public class StudentVacateController {
 	@Autowired
 	private MainLayout layout;
 	
+	@Autowired
+	private StudentVacateService studentVacateService;
+	
+	/**
+	 * 列表查询
+	 * @param model
+	 * @param page
+	 * @param condition
+	 * @return
+	 */
 	@RequestMapping("/vacateIndex")
-	public ModelAndView vacateIndex(ModelMap model,Page<StudentVacate> page){
+	public ModelAndView vacateIndex(ModelMap model,Page<StudentVacate> page,BaseCondition condition){
 		page.startPage(page);
-		List<StudentVacate> list = new ArrayList<>();
+		Map<String,Object> conditionMap = condition.getConditionMap(condition);
+		List<StudentVacate> list = studentVacateService.getStudentVacateList(conditionMap);
 		PageInfo<StudentVacate> pageList = page.listToPage(list);
 		model.put(Constant.PAGE_LIST, pageList);
 		model.put(Constant.PAGE_URL, "/admin/studentVacate/vacateIndex");
 		return layout.layout("studentVacate",MENU_ID);
 	}
+	
+	/**
+	 * 添加修改页面
+	 * 	请假状态为1时，可以修改
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/addInput")
+	public ModelAndView addInput(ModelMap model,String studentVacateId){
+		StudentVacate studentVacate = new StudentVacate();
+		if(!StringUtils.isEmpty(studentVacateId)){
+			studentVacate = studentVacateService.selectByPrimaryKey(studentVacateId);
+		}
+		model.put("studentVacate", studentVacate);
+		return layout.layout("vacate/vacate-input",MENU_ID);
+	}
+	
+	/**
+	 * 保存修改
+	 * @param request
+	 * @param role
+	 * @param attributes
+	 * @return
+	 */
+	@RequestMapping("/submitStudentVacate")
+	public RedirectView submitStudentVacate(RedirectAttributes attributes,HttpServletRequest request,StudentVacate studentVacate){
+		try {
+			int result = studentVacateService.submitStudentVacate(attributes, studentVacate);
+			if(result == 0){
+				attributes.addFlashAttribute("studentVacate", studentVacate);
+				return new RedirectView(request.getContextPath()+"/admin/studentVacate/addInput");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new RedirectView(request.getContextPath()+"/admin/studentVacate/vacateIndex");
+	}
+	
+	/**
+	 * 删除请假
+	 * 		请假状态为1时，可以删除
+	 * @param attributes
+	 * @param request
+	 * @param teachTeacherId
+	 * @return
+	 */
+	@RequestMapping("/deleteTeacher")
+	public RedirectView deleteTeacher(RedirectAttributes attributes,HttpServletRequest request,String studentVacateId){
+		try {
+			studentVacateService.deleteStudentVacate(attributes, studentVacateId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new RedirectView(request.getContextPath()+"/admin/studentVacate/vacateIndex");
+	}
+	
+	/**
+	 * 查看详情
+	 * @param model
+	 * @param teachTeacherId
+	 * @return
+	 */
+	/*@RequestMapping("/getTeacherInfo")
+	public ModelAndView getTeacherInfo(ModelMap model,String studentVacateId){
+		StudentVacate studentVacate = studentVacateService.selectByPrimaryKey(studentVacateId);
+		model.put("studentVacate", studentVacate);
+		return layout.layout("teach/teacher/teacher-info",MENU_ID);
+	}*/
+	
 }

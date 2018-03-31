@@ -1,5 +1,8 @@
 package com.my.color.vacate.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import com.my.color.vacate.dao.po.StudentVacate;
 
 public interface StudentVacateMapper {
@@ -20,4 +23,7 @@ public interface StudentVacateMapper {
 
     
     int updateByPrimaryKey(StudentVacate record);
+    
+    
+    List<StudentVacate> getStudentVacateList(Map<String,Object> conditionMap);
 }
