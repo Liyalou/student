@@ -67,6 +67,7 @@ public class StudentRecordService {
 	public Integer submitStudentRecord(RedirectAttributes attributes,StudentRecord studentRecord)throws Exception{
 		int result = 0;
 		User user = new User();
+		user.setUserId(UUIDUtils.getUUID());
 		user.setUserName(studentRecord.getStudentRecordName());
 		user.setUserAccount(studentRecord.getStudentPhone());
 		user.setUserIdCard(studentRecord.getStudentIdCard());
@@ -80,6 +81,7 @@ public class StudentRecordService {
 				userService.updateByPrimaryKeySelective(user);
 			}
 		}else{
+			studentRecord.setStudentUserId(user.getUserId());
 			studentRecord.setStudentRecordId(UUIDUtils.getUUID());
 			studentRecord.setStudentIsVaild("1");
 			studentRecord.setStudentCreateTime(DateUtils.getTime());

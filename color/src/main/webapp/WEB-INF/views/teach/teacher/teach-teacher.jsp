@@ -56,7 +56,7 @@
 						<td>${teacher.teachTeacherPhone}</td>
 						<td>${teacher.teachTeacherAddress}</td>
 						<td><a href="${ctx}/admin/teachTeacher/deleteTeacher?teachTeacherId=${teacher.teachTeacherId}">删除</a>&nbsp;
-						<a _id="${teacher.teachTeacherId}" class="modifyTeacher" >修改</a></td>
+						<a _id="${teacher.teachTeacherId}" class="modifyTeacher" >修改</a>&nbsp;<a _id="${teacher.teachTeacherId}" class="infoTeacher" >详情</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -64,38 +64,3 @@
 	    <jsp:include page="/WEB-INF/views/common/pagination.jsp"/>
 	</div>
 </div>
-<!-- /**教务老师档案id*/                         
-private String teachTeacherId;        
-                                      
-/**userid*/                           
-private String teacherUserId;         
-                                      
-/**姓名*/                               
-private String teachTeacherName;      
-                                      
-/**性别*/                               
-private String ;       
-                                      
-/**年龄*/                               
-private Integer teachTeacherAge;      
-                                      
-/**民族*/                               
-private String teachTeacherNation;    
-                                      
-/**身份证号码*/                            
-private String teachTeacherIdCard;    
-                                      
-/**学历*/                               
-private String teachTeacherDiploma;   
-                                      
-/**教龄*/                               
-private String teachSchoolAge;        
-                                      
-/**职位*/                               
-private String teachTeacherPost;      
-                                      
-/**联系电话*/                             
-private String teachTeacherPhone;     
-                                      
-/**住址*/                               
-private String teachTeacherAddress;   --> 

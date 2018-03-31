@@ -7,39 +7,25 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<form class="form-horizontal">
-				<div class="form-group">
-					<div class="col-xs-2">
-						<div class="input-group">
-							<input type="text" name="starCreateTime" class="form-control" placeholder="开始时间"/>
-							<span class="input-group-addon">
-								<i class="ace-icon fa fa-calendar"></i> &nbsp;至
-							</span>
-						</div>
-					</div> 
-					<div class="col-xs-2">
-						<div class="input-group">
-							<input type="text" name="endCreateTime" class="form-control" placeholder="结束时间"/>
-							<span class="input-group-addon">
-								<i class="ace-icon fa fa-calendar"></i>&nbsp; 结束
-							</span>
-						</div>
-					</div>
+				<div class="form-group">					
 					<div class="col-lg-2">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="模糊查询">
-						</div>
+						<input type="text" class="form-control" placeholder="模糊查询">
 					</div> 
 					<div class="col-xs-3">		
 						<button type="button" class="btn btn-info btn-sm"><i class="ace-icon glyphicon glyphicon-search"></i> 查询</button>
 						<button type="button" class="btn btn-success btn-sm"><i class="icon glyphicon glyphicon-repeat"></i> 显示全部</button>
-						<button class="btn btn-success btn-sm" type="button" id="roleAdd"><i class="ace-icon glyphicon glyphicon-plus"></i>添加 </button>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-12">
+						<button  id="add_class"  class="btn btn-success btn-sm" type="button"><i class="ace-icon glyphicon glyphicon-plus bigger-110"></i>添加学生</button>						
 					</div>
 				</div>
 			</form>
 		</div>
 	</div>
 	<div class="hr hr10 hr-dotted"></div>
-	<c:if test="${alertMsg}">
+	<c:if test="${not empty alertType}">
 		<div class="alert alert-${alertType}">
 			<button type="button" class="close" data-dismiss="alert">×</button>
 			<strong>提示:</strong>${alertMsg}
@@ -67,7 +53,8 @@
 						<td>${student.studentIdCard}</td>
 						<td>${student.studentClassName}</td>
 						<td>${student.studentPatriarchPhone}</td>
-						<td><a>删除</a>&nbsp;<a>修改</a>&nbsp;<a>考勤</a></td>
+						<td><a href="${ctx}/admin/studentRecord/deleteStudent?studentRecordId=${student.studentRecordId}">删除</a>&nbsp;
+						<a _id="${student.studentRecordId}" class="modifyStudent" >修改</a>&nbsp;<a _id="${student.studentRecordId}" class="infoStudent" >详情</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -75,7 +62,51 @@
 	    <jsp:include page="/WEB-INF/views/common/pagination.jsp"/>
 	</div>
 </div>
-
+/**姓名*/                                    
+private String studentRecordName;          
+                                           
+/**性别*/                                    
+private String studentRecordSex;           
+                                           
+/**出生年月*/                                  
+private String studentBirthYears;          
+                                           
+/**身高*/                                    
+private Integer studentRecordHeight;       
+                                           
+/**身份证*/                                   
+private String studentIdCard;              
+                                           
+/**民族*/                                    
+private String studentRecordNation;        
+                                           
+/**籍贯*/                                    
+private String studentNativePlace;         
+                                           
+/**联系电话*/                                  
+private String studentPhone;               
+                                           
+/**家长联系电话*/                                
+private String studentPatriarchPhone;      
+                                           
+/**家庭住址*/                                  
+private String studentFamilyAddress;       
+                                           
+/**个人简介*/                                  
+private String studentRemark;              
+                                           
+/**学生userId*/                              
+private String studentUserId;              
+                                           
+/**是否有效*/                                  
+private String studentIsVaild;             
+                                           
+/**班级ID*/                                  
+private String studentClassId;             
+                                           
+/**班级名称*/                                  
+private String studentClassName;           
+                                           
 
 
 
