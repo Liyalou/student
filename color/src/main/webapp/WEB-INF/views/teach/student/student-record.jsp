@@ -9,11 +9,11 @@
 			<form class="form-horizontal">
 				<div class="form-group">					
 					<div class="col-lg-2">
-						<input type="text" class="form-control" placeholder="模糊查询">
+						<input type="text" id="studentUserName" class="form-control" placeholder="学生姓名模糊查询">
 					</div> 
 					<div class="col-xs-3">		
-						<button type="button" class="btn btn-info btn-sm"><i class="ace-icon glyphicon glyphicon-search"></i> 查询</button>
-						<button type="button" class="btn btn-success btn-sm"><i class="icon glyphicon glyphicon-repeat"></i> 显示全部</button>
+						<button type="button" id="search_student" class="btn btn-info btn-sm"><i class="ace-icon glyphicon glyphicon-search"></i> 查询</button>
+						<button type="button" onclick="window.location.reload()" class="btn btn-success btn-sm"><i class="icon glyphicon glyphicon-repeat"></i> 显示全部</button>
 					</div>
 				</div>
 				<div class="form-group">
@@ -35,12 +35,14 @@
 		<table class="table table-bordered table-hover">
 			<thead>
 				<tr>
-					<th style = "text-align: center;">姓名（学生管理）</th>
+					<th style = "text-align: center;">姓名</th>
 					<th style = "text-align: center;">性别</th>
+					<th style = "text-align: center;">出生年月</th>
+					<th style = "text-align: center;">身高</th>
+					<th style = "text-align: center;">民族</th>
 					<th style = "text-align: center;">籍贯</th>
-					<th style = "text-align: center;">身份号</th>
-					<th style = "text-align: center;">班级</th>
 					<th style = "text-align: center;">联系电话</th>
+					<th style = "text-align: center;">班级名称</th>
 					<th style = "text-align: center;">操作</th>
 				</tr>
 			</thead>
@@ -49,10 +51,12 @@
 					<tr>
 						<td>${student.studentRecordName}</td>
 						<td>${student.studentRecordSex}</td>
+						<td>${student.studentBirthYears}</td>
+						<td>${student.studentRecordHeight}</td>
+						<td>${student.studentRecordNation}</td>
 						<td>${student.studentNativePlace}</td>
-						<td>${student.studentIdCard}</td>
+						<td>${student.studentPhone}</td>
 						<td>${student.studentClassName}</td>
-						<td>${student.studentPatriarchPhone}</td>
 						<td><a href="${ctx}/admin/studentRecord/deleteStudent?studentRecordId=${student.studentRecordId}">删除</a>&nbsp;
 						<a _id="${student.studentRecordId}" class="modifyStudent" >修改</a>&nbsp;<a _id="${student.studentRecordId}" class="infoStudent" >详情</a></td>
 					</tr>
@@ -62,51 +66,3 @@
 	    <jsp:include page="/WEB-INF/views/common/pagination.jsp"/>
 	</div>
 </div>
-/**姓名*/                                    
-private String studentRecordName;          
-                                           
-/**性别*/                                    
-private String studentRecordSex;           
-                                           
-/**出生年月*/                                  
-private String studentBirthYears;          
-                                           
-/**身高*/                                    
-private Integer studentRecordHeight;       
-                                           
-/**身份证*/                                   
-private String studentIdCard;              
-                                           
-/**民族*/                                    
-private String studentRecordNation;        
-                                           
-/**籍贯*/                                    
-private String studentNativePlace;         
-                                           
-/**联系电话*/                                  
-private String studentPhone;               
-                                           
-/**家长联系电话*/                                
-private String studentPatriarchPhone;      
-                                           
-/**家庭住址*/                                  
-private String studentFamilyAddress;       
-                                           
-/**个人简介*/                                  
-private String studentRemark;              
-                                           
-/**学生userId*/                              
-private String studentUserId;              
-                                           
-/**是否有效*/                                  
-private String studentIsVaild;             
-                                           
-/**班级ID*/                                  
-private String studentClassId;             
-                                           
-/**班级名称*/                                  
-private String studentClassName;           
-                                           
-
-
-
