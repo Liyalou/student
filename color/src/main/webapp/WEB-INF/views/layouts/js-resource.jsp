@@ -82,7 +82,6 @@
 <script src="${ctx}/static/assets/js/zh.js"></script>
 <script src="${ctx}/static/assets/js/jquery.form.js"></script>
 <script src="${ctx}/static/assets/js/commonText.js"></script>
-<script src="${ctx}/static/assets/js/detailPage.js"></script>
 <script src="${ctx}/static/assets/js/kalendae.standalone.js"></script>
 <script src="${ctx}/static/assets/js/jquery.raty.min.js"></script>
 <script src="${ctx}/static/assets/js/jQuery.Migrate.js"></script>
@@ -90,15 +89,9 @@
 <script src="${ctx}/static/assets/js/jquery.bootstrap-duallistbox.min.js"></script>
 <script src="${ctx}/static/assets/js/cur.js"></script>
 <script src="${ctx}/static/assets/js/jquery.poshytip.js"></script>
-<script src="${ctx}/static/assets/js/echarts.js"></script>
-<script src="${ctx}/static/assets/js/highcharts.js"></script>
-<script src="${ctx}/static/assets/js/highcharts-more.js"></script>
 
 
-<%-- <script src="${ctx}/static/ueditor/ueditor.config.js"></script>
-<script src="${ctx}/static/ueditor/ueditor.all.js"></script>
-<script src="${ctx}/static/ueditor/ueditor.all.min.js"></script>
-<script src="${ctx}/static/ueditor/lang/zh-cn/zh-cn.js"></script> --%>
+
 
 
 
