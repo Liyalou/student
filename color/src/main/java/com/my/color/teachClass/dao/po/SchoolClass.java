@@ -12,6 +12,9 @@ public class SchoolClass {
 
     /**专业*/
     private String classSpecialty;
+    
+    /**班级名称：school_class_name*/
+    private String schoolClassName;
 
     /**人数*/
     private Integer classStudentNumber;
@@ -47,7 +50,17 @@ public class SchoolClass {
     private String classLastUptime;
 
     
-    public String getSchoolClassId() {
+    public String getSchoolClassName() {
+		return schoolClassName;
+	}
+
+
+	public void setSchoolClassName(String schoolClassName) {
+		this.schoolClassName = schoolClassName;
+	}
+
+
+	public String getSchoolClassId() {
         return schoolClassId;
     }
 

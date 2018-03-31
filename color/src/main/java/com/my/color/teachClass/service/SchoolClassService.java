@@ -51,12 +51,15 @@ public class SchoolClassService {
 	public Integer submitSchoolClass(RedirectAttributes attributes,SchoolClass schoolClass)throws Exception{
 		int result = 0;
 		User user = UserToken.getLoginUser();
+		String className = schoolClass.getSchoolGradeNumber()+schoolClass.getSchoolClassNumber()+schoolClass.getClassSpecialty();
 		if(!StringUtils.isEmpty(schoolClass.getSchoolClassId())){
+			schoolClass.setSchoolClassName(className);
 			schoolClass.setClassLastUptime(DateUtils.getTime());
 			schoolClass.setClassLastUpuid(user.getUserId());
 			schoolClass.setClassLastUpuname(user.getUserName());
 			result = schoolClassMapper.updateByPrimaryKeySelective(schoolClass);
 		}else{
+			schoolClass.setSchoolClassName(className);
 			schoolClass.setSchoolClassId(UUIDUtils.getUUID());
 			schoolClass.setClassCreateTime(DateUtils.getTime());
 			schoolClass.setClassCreateUid(user.getUserId());
