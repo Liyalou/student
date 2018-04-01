@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-<script src="${pageContext.request.contextPath}/static/js/role/role.js"></script>
 <div class="page-content">
 	<div class="row">
 		<div class="col-xs-12">

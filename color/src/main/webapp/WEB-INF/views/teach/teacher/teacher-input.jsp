@@ -2,10 +2,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
+<div class="col-sm-12 center">
+    <strong style="font-size:24px">添加教务老师</strong>
+</div>
 <div class="form-group" >
     <form id="teachTeacher_form" role="form" method="post" action="${ctx}/admin/teachTeacher/submitTeacher" class="form-horizontal ">
+        <input type="hidden" name="teachTeacherId" value="${teachTeacher.teachTeacherId}" />
         <table style="border:none" id="simple-table" class="table table-bordered table-hover" >
-            <input type="hidden" name="teachTeacherId" value="${teachTeacher.teachTeacherId}" />
             <tr class="form-group" >
                 <td>教务人员类型</td>
                 <td>

@@ -26,4 +26,7 @@ public interface StudentRecordMapper {
     
     
     List<StudentRecord> getStudentRecordList(Map<String,Object> conditionMap);
+    
+    
+    List<StudentRecord> getStudentByClassId(Map<String,Object> conditionMap);
 }

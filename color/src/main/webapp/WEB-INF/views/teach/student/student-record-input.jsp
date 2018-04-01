@@ -2,11 +2,24 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
+<div class="col-sm-12 center">
+    <strong style="font-size:24px">添加学生</strong>
+</div>
 <div class="form-group" >
     <form id="studentRecord_form" role="form" method="post" action="${ctx}/admin/studentRecord/submitStudent" class="form-horizontal ">
+        <input type="hidden" name="studentRecordId" value="${studentRecord.studentRecordId}" />
         <table style="border:none" id="simple-table" class="table table-bordered table-hover" >
-            <input type="hidden" name="studentRecordId" value="${studentRecord.studentRecordId}" />
             <tr class="form-group" >
+            	<td>班级名称</td>
+                <td>                
+                    <select class="form-control" name="studentClassId" id="studentClassId">
+                    	<option value="">请选择</option>
+                        <c:forEach items="${classList}" var="pro">
+                            <option <c:if test='${studentRecord.studentClassId==pro.schoolClassId}'>selected='selected'</c:if> value="${pro.schoolClassId}" studentClassName='${pro.schoolClassName}'>${pro.schoolClassName}</option>
+                        </c:forEach>
+                    </select>
+                    <input type="hidden" name="studentClassName" id="studentClassName" />
+                </td>
                 <td>姓名</td>
                 <td>                    
                     <input type="text" class="form-control" name="studentRecordName" value="${studentRecord.studentRecordName}" />
@@ -18,23 +31,19 @@
                         <option <c:if test='${studentRecord.studentRecordSex==女}'></c:if> value="女">女</option>
                     </select>
                 </td>
-                <td>出生年月</td>
-                <td>
-                    <input type="date" class="form-control" name="studentBirthYears" value="${studentRecord.studentBirthYears}" />
-                </td>
             </tr>
             <tr class="form-group">
                 <td>身高(cm)</td>
                 <td>
                     <input class="form-control" type="number" oninput='if(value.length>3)value=value.slice(0,3)' name="studentRecordHeight" value="${studentRecord.studentRecordHeight}" />
                 </td>
+                <td>出生年月</td>
+                <td>
+                    <input type="date" class="form-control" name="studentBirthYears" value="${studentRecord.studentBirthYears}" />
+                </td>
                 <td>身份证</td>
                 <td>
                     <input class="form-control" type="number" oninput='if(value.length>18)value=value.slice(0,18)'  name="studentIdCard" value="${studentRecord.studentIdCard}" />
-                </td>
-                <td>民族</td>
-                <td>
-                    <input type="text" class="form-control" maxlength="10" name="studentRecordNation" value="${studentRecord.studentRecordNation}" />
                 </td>
             </tr>
             <tr class="form-group">
@@ -42,24 +51,20 @@
                 <td>
                     <input class="form-control" type="text" name="studentNativePlace" value="${studentRecord.studentNativePlace}" />
                 </td>
+                <td>民族</td>
+                <td>
+                    <input type="text" class="form-control" maxlength="10" name="studentRecordNation" value="${studentRecord.studentRecordNation}" />
+                </td>
                 <td>联系电话</td>
                 <td>
                     <input class="form-control" type="number" oninput='if(value.length>11)value=value.slice(0,11)'  name="studentPhone" value="${studentRecord.studentPhone}" />
                 </td>
+                
+            </tr>
+            <tr class="form-group">
                 <td>家长联系电话</td>
                 <td>
                     <input type="number" class="form-control"  oninput='if(value.length>11)value=value.slice(0,11)' name="studentPatriarchPhone" value="${studentRecord.studentPatriarchPhone}" />
-                </td>
-            </tr>
-            <tr class="form-group">
-                <td>班级名称</td>
-                <td>                
-                    <select class="form-control" name="studentClassId" id="studentClassId">
-                        <c:forEach items="${classList}" var="pro">
-                            <option <c:if test='${studentRecord.studentClassId==pro.schoolClassId}'>selected='selected'</c:if> value="${pro.schoolClassId}" studentClassName='${pro.schoolClassName}'>${pro.schoolClassName}</option>
-                        </c:forEach>
-                    </select>
-                    <input type="hidden" name="studentClassName" id="studentClassName" />
                 </td>
                 <td>家庭住址</td>
                 <td colspan="3">

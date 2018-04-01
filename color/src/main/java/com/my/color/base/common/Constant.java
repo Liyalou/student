@@ -27,4 +27,12 @@ public class Constant {
 	
 	/**提示信息*/
 	public static final String ALERT_MSG = "alertMsg";
+	
+	/**辅导员角色编码*/
+	public static final String ROLE_TYPE_INSTRUCTOR = "role_instructor";
+	
+	/**任课老师角色编码*/
+	public static final String ROLE_TYPE_TEACHER = "role_teacher";
+	
+	
 }

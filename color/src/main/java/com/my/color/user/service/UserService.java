@@ -118,11 +118,15 @@ public class UserService {
 	}
 	
 	/**
-	 * xiuagi
+	 * 修改
 	 * @param user
 	 * @return
 	 */
 	public int updateByPrimaryKeySelective(User user){
 		return userMapper.updateByPrimaryKeySelective(user);
+	}
+	
+	public List<User> getUserByType(Map<String,Object> conditionMap){
+		return userMapper.getUserByType(conditionMap);
 	}
 }

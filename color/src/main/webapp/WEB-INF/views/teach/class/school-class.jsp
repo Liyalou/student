@@ -18,7 +18,7 @@
 				</div>
 				<div class="form-group">
 					<div class="col-xs-12">
-						<button  id="add_class"  class="btn btn-success btn-sm" type="button"><i class="ace-icon glyphicon glyphicon-plus bigger-110"></i>添加班级</button>						
+						<button  id="add_class"  class="btn btn-success btn-sm" type="button"><i class="ace-icon glyphicon glyphicon-plus bigger-110"></i>添加班级</button>				
 					</div>
 				</div>
 			</form>
@@ -42,6 +42,7 @@
 					<th style = "text-align: center;">人数</th>
 					<th style = "text-align: center;">培训方案</th>
 					<th style = "text-align: center;">毕业时间</th>
+					<th style = "text-align: center;">辅导员</th>
 					<th style = "text-align: center;">操作</th>
 				</tr>
 			</thead>
@@ -55,6 +56,7 @@
 						<td>${schoolClass.classStudentNumber}</td>
 						<td>${schoolClass.classTrainScheme}</td>
 						<td>${schoolClass.classGraduationTime}</td>
+						<td>${schoolClass.classInstructorUname}</td>
 						<td><a href="${ctx}/admin/schoolClass/deleteSchoolClass?schoolClassId=${schoolClass.schoolClassId}">删除</a>&nbsp;
 						<a _id="${schoolClass.schoolClassId}" class="modifyClass" >修改</a>&nbsp;<a _id="${schoolClass.schoolClassId}" class="infoClass" >详情</a></td>
 					</tr>

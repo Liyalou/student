@@ -28,5 +28,11 @@ var Tables={
             });
 
         });
+        
+        //辅导员选择
+        $("#classInstructorUid").on('change',function() {
+            var userName=$(this).find("option:selected").attr('userName')
+            $("#classInstructorUname").val(userName)
+        });
     }
 }

@@ -18,9 +18,10 @@ import com.my.color.base.common.BaseCondition;
 import com.my.color.base.common.Constant;
 import com.my.color.base.layout.MainLayout;
 import com.my.color.base.page.Page;
-import com.my.color.base.util.StringUtils;
 import com.my.color.teachClass.dao.po.SchoolClass;
 import com.my.color.teachClass.service.SchoolClassService;
+import com.my.color.user.dao.po.User;
+import com.my.color.user.service.UserToken;
 
 /**
  * 班级管理
@@ -50,12 +51,20 @@ public class SchoolClassController {
 	 */
 	@RequestMapping("/index")
 	public ModelAndView schoolClassIndex(ModelMap model,Page<SchoolClass> page,BaseCondition condition){
-		page.startPage(page);
-		Map<String,Object> conditionMap = condition.getConditionMap(condition);
-		List<SchoolClass> list = schoolClassService.getSchoolClassList(conditionMap);
-		PageInfo<SchoolClass> pageList = page.listToPage(list);
-		model.put(Constant.PAGE_LIST, pageList);
-		model.put(Constant.PAGE_URL, "/admin/schoolClass/index");
+		try {
+			page.startPage(page);
+			Map<String,Object> conditionMap = condition.getConditionMap(condition);
+			User user = UserToken.getLoginUser();
+			if(user.getUserType().equals("3") || user.getUserType().equals("4")){
+				conditionMap.put("userId", user.getUserId());
+			}
+			List<SchoolClass> list = schoolClassService.getSchoolClassList(conditionMap);
+			PageInfo<SchoolClass> pageList = page.listToPage(list);
+			model.put(Constant.PAGE_LIST, pageList);
+			model.put(Constant.PAGE_URL, "/admin/schoolClass/index");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return layout.layout("schoolClass",MENU_ID);
 	}
 	
@@ -66,11 +75,7 @@ public class SchoolClassController {
 	 */
 	@RequestMapping("/addInput")
 	public ModelAndView addInput(ModelMap model,String schoolClassId){
-		SchoolClass schoolClass = new SchoolClass();
-		if(!StringUtils.isEmpty(schoolClassId)){
-			schoolClass = schoolClassService.selectByPrimaryKey(schoolClassId);
-		}
-		model.put("schoolClass", schoolClass);
+		schoolClassService.addSchoolClassPage(model, schoolClassId);
 		return layout.layout("teach/class/school-class-input",MENU_ID);
 	}
 	

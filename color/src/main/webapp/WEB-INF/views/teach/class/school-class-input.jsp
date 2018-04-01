@@ -2,11 +2,24 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
+<div class="col-sm-12 center">
+    <strong style="font-size:24px">添加班级</strong>
+</div>
 <div class="form-group" >
     <form id="schoolClass_form" role="form" method="post" action="${ctx}/admin/schoolClass/submitSchoolClass" class="form-horizontal ">
+        <input type="hidden" name="schoolClassId" value="${schoolClass.schoolClassId}"/>
         <table style="border:none" id="simple-table" class="table table-bordered table-hover" >
-            <input type="hidden" name="schoolClassId" value="${schoolClass.schoolClassId}" />
             <tr class="form-group" >
+            	<td>辅导员</td>
+            	<td>                    
+                    <select class="form-control" name="classInstructorUid" id="classInstructorUid">
+                    	<option value="">请选择</option>
+                        <c:forEach items="${teacherList}" var="pro">
+                            <option <c:if test='${schoolClass.classInstructorUid==pro.userId}'>selected='selected'</c:if> value="${pro.userId}" userName="${pro.userName}">${pro.userName}</option>
+                        </c:forEach>
+                    </select>
+                    <input type="hidden" name="classInstructorUname" id="classInstructorUname" />
+                </td>
                 <td>年级</td>
                 <td>                    
                     <input type="text" class="form-control" name="schoolGradeNumber" value="${schoolClass.schoolGradeNumber}" />
@@ -15,15 +28,12 @@
                 <td>
                     <input type="text" class="form-control"  name="schoolClassNumber" value="${schoolClass.schoolClassNumber}" />
                 </td>
+                
+            </tr>
+            <tr class="form-group">
                 <td>专业</td>
                 <td>
                     <input type="text" class="form-control" name="classSpecialty" value="${schoolClass.classSpecialty}" />
-                </td>
-            </tr>
-            <tr class="form-group">
-                <td>班级名称</td>
-                <td>
-                    <input class="form-control" type="text" name="schoolClassName" value="${schoolClass.schoolClassName}" />
                 </td>
                 <td>人数</td>
                 <td>
@@ -38,7 +48,9 @@
                 <td>毕业时间</td>
                 <td>
                     <input class="form-control" type="date"  name="classGraduationTime" value="${schoolClass.classGraduationTime}" />
-                </td>            
+                </td> 
+                <td colspan="5"></td>
+                         
             </tr>
         </table>
         <div class="modal-footer">
@@ -60,23 +72,3 @@
         Tables.loadPage();    
     });
 </script>
-<!-- /**班级管理id*/                          
-private String schoolClassId;   
-/**辅导员id*/                           
-private String classInstructorUid;        
-/**年级*/                              
-private String schoolGradeNumber;    
-/**班级*/                              
-private String schoolClassNumber;    
-/**专业*/                              
-private String classSpecialty;       
-/**班级名称：**/
-private String schoolClassName;      
-/**人数*/                              
-private Integer classStudentNumber;  
-/**培训方案*/                            
-private String classTrainScheme;     
-/**毕业时间*/                            
-private String classGraduationTime;  
-/**辅导员*/                             
-private String classInstructorUname;  -->

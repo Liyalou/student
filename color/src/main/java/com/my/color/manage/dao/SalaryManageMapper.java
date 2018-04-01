@@ -1,5 +1,8 @@
 package com.my.color.manage.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import com.my.color.manage.dao.po.SalaryManage;
 
 public interface SalaryManageMapper {
@@ -20,4 +23,7 @@ public interface SalaryManageMapper {
 
     
     int updateByPrimaryKey(SalaryManage record);
+    
+    
+    List<SalaryManage> getSalaryManageList(Map<String,Object> conditionMap);
 }

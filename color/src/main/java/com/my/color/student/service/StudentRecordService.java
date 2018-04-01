@@ -16,6 +16,7 @@ import com.my.color.role.dao.po.Role;
 import com.my.color.role.service.RoleService;
 import com.my.color.student.dao.StudentRecordMapper;
 import com.my.color.student.dao.po.StudentRecord;
+import com.my.color.teacher.dao.TeacherClassMapper;
 import com.my.color.user.dao.UserRoleMapper;
 import com.my.color.user.dao.po.User;
 import com.my.color.user.dao.po.UserRole;
@@ -42,6 +43,9 @@ public class StudentRecordService {
 	@Autowired
 	private UserRoleMapper userRoleMapper;
 	
+	@Autowired
+	private TeacherClassMapper teacherClassMapper;
+	
 	public StudentRecord selectByPrimaryKey(String recordId){
 		return studentRecordMapper.selectByPrimaryKey(recordId);
 	}
@@ -55,7 +59,21 @@ public class StudentRecordService {
 	}
 	
 	public List<StudentRecord> getStudentRecordList(Map<String,Object> conditionMap){
+		User user = UserToken.getLoginUser();
+		conditionMap.put("userId", user.getUserId());
+		if(user.getUserType().equals("3")){
+			conditionMap.put("teacherType", "1");
+		}
+		if(user.getUserType().equals("4")){
+			conditionMap.put("teacherType", "2");
+		}
+		List<String> classIdList = teacherClassMapper.getClassIdByUserId(conditionMap);
+		conditionMap.put("classIdList", classIdList);
 		return studentRecordMapper.getStudentRecordList(conditionMap);
+	}
+	
+	public List<StudentRecord> getStudentByClassId(Map<String,Object> conditionMap){
+		return studentRecordMapper.getStudentByClassId(conditionMap);
 	}
 	
 	
@@ -94,6 +112,7 @@ public class StudentRecordService {
 				user.setUserLoginNumber(0);
 				user.setUserIsValid("1");
 				user.setUserCreateTime(DateUtils.getTime());
+				user.setUserType("5");
 				userService.insertSelective(user);
 				Role role = roleService.getRoleByCode("role_student");
 				UserRole useRole = new UserRole();

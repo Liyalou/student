@@ -1,7 +1,5 @@
 package com.my.color.manage.dao.po;
 
-import java.util.Date;
-
 public class SalaryManage {
     /**考勤管理id*/
     private String salaryManageId;
@@ -12,11 +10,14 @@ public class SalaryManage {
     /**学生姓名*/
     private String studentUserName;
 
-    /**班级*/
-    private String salaryClass;
+    /**班级ID*/
+    private String salaryClassId;
+
+    /**班级名称*/
+    private String salaryClassName;
 
     /**考勤时间*/
-    private Date salaryTime;
+    private String salaryTime;
 
     /**节次*/
     private Double salaryClassNumber;
@@ -27,25 +28,25 @@ public class SalaryManage {
     /**教室地址*/
     private String salaryClassAddress;
 
-    /**考勤状态*/
+    /**考勤状态：1迟到，2请假、3旷课*/
     private String salaryStatus;
 
-    /**老师id*/
+    /**任课老师ID*/
     private String teacherUserId;
 
-    /**老师姓名*/
+    /**任课老师*/
     private String teacherUserName;
 
-    /**是否有效（0无效，1有效）*/
+    /**是否有效*/
     private String salaryIsVaild;
 
     /**创建时间*/
-    private Date salaryCreateTime;
+    private String salaryCreateTime;
 
-    /**最后修改时间*/
-    private Date salaryLastUptime;
+    /**修改时间*/
+    private String salaryLastUptime;
 
-    /**修改人id*/
+    /**修改人ID*/
     private String salaryLastUpuid;
 
     /**修改人*/
@@ -82,22 +83,32 @@ public class SalaryManage {
     }
 
     
-    public String getSalaryClass() {
-        return salaryClass;
+    public String getSalaryClassId() {
+        return salaryClassId;
     }
 
     
-    public void setSalaryClass(String salaryClass) {
-        this.salaryClass = salaryClass;
+    public void setSalaryClassId(String salaryClassId) {
+        this.salaryClassId = salaryClassId;
     }
 
     
-    public Date getSalaryTime() {
+    public String getSalaryClassName() {
+        return salaryClassName;
+    }
+
+    
+    public void setSalaryClassName(String salaryClassName) {
+        this.salaryClassName = salaryClassName;
+    }
+
+    
+    public String getSalaryTime() {
         return salaryTime;
     }
 
     
-    public void setSalaryTime(Date salaryTime) {
+    public void setSalaryTime(String salaryTime) {
         this.salaryTime = salaryTime;
     }
 
@@ -172,22 +183,22 @@ public class SalaryManage {
     }
 
     
-    public Date getSalaryCreateTime() {
+    public String getSalaryCreateTime() {
         return salaryCreateTime;
     }
 
     
-    public void setSalaryCreateTime(Date salaryCreateTime) {
+    public void setSalaryCreateTime(String salaryCreateTime) {
         this.salaryCreateTime = salaryCreateTime;
     }
 
     
-    public Date getSalaryLastUptime() {
+    public String getSalaryLastUptime() {
         return salaryLastUptime;
     }
 
     
-    public void setSalaryLastUptime(Date salaryLastUptime) {
+    public void setSalaryLastUptime(String salaryLastUptime) {
         this.salaryLastUptime = salaryLastUptime;
     }
 

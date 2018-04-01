@@ -40,7 +40,7 @@ public class StudentVacate {
     /**是否有效*/
     private String vacateIsVaild;
 
-    /**请假状态：1未发送，2待查看，3已查看*/
+    /**请假状态：0默认状态，1待审批，2同意，3不同意*/
     private String vacateState;
 
     /***/

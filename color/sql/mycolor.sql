@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2018-03-31 16:18:03
+Date: 2018-04-01 18:57:25
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -38,7 +38,8 @@ INSERT INTO `e_menu` VALUES ('MENU_MANGE', null, '菜单管理', '/admin/menu/in
 INSERT INTO `e_menu` VALUES ('MENU_NOTICE', null, '请假通知', null, '14', 'TOP_MAIN', '1');
 INSERT INTO `e_menu` VALUES ('MENU_QUERY_VACATE', null, '请假统计', '/amdin/queryVacate/queryIndex', '42', 'TOP_SALARY_MANAGE', '1');
 INSERT INTO `e_menu` VALUES ('MENU_ROLE', null, '角色管理', '/admin/role/roleIndex', '21', 'TOP_SYSTEM', '1');
-INSERT INTO `e_menu` VALUES ('MENU_SALARY_MANAGE', null, '考勤统计', '/admin/querySalary/querySalaryIndex', '43', 'TOP_SALARY_MANAGE', '1');
+INSERT INTO `e_menu` VALUES ('MENU_SALARY', null, '考勤管理', '/admin/salaryManage/index', '43', 'TOP_SALARY_MANAGE', '1');
+INSERT INTO `e_menu` VALUES ('MENU_SALARY_MANAGE', null, '考勤统计', '/admin/querySalary/querySalaryIndex', '44', 'TOP_SALARY_MANAGE', '1');
 INSERT INTO `e_menu` VALUES ('MENU_SCHOOL_CLASS', null, '班级管理', '/admin/schoolClass/index', '32', 'TOP_TEACH', '1');
 INSERT INTO `e_menu` VALUES ('MENU_STUDENT_RECORD', null, '学生管理', '/admin/studentRecord/index', '33', 'TOP_TEACH', '1');
 INSERT INTO `e_menu` VALUES ('MENU_STUDENT_VACATE', null, '请假申请', '/admin/studentVacate/vacateIndex', '41', 'TOP_SALARY_MANAGE', '1');
@@ -72,6 +73,8 @@ INSERT INTO `e_menu_role` VALUES ('MENU_MANGE', '3089cdfd3f51478e87d51995b93d0c0
 INSERT INTO `e_menu_role` VALUES ('MENU_NOTICE', '231cd593031e4c4faf48e4d725e45181');
 INSERT INTO `e_menu_role` VALUES ('MENU_QUERY_VACATE', '3089cdfd3f51478e87d51995b93d0c03');
 INSERT INTO `e_menu_role` VALUES ('MENU_ROLE', '3089cdfd3f51478e87d51995b93d0c03');
+INSERT INTO `e_menu_role` VALUES ('MENU_SALARY', '231cd593031e4c4faf48e4d725e45181');
+INSERT INTO `e_menu_role` VALUES ('MENU_SALARY', '3089cdfd3f51478e87d51995b93d0c03');
 INSERT INTO `e_menu_role` VALUES ('MENU_SALARY_MANAGE', '231cd593031e4c4faf48e4d725e45181');
 INSERT INTO `e_menu_role` VALUES ('MENU_SALARY_MANAGE', '3089cdfd3f51478e87d51995b93d0c03');
 INSERT INTO `e_menu_role` VALUES ('MENU_SALARY_MANAGE', 'cc2958f8ce6e4114a10300cd7ab1b798');
@@ -85,7 +88,6 @@ INSERT INTO `e_menu_role` VALUES ('MENU_STUDENT_RECORD', 'f491f2d85398437db55551
 INSERT INTO `e_menu_role` VALUES ('MENU_STUDENT_VACATE', '3089cdfd3f51478e87d51995b93d0c03');
 INSERT INTO `e_menu_role` VALUES ('MENU_STUDENT_VACATE', 'e0f9553f149041a5a4ee19a2c50110f9');
 INSERT INTO `e_menu_role` VALUES ('MENU_TEACHER', '3089cdfd3f51478e87d51995b93d0c03');
-INSERT INTO `e_menu_role` VALUES ('MENU_TEACHER', 'f491f2d85398437db55551e410961f3d');
 INSERT INTO `e_menu_role` VALUES ('MENU_USER_CONTENT', '231cd593031e4c4faf48e4d725e45181');
 INSERT INTO `e_menu_role` VALUES ('MENU_USER_CONTENT', '3089cdfd3f51478e87d51995b93d0c03');
 INSERT INTO `e_menu_role` VALUES ('MENU_USER_CONTENT', 'cc2958f8ce6e4114a10300cd7ab1b798');
@@ -125,7 +127,6 @@ CREATE TABLE `e_role` (
 -- ----------------------------
 INSERT INTO `e_role` VALUES ('231cd593031e4c4faf48e4d725e45181', '任课老师', 'role_teacher', '1', '2017-12-14 10:10:51');
 INSERT INTO `e_role` VALUES ('3089cdfd3f51478e87d51995b93d0c03', '系统管理员', 'role_system', '1', '2017-12-14 10:10:51');
-INSERT INTO `e_role` VALUES ('aba5df2b818b4847a1f7ba1a8ba656ef', 'ceshi', '123456', '1', '2018-03-29 19:09:43');
 INSERT INTO `e_role` VALUES ('cc2958f8ce6e4114a10300cd7ab1b798', '教务管理员', 'role_teach', '1', '2017-12-14 10:10:51');
 INSERT INTO `e_role` VALUES ('e0f9553f149041a5a4ee19a2c50110f9', '学生', 'role_student', '1', '2017-12-14 10:10:51');
 INSERT INTO `e_role` VALUES ('f491f2d85398437db55551e410961f3d', '辅导员', 'role_instructor', '1', '2017-12-14 10:10:51');
@@ -138,7 +139,8 @@ CREATE TABLE `e_salary_manage` (
   `salary_manage_id` varchar(36) NOT NULL COMMENT '考勤管理id',
   `student_user_id` varchar(36) NOT NULL COMMENT '学生id',
   `student_user_name` varchar(36) NOT NULL COMMENT '学生姓名',
-  `salary_class` varchar(50) DEFAULT NULL COMMENT '班级',
+  `salary_class_id` varchar(50) NOT NULL COMMENT '班级',
+  `salary_class_name` varchar(50) NOT NULL COMMENT '班级名称',
   `salary_time` datetime DEFAULT NULL COMMENT '考勤时间',
   `salary_class_number` double(5,1) DEFAULT NULL COMMENT '节次',
   `salary_course_name` varchar(100) DEFAULT NULL COMMENT '课程名称',
@@ -185,7 +187,7 @@ CREATE TABLE `e_school_class` (
 -- ----------------------------
 -- Records of e_school_class
 -- ----------------------------
-INSERT INTO `e_school_class` VALUES ('53e82c942d9e434681784f8aa3764b5e', '18级', '9班', '药理', '18级9班药理', '35', '药理实验', '2018-06-30 00:00:00', null, null, '2018-03-31 16:11:59', '0555137b929047769255c519912b232b', '系统管理员', null, null, null);
+INSERT INTO `e_school_class` VALUES ('1046b59be1ea4079abaef575a44a0874', '19', '05', '建筑', '1905建筑', '36', '土地方案', '2019-09-01 00:00:00', '41f3fa61f0874f80815765ac60ff92ae', '李亚楼', '2018-04-01 16:56:26', '0555137b929047769255c519912b232b', '系统管理员', null, null, null);
 
 -- ----------------------------
 -- Table structure for e_student_record
@@ -220,6 +222,7 @@ CREATE TABLE `e_student_record` (
 -- ----------------------------
 -- Records of e_student_record
 -- ----------------------------
+INSERT INTO `e_student_record` VALUES ('a8add5bab6004cbdbd55bc2f61c13a1b', '小李', '男', '1993-06-17', '185', '510000000000000000', '汉', '遂宁', '18511111111', '15111111111', '佛挡杀佛付付付付付付付', '的点点滴滴多多多多多多多多多多多', 'c1c6addcfc2c401889bb54b3de30946b', '1', '1046b59be1ea4079abaef575a44a0874', '1905建筑', '2018-04-01 16:57:43', '0555137b929047769255c519912b232b', '系统管理员', null, null, null);
 
 -- ----------------------------
 -- Table structure for e_student_vacate
@@ -253,13 +256,16 @@ CREATE TABLE `e_student_vacate` (
 -- ----------------------------
 DROP TABLE IF EXISTS `e_teacher_class`;
 CREATE TABLE `e_teacher_class` (
+  `school_class_id` varchar(36) NOT NULL COMMENT '班级id',
   `teacher_user_id` varchar(36) NOT NULL COMMENT '老师id',
-  `school_class_id` varchar(36) DEFAULT NULL COMMENT '班级id'
+  `teacher_type` varchar(2) NOT NULL COMMENT '老师类型（1辅导员，2任课老师）',
+  PRIMARY KEY (`school_class_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='任课老师班级关联表';
 
 -- ----------------------------
 -- Records of e_teacher_class
 -- ----------------------------
+INSERT INTO `e_teacher_class` VALUES ('1046b59be1ea4079abaef575a44a0874', '41f3fa61f0874f80815765ac60ff92ae', '1');
 
 -- ----------------------------
 -- Table structure for e_teach_teacher
@@ -291,7 +297,7 @@ CREATE TABLE `e_teach_teacher` (
 -- ----------------------------
 -- Records of e_teach_teacher
 -- ----------------------------
-INSERT INTO `e_teach_teacher` VALUES ('13d0e4da632b44f49422a8db1af00b8d', 'acd043b07a9c4b638715012adbe6396d', '李亚楼', '男', '28', '汉', '510921199009145356', '博士', '10', '教授', '18508253688', '成都市金牛区', '1', '2018-03-31 16:03:42', '0555137b929047769255c519912b232b', '系统管理员', '2018-03-31 16:06:39', '0555137b929047769255c519912b232b', '系统管理员');
+INSERT INTO `e_teach_teacher` VALUES ('0dca58a3b92541f19b66d811b9a758c4', '41f3fa61f0874f80815765ac60ff92ae', '李亚楼', '男', '28', '汉', '510921199009145356', '博士', '5', '教导主任', '18508253688', '成都市', '1', '2018-04-01 16:55:41', '0555137b929047769255c519912b232b', '系统管理员', null, null, null);
 
 -- ----------------------------
 -- Table structure for e_user
@@ -321,8 +327,9 @@ CREATE TABLE `e_user` (
 -- ----------------------------
 -- Records of e_user
 -- ----------------------------
-INSERT INTO `e_user` VALUES ('0555137b929047769255c519912b232b', '系统管理员', 'admin', '223ce7b851123353479d85757fbbf4e320d1e251', '1', null, '123456789', null, null, null, null, null, null, '1', '2017-12-04 11:15:17', '2018-03-31 16:06:02', null);
-INSERT INTO `e_user` VALUES ('acd043b07a9c4b638715012adbe6396d', '李亚楼', '18508253688', 'fb39e228978e2c298e111ab592920ab045a260b0', '男', '510921199009145356', '18508253688', null, null, null, null, '0', null, '1', '2018-03-31 16:03:42', '2018-03-31 16:04:34', null);
+INSERT INTO `e_user` VALUES ('0555137b929047769255c519912b232b', '系统管理员', 'admin', '223ce7b851123353479d85757fbbf4e320d1e251', '1', null, '123456789', null, '1', null, null, null, null, '1', '2017-12-04 11:15:17', '2018-04-01 18:14:46', null);
+INSERT INTO `e_user` VALUES ('41f3fa61f0874f80815765ac60ff92ae', '李亚楼', '18508253688', 'fb39e228978e2c298e111ab592920ab045a260b0', '男', '510921199009145356', '18508253688', null, '3', null, null, '0', null, '1', '2018-04-01 16:55:41', '2018-04-01 17:00:20', null);
+INSERT INTO `e_user` VALUES ('c1c6addcfc2c401889bb54b3de30946b', '小李', '18511111111', '821bcfcfb519bb1d0738b57dff0daa364e36c6d6', '男', '510000000000000000', '18511111111', null, '5', null, null, '0', null, '1', '2018-04-01 16:57:43', '2018-04-01 17:00:42', null);
 
 -- ----------------------------
 -- Table structure for e_user_role
@@ -338,7 +345,8 @@ CREATE TABLE `e_user_role` (
 -- Records of e_user_role
 -- ----------------------------
 INSERT INTO `e_user_role` VALUES ('0555137b929047769255c519912b232b', '3089cdfd3f51478e87d51995b93d0c03');
-INSERT INTO `e_user_role` VALUES ('acd043b07a9c4b638715012adbe6396d', 'f491f2d85398437db55551e410961f3d');
+INSERT INTO `e_user_role` VALUES ('41f3fa61f0874f80815765ac60ff92ae', 'f491f2d85398437db55551e410961f3d');
+INSERT INTO `e_user_role` VALUES ('c1c6addcfc2c401889bb54b3de30946b', 'e0f9553f149041a5a4ee19a2c50110f9');
 
 -- ----------------------------
 -- Table structure for e_vacate_notice

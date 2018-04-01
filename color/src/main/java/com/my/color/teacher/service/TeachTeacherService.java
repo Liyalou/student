@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.my.color.base.common.Constant;
 import com.my.color.base.util.DateUtils;
 import com.my.color.base.util.MessageUtils;
 import com.my.color.base.util.PasswordUtils;
@@ -90,13 +91,17 @@ public class TeachTeacherService {
 			teachTeacher.setTeacherCreateUserId(UserToken.getLoginUser().getUserId());
 			teachTeacher.setTeacherCreateUserName(UserToken.getLoginUser().getUserName());
 			result = teachTeacherMapper.insertSelective(teachTeacher);
-			
 			if(result == 1){
 				user.setUserPassword(PasswordUtils.SHA1("123456", teachTeacher.getTeachTeacherPhone()));
 				user.setUserSex(teachTeacher.getTeachTeacherSex());
 				user.setUserLoginNumber(0);
 				user.setUserIsValid("1");
 				user.setUserCreateTime(DateUtils.getTime());
+				if(roleCode.equals(Constant.ROLE_TYPE_INSTRUCTOR)){
+					user.setUserType("3");
+				}else{
+					user.setUserType("4");
+				}
 				userService.insertSelective(user);
 				Role role = roleService.getRoleByCode(roleCode);
 				UserRole useRole = new UserRole();

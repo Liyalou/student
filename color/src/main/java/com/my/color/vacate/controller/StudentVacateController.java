@@ -1,5 +1,6 @@
 package com.my.color.vacate.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
@@ -59,7 +61,7 @@ public class StudentVacateController {
 	
 	/**
 	 * 添加修改页面
-	 * 	请假状态为1时，可以修改
+	 * 	请假状态为默认状态0时，可以修改
 	 * @param model
 	 * @return
 	 */
@@ -96,7 +98,7 @@ public class StudentVacateController {
 	
 	/**
 	 * 删除请假
-	 * 		请假状态为1时，可以删除
+	 * 		请假状态为默认状态0时，可以删除
 	 * @param attributes
 	 * @param request
 	 * @param teachTeacherId
@@ -111,6 +113,32 @@ public class StudentVacateController {
 		}
 		return new RedirectView(request.getContextPath()+"/admin/studentVacate/vacateIndex");
 	}
+	
+	/**
+	 * 发起请假审批
+	 * @param studentVacateId
+	 * @return
+	 */
+	@RequestMapping("/startVacateApply")
+	@ResponseBody
+	public Map<String,Object> startVacateApply(String studentVacateId){
+		Map<String,Object> map = new HashMap<String,Object>();
+		Boolean flag = false;
+		String massage = "操作失败";
+		StudentVacate studentVacate = new StudentVacate();
+		studentVacate.setStudentVacateId(studentVacateId);
+		studentVacate.setVacateState("1");
+		int result = studentVacateService.updateByPrimaryKeySelective(studentVacate);
+		if(result == 1){
+			flag = true;
+			massage = "操作成功";
+		}
+		map.put("flag", flag);
+		map.put("massage", massage);
+		return map;
+	}
+	
+	
 	
 	/**
 	 * 查看详情

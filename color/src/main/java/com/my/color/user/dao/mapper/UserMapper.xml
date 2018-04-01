@@ -284,4 +284,11 @@
     set user_last_login_time = #{userLastLoginTime,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=VARCHAR}
   </update>
+  
+  <select id="getUserByType" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from e_user
+    where user_type = #{userType,jdbcType=VARCHAR} and user_is_valid = '1'
+  </select>
 </mapper>

@@ -58,7 +58,7 @@ public class StudentVacateService {
 			studentVacate.setVacateUserName(UserToken.getLoginUser().getUserName());
 			studentVacate.setVacateIsVaild("1");
 			studentVacate.setVacateCreateTime(DateUtils.getTime());
-			studentVacate.setVacateState("1");
+			studentVacate.setVacateState("0");
 			result = studentVacateMapper.insertSelective(studentVacate);
 		}
 		MessageUtils.getMessage(attributes, result);

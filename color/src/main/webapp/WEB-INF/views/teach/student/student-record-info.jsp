@@ -4,8 +4,8 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <div class="form-group" >
     <form id="studentRecord_form" role="form" method="post" action="${ctx}/admin/studentRecord/submitStudent" class="form-horizontal ">
+        <input type="hidden"  name="studentRecordId" value="${studentRecord.studentRecordId}" />
         <table style="border:none" id="simple-table" class="table table-bordered table-hover" >
-            <input type="hidden"  name="studentRecordId" value="${studentRecord.studentRecordId}" />
             <tr class="form-group" >
                 <td>姓名</td>
                 <td>                    
