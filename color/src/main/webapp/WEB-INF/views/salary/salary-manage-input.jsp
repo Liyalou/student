@@ -13,6 +13,7 @@
                 <td>班级名称</td>
                 <td>
                     <select name="salaryClassId" id="salaryClassId" class="form-control">
+                    	<option value="">请选择</option>
                         <c:forEach items='${classList}' var='pro'>
                             <option <c:if test="${salaryManage.salaryClassId==pro.schoolClassId}">selected='selected'</c:if> value="${pro.schoolClassId}">${pro.schoolClassName}</option>                            
                         </c:forEach>

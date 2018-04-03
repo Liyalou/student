@@ -21,6 +21,7 @@ import com.my.color.base.common.Constant;
 import com.my.color.base.layout.MainLayout;
 import com.my.color.base.page.Page;
 import com.my.color.base.util.StringUtils;
+import com.my.color.user.service.UserToken;
 import com.my.color.vacate.dao.po.StudentVacate;
 import com.my.color.vacate.service.StudentVacateService;
 
@@ -52,6 +53,7 @@ public class StudentVacateController {
 	public ModelAndView vacateIndex(ModelMap model,Page<StudentVacate> page,BaseCondition condition){
 		page.startPage(page);
 		Map<String,Object> conditionMap = condition.getConditionMap(condition);
+		conditionMap.put("userId", UserToken.getLoginUser().getUserId());
 		List<StudentVacate> list = studentVacateService.getStudentVacateList(conditionMap);
 		PageInfo<StudentVacate> pageList = page.listToPage(list);
 		model.put(Constant.PAGE_LIST, pageList);

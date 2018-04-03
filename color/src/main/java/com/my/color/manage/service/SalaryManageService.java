@@ -54,7 +54,7 @@ public class SalaryManageService {
 		if(!StringUtils.isEmpty(salaryManage.getSalaryManageId())){
 			salaryManage.setSalaryLastUptime(DateUtils.getTime());
 			salaryManage.setSalaryLastUpuid(user.getUserId());
-			salaryManage.setSalaryLastUptime(user.getUserName());
+			salaryManage.setSalaryLastUpuname(user.getUserName());
 			result = salaryManageMapper.updateByPrimaryKeySelective(salaryManage);
 		}else{
 			salaryManage.setSalaryManageId(UUIDUtils.getUUID());
