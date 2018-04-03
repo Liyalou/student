@@ -15,10 +15,10 @@
 	    
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/mycolor?characterEncoding=UTF-8" userId="root" password="root" />
 
-		<javaModelGenerator targetPackage="com.my.color.manage.dao.po" targetProject="color" />
-		<sqlMapGenerator targetPackage="com.my.color.manage.dao.mapper" targetProject="color" ></sqlMapGenerator>
-		<javaClientGenerator targetPackage="com.my.color.manage.dao" targetProject="color" type="XMLMAPPER" />
-		<table schema="general" tableName="e_salary_manage" domainObjectName="SalaryManage"
+		<javaModelGenerator targetPackage="com.my.color.wait.dao.po" targetProject="color" />
+		<sqlMapGenerator targetPackage="com.my.color.wait.dao.mapper" targetProject="color" ></sqlMapGenerator>
+		<javaClientGenerator targetPackage="com.my.color.wait.dao" targetProject="color" type="XMLMAPPER" />
+		<table schema="general" tableName="e_wait_deal" domainObjectName="WaitDeal"
 			enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false"	selectByExampleQueryId="false" >
 			<property name="useActualColumnNames" value="false"/>

@@ -104,8 +104,8 @@ public class StudentVacateController {
 	 * @param teachTeacherId
 	 * @return
 	 */
-	@RequestMapping("/deleteTeacher")
-	public RedirectView deleteTeacher(RedirectAttributes attributes,HttpServletRequest request,String studentVacateId){
+	@RequestMapping("/deleteStudentVacate")
+	public RedirectView deleteStudentVacate(RedirectAttributes attributes,HttpServletRequest request,String studentVacateId){
 		try {
 			studentVacateService.deleteStudentVacate(attributes, studentVacateId);
 		} catch (Exception e) {
@@ -138,19 +138,17 @@ public class StudentVacateController {
 		return map;
 	}
 	
-	
-	
 	/**
 	 * 查看详情
 	 * @param model
 	 * @param teachTeacherId
 	 * @return
 	 */
-	/*@RequestMapping("/getTeacherInfo")
-	public ModelAndView getTeacherInfo(ModelMap model,String studentVacateId){
+	@RequestMapping("/getVacateInfo")
+	public ModelAndView getVacateInfo(ModelMap model,String studentVacateId){
 		StudentVacate studentVacate = studentVacateService.selectByPrimaryKey(studentVacateId);
 		model.put("studentVacate", studentVacate);
-		return layout.layout("teach/teacher/teacher-info",MENU_ID);
-	}*/
+		return layout.layout("vacate/vacate-info",MENU_ID);
+	}
 	
 }

@@ -26,4 +26,7 @@ public interface TeacherClassMapper {
     
     
     List<String> getClassIdByUserId(Map<String,Object> conditionMap);
+    
+    
+    List<String> getUserIdByClassId(Map<String,Object> conditionMap);
 }

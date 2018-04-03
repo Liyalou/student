@@ -305,6 +305,12 @@
     <if test="userName != null and userName !=''">
       and teach_teacher_name LIKE CONCAT('%',#{userName,jdbcType=VARCHAR},'%')
     </if>
+    <if test="userIdList !=null and userIdList.size>0">
+        and teacher_user_id IN
+        <foreach collection="userIdList" item="userId" index="index" open="(" close=")" separator=",">
+            #{userId}
+        </foreach>
+    </if>
     order by teacher_update_time
   </select>
 </mapper>

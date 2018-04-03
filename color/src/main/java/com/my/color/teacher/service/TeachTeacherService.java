@@ -16,6 +16,7 @@ import com.my.color.base.util.UUIDUtils;
 import com.my.color.role.dao.po.Role;
 import com.my.color.role.service.RoleService;
 import com.my.color.teacher.dao.TeachTeacherMapper;
+import com.my.color.teacher.dao.TeacherClassMapper;
 import com.my.color.teacher.dao.po.TeachTeacher;
 import com.my.color.user.dao.UserRoleMapper;
 import com.my.color.user.dao.po.User;
@@ -33,6 +34,9 @@ public class TeachTeacherService {
 
 	@Autowired
 	private TeachTeacherMapper teachTeacherMapper;
+	
+	@Autowired
+	private TeacherClassMapper teacherClassMapper;
 	
 	@Autowired
 	private UserService userService;
@@ -114,7 +118,11 @@ public class TeachTeacherService {
 		return result;
 	}
 	
-	
+	/**
+	 * 删除老师
+	 * @param attributes
+	 * @param teachTeacherId
+	 */
 	public void deleteTeacher(RedirectAttributes attributes,String teachTeacherId){
 		int type = 0;
 		TeachTeacher teacher = teachTeacherMapper.selectByPrimaryKey(teachTeacherId);
@@ -130,5 +138,10 @@ public class TeachTeacherService {
 			type = userService.updateByPrimaryKeySelective(user);
 		}
 		MessageUtils.getMessage(attributes, type);
+	}
+	
+	
+	public List<String> getUserIdByClassId(Map<String,Object> conditionMap){
+		return teacherClassMapper.getUserIdByClassId(conditionMap);
 	}
 }
