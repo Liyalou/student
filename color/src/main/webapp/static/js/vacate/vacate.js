@@ -23,7 +23,10 @@ var Tables={
         //请假申请审批
         $(".approvalVacation").on('click', function() {
             var studentVacateId=$(this).attr('_id');
-            $.ajax({
+            $("body").load(ctx+'/admin/studentVacate/startVacateApply?studentVacateId='+studentVacateId,function(){
+
+            });
+            /*$.ajax({
                 url: ctx+'/admin/studentVacate/startVacateApply',
                 type: 'POST',
                 dataType: 'json',
@@ -31,7 +34,7 @@ var Tables={
                 success:function(data){
                     console.table(data)
                 }
-            })
+            })*/
         });
         //查询申请记录
         $("#search_student").on('click', function() {

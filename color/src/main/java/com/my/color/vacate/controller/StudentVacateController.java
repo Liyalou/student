@@ -1,6 +1,5 @@
 package com.my.color.vacate.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
@@ -20,6 +18,7 @@ import com.my.color.base.common.BaseCondition;
 import com.my.color.base.common.Constant;
 import com.my.color.base.layout.MainLayout;
 import com.my.color.base.page.Page;
+import com.my.color.base.util.MessageUtils;
 import com.my.color.base.util.StringUtils;
 import com.my.color.user.service.UserToken;
 import com.my.color.vacate.dao.po.StudentVacate;
@@ -122,22 +121,13 @@ public class StudentVacateController {
 	 * @return
 	 */
 	@RequestMapping("/startVacateApply")
-	@ResponseBody
-	public Map<String,Object> startVacateApply(String studentVacateId){
-		Map<String,Object> map = new HashMap<String,Object>();
-		Boolean flag = false;
-		String massage = "操作失败";
+	public RedirectView startVacateApply(RedirectAttributes attributes,HttpServletRequest request,String studentVacateId){
 		StudentVacate studentVacate = new StudentVacate();
 		studentVacate.setStudentVacateId(studentVacateId);
 		studentVacate.setVacateState("1");
 		int result = studentVacateService.updateByPrimaryKeySelective(studentVacate);
-		if(result == 1){
-			flag = true;
-			massage = "操作成功";
-		}
-		map.put("flag", flag);
-		map.put("massage", massage);
-		return map;
+		MessageUtils.getMessage(attributes, result);
+		return new RedirectView(request.getContextPath()+"/admin/studentVacate/vacateIndex");
 	}
 	
 	/**
