@@ -61,12 +61,10 @@
     $(document).ready(function() {
         Tables.loadPage();    
         $("#vacateStartTime").datetimepicker({
-            minView: "month",
             language:  'zh-CN',
-            format: 'yyyy-mm-dd',
+            format: 'yyyy-mm-dd:hh:mm:ss',
             autoclose: true,
             todayBtn: true,
-            pickerPosition: "bottom-left"
         }).on('changeDate',function(ev){
             var vacateStartTime=$("#vacateStartTime").val();
             $("#vacateEndTime").datetimepicker('setStartDate',vacateStartTime);
@@ -75,12 +73,10 @@
 
 // 结束时间的插件 
         $("#vacateEndTime").datetimepicker({
-            minView: "month",
             language:  'zh-CN',
-            format: 'yyyy-mm-dd',
+            format: 'yyyy-mm-dd:hh:mm:ss',
             autoclose: true,
             todayBtn: true,
-            pickerPosition: "bottom-left"
         }).on('changeDate',function(ev){
             var vacateStartTime=$("#vacateStartTime").val();
             var vacateEndTime=$("#vacateEndTime").val();

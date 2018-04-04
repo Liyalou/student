@@ -58,7 +58,7 @@
 						<td>${vacation.vacateEndTime}</td>
 						<td>${vacation.vacateCourseName}</td>
 						<td><a href="${ctx}/admin/studentVacate/deleteTeacher?studentVacateId=${vacation.studentVacateId}">删除</a>&nbsp;
-						<a _id="${vacation.studentVacateId}" class="modifyVacation" >修改</a>&nbsp;<a _id="${vacation.studentVacateId}" class="infoVacation" >详情</a></td>
+						<a _id="${vacation.studentVacateId}" class="modifyVacation" >修改</a>&nbsp;<a _id="${vacation.studentVacateId}" class="infoVacation" >详情</a>&nbsp;<a _id="${vacation.studentVacateId}" class="approvalVacation" >请假审批</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

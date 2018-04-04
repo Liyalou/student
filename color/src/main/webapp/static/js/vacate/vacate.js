@@ -16,9 +16,22 @@ var Tables={
         //请假申请详情
         $(".infoVacation").on('click', function() {
             var studentVacateId=$(this).attr('_id');
-            $(".page-content").load(ctx+'/admin/studentVacate/getTeacherInfo?studentVacateId='+studentVacateId,function(){
+            $(".page-content").load(ctx+'/admin/studentVacate/getVacateInfo?studentVacateId='+studentVacateId,function(){
 
             });
+        });
+        //请假申请审批
+        $(".approvalVacation").on('click', function() {
+            var studentVacateId=$(this).attr('_id');
+            $.ajax({
+                url: ctx+'/admin/studentVacate/startVacateApply',
+                type: 'POST',
+                dataType: 'json',
+                data: {studentVacateId:studentVacateId},
+                success:function(data){
+                    console.table(data)
+                }
+            })
         });
         //查询申请记录
         $("#search_student").on('click', function() {
