@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -13,6 +14,8 @@ import com.my.color.base.util.DateUtils;
 import com.my.color.base.util.MessageUtils;
 import com.my.color.base.util.StringUtils;
 import com.my.color.base.util.UUIDUtils;
+import com.my.color.student.dao.po.StudentRecord;
+import com.my.color.student.service.StudentRecordService;
 import com.my.color.teachClass.dao.SchoolClassMapper;
 import com.my.color.teachClass.dao.po.SchoolClass;
 import com.my.color.teacher.dao.TeacherClassMapper;
@@ -37,6 +40,9 @@ public class SchoolClassService {
 	
 	@Autowired
 	private TeacherClassMapper teacherClassMapper;
+	
+	@Autowired
+	private StudentRecordService recordService;
 	
 	public SchoolClass selectByPrimaryKey(String recordId){
 		return schoolClassMapper.selectByPrimaryKey(recordId);
@@ -74,7 +80,7 @@ public class SchoolClassService {
 		int result = 0;
 		TeacherClass teacherClass = new TeacherClass();
 		teacherClass.setTeacherUserId(schoolClass.getClassInstructorUid());
-		teacherClass.setTeacherType("1");
+		teacherClass.setTeacherType("3");
 		User user = UserToken.getLoginUser();
 		String className = schoolClass.getSchoolGradeNumber()+schoolClass.getSchoolClassNumber()+schoolClass.getClassSpecialty();
 		if(!StringUtils.isEmpty(schoolClass.getSchoolClassId())){
@@ -93,6 +99,7 @@ public class SchoolClassService {
 			schoolClass.setClassCreateTime(DateUtils.getTime());
 			schoolClass.setClassCreateUid(user.getUserId());
 			schoolClass.setClassCreateUname(user.getUserName());
+			schoolClass.setClassIsVaild("1");
 			teacherClass.setSchoolClassId(schoolClass.getSchoolClassId());
 			result = schoolClassMapper.insertSelective(schoolClass);
 			if(result == 1){
@@ -107,8 +114,34 @@ public class SchoolClassService {
 	 * 删除
 	 */
 	public void deleteSchoolClass(RedirectAttributes attributes,String schoolClassId){
-		int result = schoolClassMapper.deleteByPrimaryKey(schoolClassId);
+		SchoolClass schoolClass = new SchoolClass();
+		schoolClass.setSchoolClassId(schoolClassId);
+		schoolClass.setClassLastUptime(DateUtils.getTime());
+		schoolClass.setClassLastUpuid(UserToken.getLoginUser().getUserId());
+		schoolClass.setClassLastUpuname(UserToken.getLoginUser().getUserName());
+		schoolClass.setClassIsVaild("0");
+		int result = schoolClassMapper.updateByPrimaryKeySelective(schoolClass);
 		MessageUtils.getMessage(attributes, result);
 	}
 	
+	/**
+	 * 根据学生userID查询班级信息
+	 * @param userId
+	 * @return
+	 */
+	public SchoolClass selectByStudentUserId(String userId){
+		StudentRecord record = recordService.getStudentRecordByUserId(userId);
+		return schoolClassMapper.selectByPrimaryKey(record.getStudentClassId());
+	}
+	
+	@Transactional(rollbackFor= Exception.class)
+	public void submitTeacherForClass(RedirectAttributes attributes,String[] teacherIdList,
+			String schoolClassId) throws Exception{
+		for (String teacherId : teacherIdList) {
+			TeacherClass teacherClass = new TeacherClass();
+			teacherClass.setSchoolClassId(schoolClassId);
+			teacherClass.setTeacherUserId(teacherId);
+			teacherClassMapper.insertSelective(teacherClass);
+		}
+	}
 }

@@ -21,6 +21,7 @@ import com.my.color.base.page.Page;
 import com.my.color.base.util.StringUtils;
 import com.my.color.teacher.dao.po.TeachTeacher;
 import com.my.color.teacher.service.TeachTeacherService;
+import com.my.color.user.service.UserToken;
 
 /**
  * 教务老师管理
@@ -77,8 +78,11 @@ public class TeachTeacherController {
 		TeachTeacher teachTeacher = new TeachTeacher();
 		if(!StringUtils.isEmpty(teachTeacherId)){
 			teachTeacher = teachTeacherService.selectByPrimaryKey(teachTeacherId);
+			String userType = teachTeacherService.getTeacherType(teachTeacher.getTeacherUserId());
+			model.put("teacherType", userType);
 		}
 		model.put("teachTeacher", teachTeacher);
+		model.put("userType", UserToken.getLoginUser().getUserType());
 		return layout.layout("teach/teacher/teacher-input",MENU_ID);
 	}
 	

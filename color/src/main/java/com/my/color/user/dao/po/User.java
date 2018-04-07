@@ -30,7 +30,7 @@ public class User {
     /**email*/
     private String userEmail;
 
-    /**用户类型（1后台，2客户端）*/
+    /**用户类型（1系统管理，2教务管理员，3辅导员，4任课老师，5学生）*/
     private String userType;
 
     /**微信openid*/

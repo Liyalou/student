@@ -56,8 +56,9 @@ public class StudentRecordController {
 	@RequestMapping("/index")
 	public ModelAndView studentRecordIndex(ModelMap model,Page<StudentRecord> page,BaseCondition condition){
 		try {
-			page.startPage(page);
 			Map<String,Object> conditionMap = condition.getConditionMap(condition);
+			conditionMap = recordService.getStudentRecordCondition(conditionMap);
+			page.startPage(page);
 			List<StudentRecord> list = recordService.getStudentRecordList(conditionMap);
 			PageInfo<StudentRecord> pageList = page.listToPage(list);
 			model.put(Constant.PAGE_LIST, pageList);

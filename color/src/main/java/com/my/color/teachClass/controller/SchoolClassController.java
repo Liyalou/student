@@ -1,5 +1,6 @@
 package com.my.color.teachClass.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +21,8 @@ import com.my.color.base.layout.MainLayout;
 import com.my.color.base.page.Page;
 import com.my.color.teachClass.dao.po.SchoolClass;
 import com.my.color.teachClass.service.SchoolClassService;
+import com.my.color.teacher.dao.po.TeachTeacher;
+import com.my.color.teacher.service.TeachTeacherService;
 import com.my.color.user.dao.po.User;
 import com.my.color.user.service.UserToken;
 
@@ -39,6 +42,9 @@ public class SchoolClassController {
 	
 	@Autowired
 	private SchoolClassService schoolClassService;
+	
+	@Autowired
+	private TeachTeacherService teacherService;
 	
 	/**
 	 * 列表查询
@@ -130,5 +136,40 @@ public class SchoolClassController {
 		SchoolClass schoolClass = schoolClassService.selectByPrimaryKey(schoolClassId);
 		model.put("schoolClass", schoolClass);
 		return layout.layout("teach/class/school-class-info",MENU_ID);
+	}
+	
+	/**
+	 * 进入为班级分配任课老师页面
+	 * @param model
+	 * @param schoolClassId
+	 * @return
+	 */
+	@RequestMapping("/setTeacherForClass")
+	public ModelAndView setTeacherForClass(ModelMap model,String schoolClassId){
+		Map<String,Object> conditionMap = new HashMap<String,Object>();
+		conditionMap.put("schoolClassId", schoolClassId);
+		List<TeachTeacher> teacherList = teacherService.getTeacherForClass(conditionMap);
+		model.put("teacherList", teacherList);
+		model.put("schoolClassId", schoolClassId);
+		return layout.layout("teach/class/teacher-list",MENU_ID);
+	}
+	
+	/**
+	 * 分配确认
+	 * @param attributes
+	 * @param request
+	 * @param teacherIdList
+	 * @param schoolClassId
+	 * @return
+	 */
+	@RequestMapping("/submitTeacherForClass")
+	public RedirectView submitTeacherForClass(RedirectAttributes attributes,HttpServletRequest request,
+			String[] teacherIdList,String schoolClassId){
+		try {
+			schoolClassService.submitTeacherForClass(attributes, teacherIdList, schoolClassId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new RedirectView(request.getContextPath()+"/admin/schoolClass/index");
 	}
 }

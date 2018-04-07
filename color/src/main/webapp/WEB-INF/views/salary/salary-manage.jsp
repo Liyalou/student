@@ -55,7 +55,17 @@
 						<td>${SalaryManage.salaryClassNumber}</td>
 						<td>${SalaryManage.salaryCourseName}</td>
 						<td>${SalaryManage.salaryClassAddress}</td>
-						<td>${SalaryManage.salaryStatus}</td>
+						<td>
+							<c:if test="${SalaryManage.salaryStatus == 1}">
+								迟到
+							</c:if>
+							<c:if test="${SalaryManage.salaryStatus == 2}">
+								请假
+							</c:if>
+							<c:if test="${SalaryManage.salaryStatus == 3}">
+								旷课
+							</c:if>
+						</td>
 						<td>${SalaryManage.teacherUserName}</td>
 						<td><a href="${ctx}/admin/salaryManage/deleteSalaryManage?salaryManageId=${SalaryManage.salaryManageId}">删除</a>&nbsp;
 						<a _id="${SalaryManage.salaryManageId}" class="modifySalaryManage" >修改</a>&nbsp;<a _id="${SalaryManage.salaryManageId}" class="infoSalaryManage" >详情</a></td>

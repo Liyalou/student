@@ -2,23 +2,23 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-<script src="${pageContext.request.contextPath}/static/js/role/role.js"></script>
+
 <div class="page-content">
 	<div class="row">
 		<div class="col-xs-12">
 			<form class="form-horizontal">
 				<div class="form-group">
-					<div class="col-xs-2">
+					<div class="col-xs-3">
 						<div class="input-group">
-							<input type="text" name="starCreateTime" class="form-control" placeholder="开始时间"/>
+							<input type="text" id="starCreateTime" class="form-control" placeholder="开始时间"/>
 							<span class="input-group-addon">
 								<i class="ace-icon fa fa-calendar"></i> &nbsp;至
 							</span>
 						</div>
 					</div> 
-					<div class="col-xs-2">
+					<div class="col-xs-3">
 						<div class="input-group">
-							<input type="text" name="endCreateTime" class="form-control" placeholder="结束时间"/>
+							<input type="text" id="endCreateTime" class="form-control" placeholder="结束时间"/>
 							<span class="input-group-addon">
 								<i class="ace-icon fa fa-calendar"></i>&nbsp; 结束
 							</span>
@@ -26,13 +26,12 @@
 					</div>
 					<div class="col-lg-2">
 						<div class="input-group">
-							<input type="text" class="form-control" placeholder="模糊查询">
+							<input type="text" class="form-control" id="schoolClassName" placeholder="班级名称">
 						</div>
 					</div> 
 					<div class="col-xs-3">		
-						<button type="button" class="btn btn-info btn-sm"><i class="ace-icon glyphicon glyphicon-search"></i> 查询</button>
-						<button type="button" class="btn btn-success btn-sm"><i class="icon glyphicon glyphicon-repeat"></i> 显示全部</button>
-						<button class="btn btn-success btn-sm" type="button" id="roleAdd"><i class="ace-icon glyphicon glyphicon-plus"></i>添加 </button>
+						<button type="button" class="btn btn-info btn-sm" id="search_vacation" ><i class="ace-icon glyphicon glyphicon-search"></i> 查询</button>
+						<button type="button" class="btn btn-success btn-sm" onclick="window.location.reload()"><i class="icon glyphicon glyphicon-repeat"></i> 显示全部</button>
 					</div>
 				</div>
 			</form>
@@ -49,25 +48,32 @@
 		<table class="table table-bordered table-hover">
 			<thead>
 				<tr>
-					<th style = "text-align: center;">姓名（请假统计）</th>
-					<th style = "text-align: center;">性别</th>
-					<th style = "text-align: center;">籍贯</th>
-					<th style = "text-align: center;">身份号</th>
-					<th style = "text-align: center;">班级</th>
-					<th style = "text-align: center;">联系电话</th>
-					<th style = "text-align: center;">操作</th>
+					<th style = "text-align: center;">学生姓名</th>
+					<th style = "text-align: center;">班级名称</th>
+					<th style = "text-align: center;">请假类型</th>
+					<th style = "text-align: center;">节次/天数</th>
+					<th style = "text-align: center;">开始时间</th>
+					<th style = "text-align: center;">结束时间</th>
+					<th style = "text-align: center;">辅导员</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${pageList.list}" var="student">
+				<c:forEach items="${pageList.list}" var="vacation">
 					<tr>
-						<td>${student.studentRecordName}</td>
-						<td>${student.studentRecordSex}</td>
-						<td>${student.studentNativePlace}</td>
-						<td>${student.studentIdCard}</td>
-						<td>${student.studentClassName}</td>
-						<td>${student.studentPatriarchPhone}</td>
-						<td><a>删除</a>&nbsp;<a>修改</a>&nbsp;<a>考勤</a></td>
+						<td>${vacation.vacateUserName}</td>
+						<td>${vacation.studentClassName}</td>
+						<td>
+							<c:if test="${vacation.vacateType == 1}">
+								节次
+							</c:if>
+							<c:if test="${vacation.vacateType == 2}">
+								天数
+							</c:if>
+						</td>
+						<td>${vacation.vacateNumber}</td>
+						<td>${vacation.vacateStartTime}</td>
+						<td>${vacation.vacateEndTime}</td>
+						<td>${vacation.studentInstructorUname}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -75,7 +81,34 @@
 	    <jsp:include page="/WEB-INF/views/common/pagination.jsp"/>
 	</div>
 </div>
+<script type="text/javascript" >
+    $(document).ready(function() {
+        Tables.loadPage();    
+        $("#starCreateTime").datetimepicker({
+            language:  'zh-CN',
+            format: 'yyyy-mm-dd:hh:mm:ss',
+            autoclose: true,
+            todayBtn: true,
+        }).on('changeDate',function(ev){
+            var vacateStartTime=$("#starCreateTime").val();
+            $("#endCreateTime").datetimepicker('setStartDate',vacateStartTime);
+            $("#starCreateTime").datetimepicker('hide');
+        });
 
+		// 结束时间的插件 
+        $("#endCreateTime").datetimepicker({
+            language:  'zh-CN',
+            format: 'yyyy-mm-dd:hh:mm:ss',
+            autoclose: true,
+            todayBtn: true,
+        }).on('changeDate',function(ev){
+            var vacateStartTime=$("#starCreateTime").val();
+            var vacateEndTime=$("#endCreateTime").val();
+            $("#starCreateTime").datetimepicker('setEndDate',vacateEndTime);
+            $("#endCreateTime").datetimepicker('hide'); 
+        });
+    });
+</script>
 
 
 

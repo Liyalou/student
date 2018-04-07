@@ -1,5 +1,6 @@
 package com.my.color.manage.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import com.my.color.base.util.StringUtils;
 import com.my.color.base.util.UUIDUtils;
 import com.my.color.manage.dao.SalaryManageMapper;
 import com.my.color.manage.dao.po.SalaryManage;
+import com.my.color.teacher.service.TeachTeacherService;
 import com.my.color.user.dao.po.User;
 import com.my.color.user.service.UserToken;
 
@@ -26,6 +28,9 @@ public class SalaryManageService {
 
 	@Autowired
 	private SalaryManageMapper salaryManageMapper;
+	
+	@Autowired
+	private TeachTeacherService teachTeacherService;
 	
 	public SalaryManage selectByPrimaryKey(String recordId){
 		return salaryManageMapper.selectByPrimaryKey(recordId);
@@ -82,4 +87,22 @@ public class SalaryManageService {
 		MessageUtils.getMessage(attributes, result);
 	}
 	
+	public Map<String,Object> getConditionForQuery(){
+		Map<String,Object> conditionMap = new HashMap<String,Object>();
+		User user = UserToken.getLoginUser();
+		String userType = user.getUserType();
+		if(userType.equals("3") || userType.equals("4")){
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("userId", user.getUserId());
+			map.put("teacherType", userType);
+			List<String> classIdList = teachTeacherService.getClassIdByUserId(conditionMap);
+			if(classIdList != null && classIdList.size()>0){
+				conditionMap.put("classIdList", classIdList);
+			}
+		}
+		if(userType.equals("5")){
+			conditionMap.put("studentUserId", user.getUserId());
+		}
+		return conditionMap;
+	}
 }

@@ -36,10 +36,10 @@
 				<tr>
 					<th style = "text-align: center;">姓名</th>
 					<th style = "text-align: center;">性别</th>
-					<th style = "text-align: center;">年龄</th>
 					<th style = "text-align: center;">身份号</th>
-					<th style = "text-align: center;">职位</th>
 					<th style = "text-align: center;">联系电话</th>
+					<th style = "text-align: center;">角色</th>
+					<th style = "text-align: center;">职位</th>
 					<th style = "text-align: center;">操作</th>
 				</tr>
 			</thead>
@@ -48,10 +48,20 @@
 					<tr>
 						<td>${teacher.teachTeacherName}</td>
 						<td>${teacher.teachTeacherSex}</td>
-						<td>${teacher.teachTeacherAge}</td>
 						<td>${teacher.teachTeacherIdCard}</td>
-						<td>${teacher.teachTeacherPost}</td>
 						<td>${teacher.teachTeacherPhone}</td>
+						<td>
+							<c:if test="${teacher.userType==2}">
+                				教务管理员
+                			</c:if>
+                			<c:if test="${teacher.userType==3}">
+                				辅导员
+                			</c:if>
+                			<c:if test="${teacher.userType==4}">
+                				任课老师
+                			</c:if>
+                			<td>${teacher.teachTeacherPost}</td>
+						</td>
 						<td><a href="${ctx}/admin/teachTeacher/deleteTeacher?teachTeacherId=${teacher.teachTeacherId}">删除</a>&nbsp;
 						<a _id="${teacher.teachTeacherId}" class="modifyTeacher" >修改</a>&nbsp;<a _id="${teacher.teachTeacherId}" class="infoTeacher" >详情</a></td>
 					</tr>

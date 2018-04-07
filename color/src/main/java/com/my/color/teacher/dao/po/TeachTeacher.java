@@ -57,9 +57,20 @@ public class TeachTeacher {
 
     /**修改人*/
     private String teacherUpdateUserName;
-
     
-    public String getTeachTeacherId() {
+    private String userType;
+    
+    public String getUserType() {
+		return userType;
+	}
+
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+
+
+	public String getTeachTeacherId() {
         return teachTeacherId;
     }
 

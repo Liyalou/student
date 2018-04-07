@@ -18,7 +18,6 @@ import com.my.color.base.common.BaseCondition;
 import com.my.color.base.common.Constant;
 import com.my.color.base.layout.MainLayout;
 import com.my.color.base.page.Page;
-import com.my.color.base.util.MessageUtils;
 import com.my.color.base.util.StringUtils;
 import com.my.color.user.service.UserToken;
 import com.my.color.vacate.dao.po.StudentVacate;
@@ -122,11 +121,11 @@ public class StudentVacateController {
 	 */
 	@RequestMapping("/startVacateApply")
 	public RedirectView startVacateApply(RedirectAttributes attributes,HttpServletRequest request,String studentVacateId){
-		StudentVacate studentVacate = new StudentVacate();
-		studentVacate.setStudentVacateId(studentVacateId);
-		studentVacate.setVacateState("1");
-		int result = studentVacateService.updateByPrimaryKeySelective(studentVacate);
-		MessageUtils.getMessage(attributes, result);
+		try {
+			studentVacateService.startVacateApply(attributes, studentVacateId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return new RedirectView(request.getContextPath()+"/admin/studentVacate/vacateIndex");
 	}
 	

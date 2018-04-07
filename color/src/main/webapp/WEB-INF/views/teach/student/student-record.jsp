@@ -18,7 +18,7 @@
 				</div>
 				<div class="form-group">
 					<div class="col-xs-12">
-						<button  id="add_class"  class="btn btn-success btn-sm" type="button"><i class="ace-icon glyphicon glyphicon-plus bigger-110"></i>添加学生</button>						
+						<button  id="add_class"  class="btn btn-success btn-sm" type="button"><i class="ace-icon glyphicon glyphicon-plus bigger-110"></i>添加学生</button>	
 					</div>
 				</div>
 			</form>

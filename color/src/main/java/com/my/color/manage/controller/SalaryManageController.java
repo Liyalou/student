@@ -27,6 +27,7 @@ import com.my.color.student.dao.po.StudentRecord;
 import com.my.color.student.service.StudentRecordService;
 import com.my.color.teachClass.dao.po.SchoolClass;
 import com.my.color.teachClass.service.SchoolClassService;
+import com.my.color.user.service.UserToken;
 
 @Controller
 @RequestMapping("/admin/salaryManage")
@@ -60,6 +61,7 @@ private static final String MENU_ID = "MENU_SALARY";
 			BaseCondition condition){
 		page.startPage(page);
 		Map<String,Object> conditionMap = condition.getConditionMap(condition);
+		conditionMap.put("teacherUserId", UserToken.getLoginUser().getUserId());
 		List<SalaryManage> list = salaryManageService.getSalaryManageList(conditionMap);
 		PageInfo<SalaryManage> pageList = page.listToPage(list);
 		model.put(Constant.PAGE_LIST, pageList);

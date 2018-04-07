@@ -48,9 +48,22 @@ public class SchoolClass {
 
     /**修改时间*/
     private String classLastUptime;
+    
+    /**是否有效：class_is_vaild*/
+    private String classIsVaild;
 
     
-    public String getSchoolClassName() {
+    public String getClassIsVaild() {
+		return classIsVaild;
+	}
+
+
+	public void setClassIsVaild(String classIsVaild) {
+		this.classIsVaild = classIsVaild;
+	}
+
+
+	public String getSchoolClassName() {
 		return schoolClassName;
 	}
 

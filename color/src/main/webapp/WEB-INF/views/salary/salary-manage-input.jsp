@@ -93,31 +93,7 @@
             showOtherMonths: true,
             selectOtherMonths: true,
             autoclose:true,
-            todayHighlight:true,
+            todayHighlight:true, 
         });
     });
 </script>
-<!-- /**考勤管理id*/                       
-private String salaryManageId;    
-/**学生id*/                         
-private String studentUserId;     
-/**学生姓名*/                         
-private String studentUserName;   
-/**班级ID*/                         
-private String salaryClassId;     
-/**班级名称*/                         
-private String salaryClassName;   
-/**考勤时间*/                         
-private String salaryTime;        
-/**节次*/                           
-private Double salaryClassNumber; 
-/**课程名称*/                         
-private String salaryCourseName;  
-/**教室地址*/                         
-private String salaryClassAddress;
-/**考勤状态：1迟到，2请假、3旷课*/             
-private String salaryStatus;      
-/**任课老师ID*/                       
-private String teacherUserId;     
-/**任课老师*/                         
-private String teacherUserName;    -->

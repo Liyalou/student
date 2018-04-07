@@ -26,4 +26,7 @@ public interface TeachTeacherMapper {
     
     
     List<TeachTeacher> getTeachTeacherList(Map<String,Object> conditionMap);
+    
+    
+    List<TeachTeacher> getTeacherForClass(Map<String,Object> conditionMap);
 }

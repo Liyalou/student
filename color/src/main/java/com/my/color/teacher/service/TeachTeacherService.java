@@ -64,6 +64,10 @@ public class TeachTeacherService {
 		return teachTeacherMapper.getTeachTeacherList(conditionMap);
 	}
 	
+	public List<TeachTeacher> getTeacherForClass(Map<String,Object> conditionMap){
+		return teachTeacherMapper.getTeacherForClass(conditionMap);
+	}
+	
 	/**
 	 * 保存修改
 	 * @param role
@@ -103,8 +107,10 @@ public class TeachTeacherService {
 				user.setUserCreateTime(DateUtils.getTime());
 				if(roleCode.equals(Constant.ROLE_TYPE_INSTRUCTOR)){
 					user.setUserType("3");
-				}else{
+				}else if(roleCode.equals(Constant.ROLE_TYPE_TEACHER)){
 					user.setUserType("4");
+				}else{
+					user.setUserType("2");
 				}
 				userService.insertSelective(user);
 				Role role = roleService.getRoleByCode(roleCode);
@@ -143,5 +149,15 @@ public class TeachTeacherService {
 	
 	public List<String> getUserIdByClassId(Map<String,Object> conditionMap){
 		return teacherClassMapper.getUserIdByClassId(conditionMap);
+	}
+	
+	public List<String> getClassIdByUserId(Map<String,Object> conditionMap){
+		return teacherClassMapper.getClassIdByUserId(conditionMap);
+	}
+	
+	
+	public String getTeacherType(String teacherUserId){
+		User user = userService.selectByPrimaryKey(teacherUserId);
+		return user.getUserType();
 	}
 }

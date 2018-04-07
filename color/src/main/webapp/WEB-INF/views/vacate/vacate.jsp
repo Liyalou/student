@@ -9,7 +9,7 @@
 			<form class="form-horizontal">
 				<div class="form-group">					
 					<div class="col-lg-2">
-						<input type="text" id="studentName" class="form-control" placeholder="学生姓名模糊查询">
+						<input type="text" id="studentName" class="form-control" placeholder="学生姓名">
 					</div> 
 					<div class="col-xs-3">		
 						<button type="button" id="search_student" class="btn btn-info btn-sm"><i class="ace-icon glyphicon glyphicon-search"></i> 查询</button>
@@ -35,14 +35,13 @@
 		<table class="table table-bordered table-hover">
 			<thead>
 				<tr>
-					<th style = "text-align: center;">姓名（请假申请）</th>
-					<th style = "text-align: center;">班级</th>
-					<th style = "text-align: center;">辅导员</th>
+					<th style = "text-align: center;">姓名</th>
 					<th style = "text-align: center;">请假类型</th>
 					<th style = "text-align: center;">节次/天数</th>
-					<th style = "text-align: center;">请假开始时间</th>
-					<th style = "text-align: center;">请假结束时间</th>
+					<th style = "text-align: center;">开始时间</th>
+					<th style = "text-align: center;">结束时间</th>
 					<th style = "text-align: center;">课时名称</th>
+					<th style = "text-align: center;">请假状态</th>
 					<th style = "text-align: center;">操作</th>
 				</tr>
 			</thead>
@@ -50,15 +49,37 @@
 				<c:forEach items="${pageList.list}" var="vacation">
 					<tr>
 						<td>${vacation.vacateUserName}</td>
-						<td>${vacation.vacateUserClass}</td>
-						<td>${vacation.studentInstructorUname}</td>
-						<td>${vacation.vacateType}</td>
+						<td>
+							<c:if test="${vacation.vacateType == 1}">
+								节次
+							</c:if>
+							<c:if test="${vacation.vacateType == 2}">
+								天数
+							</c:if>
+						</td>
 						<td>${vacation.vacateNumber}</td>
 						<td>${vacation.vacateStartTime}</td>
 						<td>${vacation.vacateEndTime}</td>
 						<td>${vacation.vacateCourseName}</td>
-						<td><a href="${ctx}/admin/studentVacate/deleteTeacher?studentVacateId=${vacation.studentVacateId}">删除</a>&nbsp;
-						<a _id="${vacation.studentVacateId}" class="modifyVacation" >修改</a>&nbsp;<a _id="${vacation.studentVacateId}" class="infoVacation" >详情</a>&nbsp;<a _id="${vacation.studentVacateId}" class="approvalVacation" >请假审批</a></td>
+						<td>
+							<c:if test="${vacation.vacateState == 1}">
+								待审批
+							</c:if>
+							<c:if test="${vacation.vacateState == 2}">
+								同意
+							</c:if>
+							<c:if test="${vacation.vacateState == 3}">
+								不同意
+							</c:if>
+						</td>
+						<td>
+							<c:if test="${vacation.vacateState == 0}">
+								<a href="${ctx}/admin/studentVacate/deleteTeacher?studentVacateId=${vacation.studentVacateId}">删除</a>&nbsp;
+								<a _id="${vacation.studentVacateId}" class="approvalVacation" href="javaScript:void(0);">请假审批</a>&nbsp;
+								<a _id="${vacation.studentVacateId}" class="modifyVacation" href="javaScript:void(0);">修改</a>&nbsp;
+							</c:if>
+							<a _id="${vacation.studentVacateId}" class="infoVacation" href="javaScript:void(0);">详情</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

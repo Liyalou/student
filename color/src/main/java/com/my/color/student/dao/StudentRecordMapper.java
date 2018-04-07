@@ -29,4 +29,7 @@ public interface StudentRecordMapper {
     
     
     List<StudentRecord> getStudentByClassId(Map<String,Object> conditionMap);
+    
+    
+    StudentRecord getStudentRecordByUserId(String userId);
 }

@@ -229,6 +229,6 @@
     from e_wait_deal
     where wait_is_vaild = '1' 
     and wait_instructor_uid = #{userId,jdbcType=VARCHAR}
-    and wait_deal_state = #{waitDealState,jdbcType=VARCHAR}
+    order by wait_create_time,wait_deal_state desc
   </select>
 </mapper>

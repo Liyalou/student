@@ -22,6 +22,7 @@
     <result column="class_last_upuid" jdbcType="VARCHAR" property="classLastUpuid" />
     <result column="class_last_upuname" jdbcType="VARCHAR" property="classLastUpuname" />
     <result column="class_last_uptime" jdbcType="VARCHAR" property="classLastUptime" />
+    <result column="class_is_vaild" jdbcType="VARCHAR" property="classIsVaild" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--
@@ -31,7 +32,7 @@
     school_class_id, school_grade_number, school_class_number, class_specialty, school_class_name,class_student_number, 
     class_train_scheme, class_graduation_time, class_instructor_uid, class_instructor_uname, 
     class_create_time, class_create_uid, class_create_uname, class_last_upuid, class_last_upuname, 
-    class_last_uptime
+    class_last_uptime, class_is_vaild
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     <!--
@@ -61,7 +62,7 @@
       class_train_scheme, class_graduation_time, 
       class_instructor_uid, class_instructor_uname, 
       class_create_time, class_create_uid, class_create_uname, 
-      class_last_upuid, class_last_upuname, class_last_uptime
+      class_last_upuid, class_last_upuname, class_last_uptime,class_is_vaild
       )
     values (#{schoolClassId,jdbcType=VARCHAR}, #{schoolGradeNumber,jdbcType=VARCHAR}, 
       #{schoolClassNumber,jdbcType=VARCHAR}, #{classSpecialty,jdbcType=VARCHAR}, 
@@ -69,8 +70,8 @@
       #{classTrainScheme,jdbcType=VARCHAR}, #{classGraduationTime,jdbcType=VARCHAR}, 
       #{classInstructorUid,jdbcType=VARCHAR}, #{classInstructorUname,jdbcType=VARCHAR}, 
       #{classCreateTime,jdbcType=VARCHAR}, #{classCreateUid,jdbcType=VARCHAR}, #{classCreateUname,jdbcType=VARCHAR}, 
-      #{classLastUpuid,jdbcType=VARCHAR}, #{classLastUpuname,jdbcType=VARCHAR}, #{classLastUptime,jdbcType=VARCHAR}
-      )
+      #{classLastUpuid,jdbcType=VARCHAR}, #{classLastUpuname,jdbcType=VARCHAR}, #{classLastUptime,jdbcType=VARCHAR},
+      #{classIsVaild,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.my.color.teachClass.dao.po.SchoolClass">
     <!--
@@ -127,6 +128,9 @@
       <if test="classLastUptime != null">
         class_last_uptime,
       </if>
+      <if test="classIsVaild != null">
+        class_is_vaild,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="schoolClassId != null">
@@ -176,6 +180,9 @@
       </if>
       <if test="classLastUptime != null">
         #{classLastUptime,jdbcType=VARCHAR},
+      </if>
+      <if test="classIsVaild != null">
+        #{classIsVaild,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -231,6 +238,9 @@
       <if test="classLastUptime != null">
         class_last_uptime = #{classLastUptime,jdbcType=VARCHAR},
       </if>
+      <if test="classIsVaild != null">
+        class_is_vaild = #{classIsVaild,jdbcType=VARCHAR},
+      </if>
     </set>
     where school_class_id = #{schoolClassId,jdbcType=VARCHAR}
   </update>
@@ -254,7 +264,8 @@
       class_create_uname = #{classCreateUname,jdbcType=VARCHAR},
       class_last_upuid = #{classLastUpuid,jdbcType=VARCHAR},
       class_last_upuname = #{classLastUpuname,jdbcType=VARCHAR},
-      class_last_uptime = #{classLastUptime,jdbcType=VARCHAR}
+      class_last_uptime = #{classLastUptime,jdbcType=VARCHAR},
+      class_is_vaild = #{classIsVaild,jdbcType=VARCHAR}
     where school_class_id = #{schoolClassId,jdbcType=VARCHAR}
   </update>
   
@@ -266,7 +277,7 @@
     select 
     <include refid="Base_Column_List" />
     from e_school_class
-    where 1=1
+    where class_is_vaild = '1'
     <if test="userName != null and userName !=''">
       and class_instructor_uname LIKE CONCAT('%',#{userName,jdbcType=VARCHAR},'%')
     </if>

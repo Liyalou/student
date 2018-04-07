@@ -9,9 +9,12 @@ public class StudentVacate {
 
     /**姓名*/
     private String vacateUserName;
-
+    
+    /**班级ID*/
+    private String studentClassId;
+    
     /**班级*/
-    private String vacateUserClass;
+    private String studentClassName;
 
     /**辅导员*/
     private String studentInstructorUid;
@@ -47,7 +50,27 @@ public class StudentVacate {
     private String vacateCreateTime;
 
     
-    public String getStudentVacateId() {
+    public String getStudentClassId() {
+		return studentClassId;
+	}
+
+
+	public void setStudentClassId(String studentClassId) {
+		this.studentClassId = studentClassId;
+	}
+
+
+	public String getStudentClassName() {
+		return studentClassName;
+	}
+
+
+	public void setStudentClassName(String studentClassName) {
+		this.studentClassName = studentClassName;
+	}
+
+
+	public String getStudentVacateId() {
         return studentVacateId;
     }
 
@@ -74,16 +97,6 @@ public class StudentVacate {
     
     public void setVacateUserName(String vacateUserName) {
         this.vacateUserName = vacateUserName;
-    }
-
-    
-    public String getVacateUserClass() {
-        return vacateUserClass;
-    }
-
-    
-    public void setVacateUserClass(String vacateUserClass) {
-        this.vacateUserClass = vacateUserClass;
     }
 
     

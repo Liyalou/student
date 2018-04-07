@@ -58,24 +58,26 @@ public class StudentRecordService {
 		return studentRecordMapper.insertSelective(studentRecord);
 	}
 	
-	public List<StudentRecord> getStudentRecordList(Map<String,Object> conditionMap){
+	public StudentRecord getStudentRecordByUserId(String userId){
+		return studentRecordMapper.getStudentRecordByUserId(userId);
+	}
+	
+	public Map<String,Object> getStudentRecordCondition(Map<String,Object> conditionMap){
 		User user = UserToken.getLoginUser();
 		conditionMap.put("userId", user.getUserId());
-		if(user.getUserType().equals("3")){
-			conditionMap.put("teacherType", "1");
-		}
-		if(user.getUserType().equals("4")){
-			conditionMap.put("teacherType", "2");
-		}
+		conditionMap.put("teacherType", user.getUserType());
 		List<String> classIdList = teacherClassMapper.getClassIdByUserId(conditionMap);
 		conditionMap.put("classIdList", classIdList);
+		return conditionMap;
+	}
+	
+	public List<StudentRecord> getStudentRecordList(Map<String,Object> conditionMap){
 		return studentRecordMapper.getStudentRecordList(conditionMap);
 	}
 	
 	public List<StudentRecord> getStudentByClassId(Map<String,Object> conditionMap){
 		return studentRecordMapper.getStudentByClassId(conditionMap);
 	}
-	
 	
 	/**
 	 * 保存修改
@@ -137,5 +139,4 @@ public class StudentRecordService {
 		int result = studentRecordMapper.updateByPrimaryKeySelective(studentRecord);
 		MessageUtils.getMessage(attributes, result);
 	}
-	
 }

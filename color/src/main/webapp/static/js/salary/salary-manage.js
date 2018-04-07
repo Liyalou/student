@@ -39,7 +39,7 @@ var Tables={
                 success:function(data){
                     var str='';
                     $.each(data, function(index, item) {
-                        str+='<option value="'+item.studentRecordId+'" >'+item.studentRecordName+'</option>'
+                        str+='<option value="'+item.studentUserId+'" >'+item.studentRecordName+'</option>'
                     });
                     $("#studentUserId").html(str);
                     $("#studentUserName").val(data[0].studentRecordName);

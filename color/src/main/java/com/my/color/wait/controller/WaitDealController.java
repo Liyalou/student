@@ -4,11 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.github.pagehelper.PageInfo;
 import com.my.color.base.common.BaseCondition;
@@ -17,8 +21,7 @@ import com.my.color.base.layout.MainLayout;
 import com.my.color.base.page.Page;
 import com.my.color.teacher.dao.po.TeachTeacher;
 import com.my.color.teacher.service.TeachTeacherService;
-import com.my.color.vacate.dao.po.StudentVacate;
-import com.my.color.vacate.service.StudentVacateService;
+import com.my.color.user.service.UserToken;
 import com.my.color.wait.dao.po.WaitDeal;
 import com.my.color.wait.service.WaitDealService;
 
@@ -35,9 +38,6 @@ public class WaitDealController {
 	private WaitDealService waitDealService;
 	
 	@Autowired
-	private StudentVacateService vacateService;
-	
-	@Autowired
 	private TeachTeacherService teachTeacherService;
 	
 	/**
@@ -51,7 +51,7 @@ public class WaitDealController {
 	public ModelAndView index(ModelMap model,Page<WaitDeal> page,BaseCondition condition){
 		page.startPage(page);
 		Map<String,Object> conditionMap = condition.getConditionMap(condition);
-		conditionMap.put("waitDealState", "1");
+		conditionMap.put("userId", UserToken.getLoginUser().getUserId());
 		List<WaitDeal> list = waitDealService.getWaitDealList(conditionMap);
 		PageInfo<WaitDeal> pageList = page.listToPage(list);
 		model.put(Constant.PAGE_LIST, pageList);
@@ -62,16 +62,12 @@ public class WaitDealController {
 	/**
 	 * 查看待办详情
 	 * @param model
-	 * @param waitDealId(待办id，必传)
-	 * @param waitReferenceId(请假单id，必传)
+	 * @param waitDealId
 	 * @return
 	 */
 	@RequestMapping("/selectWaitDeal")
-	public ModelAndView selectWaitDeal(ModelMap model,String waitDealId,String waitReferenceId){
-		StudentVacate studentVacate= vacateService.selectByPrimaryKey(waitReferenceId);
-		model.put("waitDealId", waitDealId);//待办id
-		model.put("schoolClassId", studentVacate.getVacateUserClass());//班级id
-		model.put("studentVacate", studentVacate);
+	public ModelAndView selectWaitDeal(ModelMap model,String waitDealId){
+		waitDealService.selectWaitDeal(model,waitDealId);
 		return layout.layout("wait/wait-deal-info",MENU_ID);
 	}
 	
@@ -86,12 +82,30 @@ public class WaitDealController {
 	public ModelAndView selectTeacher(ModelMap model,String schoolClassId,String waitDealId){
 		Map<String,Object> conditionMap = new HashMap<String,Object>();
 		conditionMap.put("schoolClassId", schoolClassId);
-		conditionMap.put("teacherType", "2");
+		conditionMap.put("teacherType", "4");
 		List<String> userIdList = teachTeacherService.getUserIdByClassId(conditionMap);
 		conditionMap.put("userIdList", userIdList);
 		List<TeachTeacher> teacherList = teachTeacherService.getTeachTeacherList(conditionMap);
-		model.put("teacherList", teacherList);
+		model.put("teacherList", teacherList);//老师集合
+		model.put("waitDealId", waitDealId);//待办ID
 		return layout.layout("wait/select-teacher");
 	}
 	
+	/**
+	 * 保存修改
+	 * @param request
+	 * @param role
+	 * @param attributes
+	 * @return
+	 */
+	@RequestMapping("/submitVacateApply")
+	public RedirectView submitVacateApply(RedirectAttributes attributes,HttpServletRequest request,
+			String waitDealId,String waitReplyResult,String teacherUserId){
+		try {
+			waitDealService.submitVacateApply(attributes, request, waitDealId, waitReplyResult, teacherUserId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new RedirectView(request.getContextPath()+"/admin/waitDeal/index");
+	}
 }

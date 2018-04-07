@@ -30,13 +30,13 @@ public class WaitDeal {
     /**是否有效*/
     private String waitIsVaild;
 
-    /**处理状态（1同意，2不同意）*/
+    /**处理状态（0待处理，1已处理）*/
     private String waitDealState;
 
     /**创建时间*/
-    private Date waitCreateTime;
+    private String waitCreateTime;
 
-    /**回复结果（1同意，不同意）*/
+    /**回复结果（1同意，2不同意）*/
     private String waitReplyResult;
 
     /**处理时间*/
@@ -143,12 +143,12 @@ public class WaitDeal {
     }
 
     
-    public Date getWaitCreateTime() {
+    public String getWaitCreateTime() {
         return waitCreateTime;
     }
 
     
-    public void setWaitCreateTime(Date waitCreateTime) {
+    public void setWaitCreateTime(String waitCreateTime) {
         this.waitCreateTime = waitCreateTime;
     }
 

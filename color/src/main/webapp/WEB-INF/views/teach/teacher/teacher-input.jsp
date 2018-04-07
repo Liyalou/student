@@ -12,10 +12,31 @@
             <tr class="form-group" >
                 <td>教务人员类型</td>
                 <td>
-                    <select name="roleCode" class="form-control">
-                        <option value="role_teacher">任课老师</option>
-                        <option value="role_instructor">辅导员</option>
-                    </select>
+                	<c:choose>
+                		<c:when test="${not empty teachTeacher.teachTeacherId}">
+                			<c:if test="${teacherType==2}">
+                				<input type="text" class="form-control" readonly  value="教务管理员" />
+                			</c:if>
+                			<c:if test="${teacherType==3}">
+                				<input type="text" class="form-control" readonly  value="辅导员" />
+                			</c:if>
+                			<c:if test="${teacherType==4}">
+                				<input type="text" class="form-control" readonly  value="任课老师" />
+                			</c:if>
+                		</c:when>
+                		<c:otherwise>
+		                	<select name="roleCode" class="form-control">
+		                    	<option value="">请选择</option>
+		                    	<c:if test="${userType == 1 }">
+		                    		<option value="role_teach">教务管理员</option>
+		                    	</c:if>
+		                    	<c:if test="${userType == 2 }">
+		                        	<option value="role_instructor">辅导员</option>
+		                        	<option value="role_teacher">任课老师</option>
+		                    	</c:if>
+		                    </select>
+	                	</c:otherwise>
+                	</c:choose>
                 </td>
                 <td>姓名</td>
                 <td>

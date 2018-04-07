@@ -278,5 +278,20 @@
     <if test="userName != null and userName !=''">
     	and student_user_name LIKE CONCAT('%',#{userName,jdbcType=VARCHAR},'%')
     </if>
+    <if test="teacherUserName != null and teacherUserName !=''">
+    	and teacher_user_name LIKE CONCAT('%',#{teacherUserName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="studentUserId != null and studentUserId !=''">
+    	and student_user_id = #{studentUserId,jdbcType=VARCHAR}
+    </if>
+    <if test="teacherUserId != null and teacherUserId != ''">
+    	and teacher_user_id = #{teacherUserId,jdbcType=VARCHAR}
+    </if>
+    <if test="classIdList !=null and classIdList.size>0">
+        and salary_class_id IN
+        <foreach collection="classIdList" item="classId" index="index" open="(" close=")" separator=",">
+            #{classId,jdbcType=VARCHAR}
+        </foreach>
+    </if>
   </select>
 </mapper>
