@@ -34,5 +34,14 @@ var Tables={
             var userName=$(this).find("option:selected").attr('userName')
             $("#classInstructorUname").val(userName)
         });
+        
+        //分配任课老师
+        $(".setTeacher").on('click', function() {
+            var schoolClassId=$(this).attr('_id');
+            $(".page-content").load(ctx+'/admin/schoolClass/setTeacherForClass?schoolClassId='+schoolClassId,function(){
+
+            });
+        });
+        
     }
 }

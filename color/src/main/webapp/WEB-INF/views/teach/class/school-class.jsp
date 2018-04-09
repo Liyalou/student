@@ -57,8 +57,12 @@
 						<td>${schoolClass.classTrainScheme}</td>
 						<td>${schoolClass.classGraduationTime}</td>
 						<td>${schoolClass.classInstructorUname}</td>
-						<td><a href="${ctx}/admin/schoolClass/deleteSchoolClass?schoolClassId=${schoolClass.schoolClassId}">删除</a>&nbsp;
-						<a _id="${schoolClass.schoolClassId}" class="modifyClass" >修改</a>&nbsp;<a _id="${schoolClass.schoolClassId}" class="infoClass" >详情</a></td>
+						<td>
+							<a href="${ctx}/admin/schoolClass/deleteSchoolClass?schoolClassId=${schoolClass.schoolClassId}">删除</a>&nbsp;
+							<a _id="${schoolClass.schoolClassId}" class="modifyClass" href="javaScript:void(0);">修改</a>&nbsp;
+							<a _id="${schoolClass.schoolClassId}" class="infoClass" href="javaScript:void(0);">详情</a>&nbsp;
+							<a _id="${schoolClass.schoolClassId}" class="setTeacher" href="javaScript:void(0);" title="分配任课老师">分配</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

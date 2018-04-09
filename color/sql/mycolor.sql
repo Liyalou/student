@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2018-04-07 17:43:14
+Date: 2018-04-09 12:32:27
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -306,6 +306,8 @@ CREATE TABLE `e_teach_teacher` (
 -- ----------------------------
 INSERT INTO `e_teach_teacher` VALUES ('0dca58a3b92541f19b66d811b9a758c4', '41f3fa61f0874f80815765ac60ff92ae', '李亚楼', '男', '28', '汉', '510921199009145356', '博士', '5', '教导主任', '18508253688', '成都市', '1', '2018-04-01 16:55:41', '0555137b929047769255c519912b232b', '系统管理员', null, null, null);
 INSERT INTO `e_teach_teacher` VALUES ('30e033a9dd964d238ae27dc374da633a', '11ac510a851f4c50a691a5f3b7d22d94', '李主管', '男', '28', '汉', '513666666666666666', '博士', '5', '教务管理员', '18166666666', '多福多寿', '1', '2018-04-07 16:38:07', '0555137b929047769255c519912b232b', '系统管理员', null, null, null);
+INSERT INTO `e_teach_teacher` VALUES ('4b72dcfa3ed047f6a7a5884adf14fd1c', '71993da392bb44a484d9bb4ed874fceb', '毛毛', '男', '27', '汉', '570000000000000000', '本科', '2', '测试', '18133333333', '', '1', '2018-04-08 15:55:51', '11ac510a851f4c50a691a5f3b7d22d94', '李主管', null, null, null);
+INSERT INTO `e_teach_teacher` VALUES ('8a12dac259fd441ca6ee086d0ac949f5', 'ee19d186716a49cfbb057db20f691c8d', '茂茂', '男', '32', '汉', '563333333333333000', '本科', '10', '测试', '18122222222', '大声道', '1', '2018-04-08 15:54:52', '11ac510a851f4c50a691a5f3b7d22d94', '李主管', null, null, null);
 INSERT INTO `e_teach_teacher` VALUES ('b49a4773a6524982bec385f47d370830', '53f5079d1f724bdba8004e9e34a2bfdf', '李老师', '男', '28', '汉', '510921111111111111', '本科', '2', '主任', '18113126261', '佛挡杀佛', '1', '2018-04-07 15:34:43', '0555137b929047769255c519912b232b', '系统管理员', null, null, null);
 
 -- ----------------------------
@@ -336,11 +338,13 @@ CREATE TABLE `e_user` (
 -- ----------------------------
 -- Records of e_user
 -- ----------------------------
-INSERT INTO `e_user` VALUES ('0555137b929047769255c519912b232b', '系统管理员', 'admin', '223ce7b851123353479d85757fbbf4e320d1e251', '1', null, '123456789', null, '1', null, null, null, null, '1', '2017-12-04 11:15:17', '2018-04-07 16:37:12', null);
-INSERT INTO `e_user` VALUES ('11ac510a851f4c50a691a5f3b7d22d94', '李主管', '18166666666', '7596a366a929d094bfe9fae98510d1c1637d5b91', '男', '513666666666666666', '18166666666', null, '2', null, null, '0', null, '1', '2018-04-07 16:38:07', '2018-04-07 17:03:32', null);
+INSERT INTO `e_user` VALUES ('0555137b929047769255c519912b232b', '系统管理员', 'admin', '223ce7b851123353479d85757fbbf4e320d1e251', '1', null, '123456789', null, '1', null, null, null, null, '1', '2017-12-04 11:15:17', '2018-04-08 16:07:10', null);
+INSERT INTO `e_user` VALUES ('11ac510a851f4c50a691a5f3b7d22d94', '李主管', '18166666666', '7596a366a929d094bfe9fae98510d1c1637d5b91', '男', '513666666666666666', '18166666666', null, '2', null, null, '0', null, '1', '2018-04-07 16:38:07', '2018-04-08 15:53:24', null);
 INSERT INTO `e_user` VALUES ('41f3fa61f0874f80815765ac60ff92ae', '李亚楼', '18508253688', 'fb39e228978e2c298e111ab592920ab045a260b0', '男', '510921199009145356', '18508253688', null, '3', null, null, '0', null, '1', '2018-04-01 16:55:41', '2018-04-07 16:12:06', null);
 INSERT INTO `e_user` VALUES ('53f5079d1f724bdba8004e9e34a2bfdf', '李老师', '18113126261', 'a862d77e8d968ed386ca320a7c6b977841dfcb00', '男', '510921111111111111', '18113126261', null, '4', null, null, '0', null, '1', '2018-04-07 15:34:43', '2018-04-07 16:11:56', null);
+INSERT INTO `e_user` VALUES ('71993da392bb44a484d9bb4ed874fceb', '毛毛', '18133333333', 'f8a12c889f64739bef8eaf987f928e053fcc548c', '男', '570000000000000000', '18133333333', null, '4', null, null, '0', null, '1', '2018-04-08 15:55:51', null, null);
 INSERT INTO `e_user` VALUES ('c1c6addcfc2c401889bb54b3de30946b', '小李', '18511111111', '821bcfcfb519bb1d0738b57dff0daa364e36c6d6', '男', '510000000000000000', '18511111111', null, '5', null, null, '0', null, '1', '2018-04-01 16:57:43', '2018-04-05 17:07:23', null);
+INSERT INTO `e_user` VALUES ('ee19d186716a49cfbb057db20f691c8d', '茂茂', '18122222222', '94f5456860e88d021ef6e6747f338ab3f39b8d4f', '男', '563333333333333000', '18122222222', null, '4', null, null, '0', null, '1', '2018-04-08 15:54:52', null, null);
 
 -- ----------------------------
 -- Table structure for e_user_role
@@ -359,7 +363,9 @@ INSERT INTO `e_user_role` VALUES ('0555137b929047769255c519912b232b', '3089cdfd3
 INSERT INTO `e_user_role` VALUES ('11ac510a851f4c50a691a5f3b7d22d94', 'cc2958f8ce6e4114a10300cd7ab1b798');
 INSERT INTO `e_user_role` VALUES ('41f3fa61f0874f80815765ac60ff92ae', 'f491f2d85398437db55551e410961f3d');
 INSERT INTO `e_user_role` VALUES ('53f5079d1f724bdba8004e9e34a2bfdf', '231cd593031e4c4faf48e4d725e45181');
+INSERT INTO `e_user_role` VALUES ('71993da392bb44a484d9bb4ed874fceb', '231cd593031e4c4faf48e4d725e45181');
 INSERT INTO `e_user_role` VALUES ('c1c6addcfc2c401889bb54b3de30946b', 'e0f9553f149041a5a4ee19a2c50110f9');
+INSERT INTO `e_user_role` VALUES ('ee19d186716a49cfbb057db20f691c8d', '231cd593031e4c4faf48e4d725e45181');
 
 -- ----------------------------
 -- Table structure for e_vacate_notice
