@@ -56,8 +56,6 @@
 			</table>
 		</div>
 	</div>
-	
-	
 </div>
 
 

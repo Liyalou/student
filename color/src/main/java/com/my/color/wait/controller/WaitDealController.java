@@ -1,5 +1,6 @@
 package com.my.color.wait.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,7 +86,10 @@ public class WaitDealController {
 		conditionMap.put("teacherType", "4");
 		List<String> userIdList = teachTeacherService.getUserIdByClassId(conditionMap);
 		conditionMap.put("userIdList", userIdList);
-		List<TeachTeacher> teacherList = teachTeacherService.getTeachTeacherList(conditionMap);
+		List<TeachTeacher> teacherList = new ArrayList<TeachTeacher>();
+		if(userIdList !=null && userIdList.size()>0){
+			teacherList = teachTeacherService.getTeachTeacherList(conditionMap);
+		}
 		model.put("teacherList", teacherList);//老师集合
 		model.put("waitDealId", waitDealId);//待办ID
 		return layout.layout("wait/select-teacher");

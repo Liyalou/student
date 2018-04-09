@@ -9,7 +9,7 @@ var Tables={
         })
         //同意弹框
         $("#agreeVacate").on('click', function(event) {
-            $("#selectTeacher-input").load(ctx+'/admin/waitDeal/selectTeacher?waitDealId='+$("#waitDealId").val()+'&studentClassId='+$("#studentClassId").val(),function(){
+            $("#selectTeacher-input").load(ctx+'/admin/waitDeal/selectTeacher?waitDealId='+$("#waitDealId").val()+'&schoolClassId='+$("#studentClassId").val(),function(){
                 $("#selectTeacher-input").modal('show');
             })
         });       
