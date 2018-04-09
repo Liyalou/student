@@ -141,6 +141,7 @@ public class SchoolClassService {
 			TeacherClass teacherClass = new TeacherClass();
 			teacherClass.setSchoolClassId(schoolClassId);
 			teacherClass.setTeacherUserId(teacherId);
+			teacherClass.setTeacherType("4");
 			teacherClassMapper.insertSelective(teacherClass);
 		}
 	}

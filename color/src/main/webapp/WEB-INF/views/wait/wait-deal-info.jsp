@@ -46,8 +46,8 @@
     <div class="modal-footer">
         <div class="col-md-offset-8 col-md-4">
         	<c:if test="${waitDealState == 0 }">
-        		<button class="btn btn-sm btn-primary" onclick="" type="button" >
-	                	同意
+        		<button class="btn btn-sm btn-primary" id="agreeVacate" type="button" >
+	                	审核
 	            </button>
 	            <!-- 
 	            	审批同意，进入弹窗页面，然后选择请假通知的老师：
@@ -63,11 +63,11 @@
 	            			 	老师teacherUserId
 	            			请求路径：/admin/waitDeal/submitVacateApply
 	            -->
-	            <input type="hidden" name="waitDealId" value="${waitDealId}" /><!-- 待办ID -->
-	            <input type="hidden" name="studentClassId" value="${studentVacate.studentClassId}" /><!-- 班级ID -->
-	            <button class="btn btn-sm btn-primary btn-grey" onclick="" type="button" >
+	            <input type="hidden" id="waitDealId" name="waitDealId" value="${waitDealId}" /><!-- 待办ID -->
+	            <input type="hidden" id="studentClassId" name="studentClassId" value="${studentVacate.studentClassId}" /><!-- 班级ID -->
+	           <!--  <button class="btn btn-sm btn-primary btn-danger" id="notAgree" type="button" >
 	                	不同意
-	            </button>
+	            </button> -->
 	            <!-- 
 	            	审批不同意，
 	            		请求参数：

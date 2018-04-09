@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
@@ -8,15 +8,25 @@
             <span id="ui-id-26" class="ui-dialog-title">
                 <div class="widget-header widget-header-small">
                     <h4 class="smaller">
-                        <span class="icon-ok" id="input-image-title">分配教师</span>
+                        <span class="icon-ok" id="input-image-title">选择通知老师</span>
                     </h4>
                 </div>
             </span>
         </div>      
-        <form ole="form" method="post" action="${ctx}/admin/schoolClass/submitTeacherForClass" class="form-horizontal ">
+        <form ole="form" method="post" action="${ctx}/admin/waitDeal/submitVacateApply" class="form-horizontal ">
             <div class="well table-responsive" style="background-color: white;">
-                <input type="hidden" value="${schoolClassId}" name="schoolClassId" />
-                <table class="table table-bordered table-hover">
+                <input type="hidden" value="${waitDealId}" name="waitDealId" />
+                <div class="form-group">
+                    <label class="col-sm-2 center" >审批意见：</label>
+                    <div class="col-sm-10" >
+                        <select class="form-control" id="waitReplyResult" name="waitReplyResult" >                            
+                            <option value="1">同意</option>
+                            <option value="2">不同意</option>
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <table id="teacherTable" class="table table-bordered table-hover">
                     <thead>
                         <tr>
                             <th style = "text-align: center;"></th>
@@ -30,7 +40,7 @@
                     <tbody>
                         <c:forEach items="${teacherList}" var="teacher">
                             <tr>
-                                <td><input type="checkbox" value="${teacher.teacherUserId}" name="teacherIdList" ></td>
+                                <td><input type="radio" value="${teacher.teacherUserId}" name="teacherUserId" ></td>
                                 <td>${teacher.teachTeacherName}</td>
                                 <td>${teacher.teachTeacherSex}</td>
                                 <td>${teacher.teachTeacherIdCard}</td>
@@ -56,3 +66,8 @@
         </form>
     </div>
 </div>
+<script type="text/javascript" >
+    $(document).ready(function() {
+        Tables.loadPage();
+    });
+</script>

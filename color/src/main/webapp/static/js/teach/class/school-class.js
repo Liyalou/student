@@ -38,8 +38,8 @@ var Tables={
         //分配任课老师
         $(".setTeacher").on('click', function() {
             var schoolClassId=$(this).attr('_id');
-            $(".page-content").load(ctx+'/admin/schoolClass/setTeacherForClass?schoolClassId='+schoolClassId,function(){
-
+            $("#teacherList-input").load(ctx+'/admin/schoolClass/setTeacherForClass?schoolClassId='+schoolClassId,function(){
+                $("#teacherList-input").modal('show');
             });
         });
         

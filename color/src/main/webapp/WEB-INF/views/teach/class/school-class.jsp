@@ -70,6 +70,4 @@
 	    <jsp:include page="/WEB-INF/views/common/pagination.jsp"/>
 	</div>
 </div>
-
-
-
+<div id="teacherList-input" class="modal"  data-show="false" data-backdrop='static'></div>
