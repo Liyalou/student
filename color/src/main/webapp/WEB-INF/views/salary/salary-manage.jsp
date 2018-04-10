@@ -9,16 +9,12 @@
 			<form class="form-horizontal">
 				<div class="form-group">					
 					<div class="col-lg-2">
-						<input type="text" id="userName" class="form-control" placeholder="学生名字模糊查询">
+						<input type="text" id="userName" class="form-control" placeholder="学生名字">
 					</div> 
 					<div class="col-xs-3">		
 						<button type="button" id="search_SalaryManage" class="btn btn-info btn-sm"><i class="ace-icon glyphicon glyphicon-search"></i> 查询</button>
 						<button type="button" onclick="window.location.reload()" class="btn btn-success btn-sm"><i class="icon glyphicon glyphicon-repeat"></i> 显示全部</button>						
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-xs-12">
-						<button  id="add_SalaryManage"  class="btn btn-success btn-sm" type="button"><i class="ace-icon glyphicon glyphicon-plus bigger-110"></i>新增考勤管理</button>				
+						<button id="add_SalaryManage" class="btn btn-success btn-sm" type="button" title="考勤管理"><i class="ace-icon glyphicon glyphicon-plus bigger-110"></i>添加</button>	
 					</div>
 				</div>
 			</form>
@@ -68,7 +64,8 @@
 						</td>
 						<td>${SalaryManage.teacherUserName}</td>
 						<td><a href="${ctx}/admin/salaryManage/deleteSalaryManage?salaryManageId=${SalaryManage.salaryManageId}">删除</a>&nbsp;
-						<a _id="${SalaryManage.salaryManageId}" class="modifySalaryManage" >修改</a>&nbsp;<a _id="${SalaryManage.salaryManageId}" class="infoSalaryManage" >详情</a></td>
+						<a _id="${SalaryManage.salaryManageId}" class="modifySalaryManage" href="javaScript:void(0);">修改</a>&nbsp;
+						<a _id="${SalaryManage.salaryManageId}" class="infoSalaryManage" href="javaScript:void(0);">详情</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

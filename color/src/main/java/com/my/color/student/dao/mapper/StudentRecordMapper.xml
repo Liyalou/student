@@ -338,9 +338,11 @@
     </if>
     <if test="teacherType != 2">
         and student_class_id IN
-        <foreach collection="classIdList" item="classId" index="index" open="(" close=")" separator=",">
-            #{classId,jdbcType=VARCHAR}
-        </foreach>
+        <if test="classIdList !=null and classIdList.size>0">
+        	<foreach collection="classIdList" item="classId" index="index" open="(" close=")" separator=",">
+	            #{classId,jdbcType=VARCHAR}
+	        </foreach>
+        </if>
     </if>
   </select>
   

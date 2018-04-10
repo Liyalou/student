@@ -2,6 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
+<div class="col-sm-12 center">
+    <strong style="font-size:24px">请假详情</strong>
+</div>
 <div class="form-group" >
     <form id="teachTeacher_form" role="form" method="post" action="${ctx}/admin/studentVacate/submitStudentVacate" class="form-horizontal ">
         <input type="hidden" name="studentVacateId" value="${studentVacate.studentVacateId}" />

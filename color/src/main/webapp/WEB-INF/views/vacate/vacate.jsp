@@ -13,12 +13,13 @@
 					</div> 
 					<div class="col-xs-3">		
 						<button type="button" id="search_student" class="btn btn-info btn-sm"><i class="ace-icon glyphicon glyphicon-search"></i> 查询</button>
-						<button type="button" onclick="window.location.reload()" class="btn btn-success btn-sm"><i class="icon glyphicon glyphicon-repeat"></i> 显示全部</button>						
+						<button type="button" onclick="window.location.reload()" class="btn btn-success btn-sm"><i class="icon glyphicon glyphicon-repeat"></i> 显示全部</button>		
+						<button id="add_vacation" class="btn btn-success btn-sm" type="button" title="请假申请"><i class="ace-icon glyphicon glyphicon-plus bigger-110"></i>添加</button>				
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-12">
-						<button  id="add_vacation"  class="btn btn-success btn-sm" type="button"><i class="ace-icon glyphicon glyphicon-plus bigger-110"></i>请假申请</button>				
+										
 					</div>
 				</div>
 			</form>

@@ -137,6 +137,8 @@ public class TeachTeacherController {
 	@RequestMapping("/getTeacherInfo")
 	public ModelAndView getTeacherInfo(ModelMap model,String teachTeacherId){
 		TeachTeacher teachTeacher = teachTeacherService.selectByPrimaryKey(teachTeacherId);
+		String userType = teachTeacherService.getTeacherType(teachTeacher.getTeacherUserId());
+		model.put("teacherType", userType);
 		model.put("teachTeacher", teachTeacher);
 		return layout.layout("teach/teacher/teacher-info",MENU_ID);
 	}

@@ -9,16 +9,12 @@
 			<form class="form-horizontal">
 				<div class="form-group">					
 					<div class="col-lg-2">
-						<input type="text" id="teacerName" class="form-control" placeholder="辅导员模糊查询">
+						<input type="text" id="teacerName" class="form-control" placeholder="辅导员">
 					</div> 
 					<div class="col-xs-3">		
 						<button type="button" id="search_teacher" class="btn btn-info btn-sm"><i class="ace-icon glyphicon glyphicon-search"></i> 查询</button>
 						<button type="button" onclick="window.location.reload()" class="btn btn-success btn-sm"><i class="icon glyphicon glyphicon-repeat"></i> 显示全部</button>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-xs-12">
-						<button  id="add_class"  class="btn btn-success btn-sm" type="button"><i class="ace-icon glyphicon glyphicon-plus bigger-110"></i>添加班级</button>				
+						<button id="add_class" class="btn btn-success btn-sm" type="button" title="添加班级"><i class="ace-icon glyphicon glyphicon-plus bigger-110"></i>添加</button>
 					</div>
 				</div>
 			</form>

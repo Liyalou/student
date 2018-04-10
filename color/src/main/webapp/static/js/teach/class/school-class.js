@@ -43,5 +43,12 @@ var Tables={
             });
         });
         
+        $("#deleteTeacherForClass").on('click', function() {
+            var schoolClassId=$(this).attr('schoolClassId');
+            var teacherId=$(this).attr('teacherId');
+            $(".page-content").load(ctx+'/admin/schoolClass/deleteTeacherForClass?schoolClassId='+schoolClassId+'&teacherId='+teacherId,function(){
+
+            });
+        });
     }
 }

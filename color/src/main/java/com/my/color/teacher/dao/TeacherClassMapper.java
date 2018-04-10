@@ -29,4 +29,7 @@ public interface TeacherClassMapper {
     
     
     List<String> getUserIdByClassId(Map<String,Object> conditionMap);
+    
+    
+    int deleteTeacherClass(TeacherClass record);
 }

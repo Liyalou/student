@@ -8,16 +8,12 @@
 			<form class="form-horizontal">
 				<div class="form-group">					
 					<div class="col-lg-2">						
-						<input type="text" id="teacerName" class="form-control" placeholder="教务人名模糊查询">						
+						<input type="text" id="teacerName" class="form-control" placeholder="教务人名">						
 					</div> 
 					<div class="col-xs-3">		
 						<button type="button" id="search_teacher" class="btn btn-info btn-sm"><i class="ace-icon glyphicon glyphicon-search"></i> 查询</button>
 						<button type="button" onclick="window.location.reload()"  class="btn btn-success btn-sm"><i class="icon glyphicon glyphicon-repeat"></i> 显示全部</button>						
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-xs-12">
-						<button  id="add_teacher"  class="btn btn-success btn-sm" type="button"><i class="ace-icon glyphicon glyphicon-plus bigger-110"></i>添加教务人员</button>				
+						<button id="add_teacher" class="btn btn-success btn-sm" type="button" title="添加教务人员"><i class="ace-icon glyphicon glyphicon-plus bigger-110"></i>添加</button>
 					</div>
 				</div>
 			</form>
@@ -60,10 +56,13 @@
                 			<c:if test="${teacher.userType==4}">
                 				任课老师
                 			</c:if>
-                			<td>${teacher.teachTeacherPost}</td>
 						</td>
-						<td><a href="${ctx}/admin/teachTeacher/deleteTeacher?teachTeacherId=${teacher.teachTeacherId}">删除</a>&nbsp;
-						<a _id="${teacher.teachTeacherId}" class="modifyTeacher" >修改</a>&nbsp;<a _id="${teacher.teachTeacherId}" class="infoTeacher" >详情</a></td>
+						<td>${teacher.teachTeacherPost}</td>
+						<td>
+							<a href="${ctx}/admin/teachTeacher/deleteTeacher?teachTeacherId=${teacher.teachTeacherId}">删除</a>&nbsp;
+							<a _id="${teacher.teachTeacherId}" class="modifyTeacher" href="javaScript:void(0);">修改</a>&nbsp;
+							<a _id="${teacher.teachTeacherId}" class="infoTeacher" href="javaScript:void(0);">详情</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

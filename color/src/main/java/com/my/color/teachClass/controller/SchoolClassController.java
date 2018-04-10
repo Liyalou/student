@@ -1,5 +1,6 @@
 package com.my.color.teachClass.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,9 +20,11 @@ import com.my.color.base.common.BaseCondition;
 import com.my.color.base.common.Constant;
 import com.my.color.base.layout.MainLayout;
 import com.my.color.base.page.Page;
+import com.my.color.base.util.MessageUtils;
 import com.my.color.teachClass.dao.po.SchoolClass;
 import com.my.color.teachClass.service.SchoolClassService;
 import com.my.color.teacher.dao.po.TeachTeacher;
+import com.my.color.teacher.dao.po.TeacherClass;
 import com.my.color.teacher.service.TeachTeacherService;
 import com.my.color.user.dao.po.User;
 import com.my.color.user.service.UserToken;
@@ -134,6 +137,16 @@ public class SchoolClassController {
 	@RequestMapping("/getSchoolClassInfo")
 	public ModelAndView getSchoolClassInfo(ModelMap model,String schoolClassId){
 		SchoolClass schoolClass = schoolClassService.selectByPrimaryKey(schoolClassId);
+		Map<String,Object> conditionMap = new HashMap<String,Object>();
+		conditionMap.put("schoolClassId", schoolClassId);
+		conditionMap.put("teacherType", "4");
+		List<String> userIdList = teacherService.getUserIdByClassId(conditionMap);
+		conditionMap.put("userIdList", userIdList);
+		List<TeachTeacher> teacherList = new ArrayList<TeachTeacher>();
+		if(userIdList !=null && userIdList.size()>0){
+			teacherList = teacherService.getTeachTeacherList(conditionMap);
+		}
+		model.put("teacherList", teacherList);//老师集合
 		model.put("schoolClass", schoolClass);
 		return layout.layout("teach/class/school-class-info",MENU_ID);
 	}
@@ -169,7 +182,19 @@ public class SchoolClassController {
 			schoolClassService.submitTeacherForClass(attributes, teacherIdList, schoolClassId);
 		} catch (Exception e) {
 			e.printStackTrace();
+			MessageUtils.getMessage(attributes, 0);
 		}
 		return new RedirectView(request.getContextPath()+"/admin/schoolClass/index");
+	}
+	
+	@RequestMapping("/deleteTeacherForClass")
+	public RedirectView deleteTeacherForClass(RedirectAttributes attributes,HttpServletRequest request,
+	String teacherId,String schoolClassId){
+		TeacherClass record = new TeacherClass();
+		record.setSchoolClassId(schoolClassId);
+		record.setTeacherUserId(teacherId);
+		int result = schoolClassService.deleteTeacherClass(record);
+		MessageUtils.getMessage(attributes, result);
+		return new RedirectView(request.getContextPath()+"/admin/schoolClass/getSchoolClassInfo?schoolClassId="+schoolClassId);
 	}
 }

@@ -60,6 +60,10 @@ public class SchoolClassService {
 		return schoolClassMapper.getSchoolClassList(conditionMap);
 	}
 	
+	public int deleteTeacherClass(TeacherClass record){
+		return teacherClassMapper.deleteTeacherClass(record);
+	}
+	
 	public void addSchoolClassPage(ModelMap model,String schoolClassId){
 		SchoolClass schoolClass = new SchoolClass();
 		if(!StringUtils.isEmpty(schoolClassId)){
@@ -144,5 +148,6 @@ public class SchoolClassService {
 			teacherClass.setTeacherType("4");
 			teacherClassMapper.insertSelective(teacherClass);
 		}
+		MessageUtils.getMessage(attributes, 1);
 	}
 }

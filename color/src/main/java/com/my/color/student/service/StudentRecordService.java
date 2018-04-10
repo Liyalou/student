@@ -67,7 +67,9 @@ public class StudentRecordService {
 		conditionMap.put("userId", user.getUserId());
 		conditionMap.put("teacherType", user.getUserType());
 		List<String> classIdList = teacherClassMapper.getClassIdByUserId(conditionMap);
-		conditionMap.put("classIdList", classIdList);
+		if(classIdList !=null && classIdList.size()>0){
+			conditionMap.put("classIdList", classIdList);
+		}
 		return conditionMap;
 	}
 	

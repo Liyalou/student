@@ -7,7 +7,7 @@
 		<div class="col-xs-12">
 			<form class="form-horizontal">
 				<div class="form-group">
-					<div class="col-xs-3">
+					<div class="col-xs-2">
 						<div class="input-group">
 							<input type="text" id="starCreateTime" class="form-control" placeholder="开始时间"/>
 							<span class="input-group-addon">
@@ -15,7 +15,7 @@
 							</span>
 						</div>
 					</div> 
-					<div class="col-xs-3">
+					<div class="col-xs-2">
 						<div class="input-group">
 							<input type="text" id="endCreateTime" class="form-control" placeholder="结束时间"/>
 							<span class="input-group-addon">

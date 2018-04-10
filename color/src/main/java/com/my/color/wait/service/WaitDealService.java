@@ -89,6 +89,7 @@ public class WaitDealService {
 			String waitDealId,String waitReplyResult,String teacherId)throws Exception{
 		WaitDeal waitDeal = waitDealMapper.selectByPrimaryKey(waitDealId);
 		waitDeal.setWaitReplyResult(waitReplyResult);
+		waitDeal.setWaitDealState("1");
 		int result = waitDealMapper.updateByPrimaryKeySelective(waitDeal);
 		if(result == 1){
 			StudentVacate studentVacate= vacateService.selectByPrimaryKey(waitDeal.getWaitReferenceId());
