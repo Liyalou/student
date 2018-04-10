@@ -9,7 +9,7 @@
 			<form class="form-horizontal">
 				<div class="form-group">					
 					<div class="col-lg-2">
-						<input type="text" class="form-control" placeholder="模糊查询">
+						<input type="text" id="userName" class="form-control" placeholder="学生名字模糊查询">
 					</div> 
 					<div class="col-xs-3">		
 						<button type="button" id="search_SalaryManage" class="btn btn-info btn-sm"><i class="ace-icon glyphicon glyphicon-search"></i> 查询</button>

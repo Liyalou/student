@@ -17,8 +17,10 @@ var Tables={
             var waitReplyResult=$(this).find('option:selected').val();
             if (waitReplyResult=='2') {
                 $('#teacherTable').hide();
+                $("#teacherTable").find('input[name="teacherUserId"]').removeAttr('required');
             }else{
                 $('#teacherTable').show();
+                $("#teacherTable").find('input[name="teacherUserId"]').attr('required','required');
             }
         });
     }

@@ -24,15 +24,8 @@
 						</div>
 					</div>
 					<div class="col-lg-2">
-						<div class="input-group">
-							<input type="text" class="form-control" id ="studentUserName" placeholder="学生姓名">
-						</div>
-					</div> 
-					<!-- <div class="col-lg-2">
-						<div class="input-group">
-							<input type="text" class="form-control" id ="teacherUserName" placeholder="老师姓名">
-						</div>
-					</div> -->
+						<input type="text" class="form-control" id ="studentUserName" placeholder="学生姓名">
+					</div> 					
 					<div class="col-xs-3">		
 						<button type="button" class="btn btn-info btn-sm" id="search_salary"><i class="ace-icon glyphicon glyphicon-search"></i> 查询</button>
 						<button type="button" class="btn btn-success btn-sm" onclick="window.location.reload()"><i class="icon glyphicon glyphicon-repeat"></i> 显示全部</button>
@@ -42,12 +35,12 @@
 		</div>
 	</div>
 	<div class="hr hr10 hr-dotted"></div>
-	<c:if test="${alertMsg}">
-		<div class="alert alert-${alertType}">
-			<button type="button" class="close" data-dismiss="alert">×</button>
-			<strong>提示:</strong>${alertMsg}
-		</div>
-	</c:if>
+	<c:if test="${not empty alertType}">
+        <div class="alert alert-${alertType}">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>提示:</strong>${alertMsg}
+        </div>
+    </c:if>
 	<div class="well table-responsive" style="background-color: white;">
 		<table class="table table-bordered table-hover">
 			<thead>
@@ -92,30 +85,7 @@
 </div>
 <script type="text/javascript" >
     $(document).ready(function() {
-        Tables.loadPage();    
-        $("#starCreateTime").datetimepicker({
-            language:  'zh-CN',
-            format: 'yyyy-mm-dd:hh:mm:ss',
-            autoclose: true,
-            todayBtn: true,
-        }).on('changeDate',function(ev){
-            var vacateStartTime=$("#starCreateTime").val();
-            $("#endCreateTime").datetimepicker('setStartDate',vacateStartTime);
-            $("#starCreateTime").datetimepicker('hide');
-        });
-
-		// 结束时间的插件 
-        $("#endCreateTime").datetimepicker({
-            language:  'zh-CN',
-            format: 'yyyy-mm-dd:hh:mm:ss',
-            autoclose: true,
-            todayBtn: true,
-        }).on('changeDate',function(ev){
-            var vacateStartTime=$("#starCreateTime").val();
-            var vacateEndTime=$("#endCreateTime").val();
-            $("#starCreateTime").datetimepicker('setEndDate',vacateEndTime);
-            $("#endCreateTime").datetimepicker('hide'); 
-        });
+        Tables.loadPage();           
     });
 </script>
 

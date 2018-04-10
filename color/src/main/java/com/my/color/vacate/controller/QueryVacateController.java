@@ -23,7 +23,7 @@ import com.my.color.vacate.service.StudentVacateService;
  *
  */
 @Controller
-@RequestMapping("/amdin/queryVacate")
+@RequestMapping("/admin/queryVacate")
 public class QueryVacateController {
 
 	private static final String MENU_ID = "MENU_QUERY_VACATE";
@@ -52,7 +52,7 @@ public class QueryVacateController {
 		List<StudentVacate> list = studentVacateService.getStudentVacateList(conditionMap);
 		PageInfo<StudentVacate> pageList = page.listToPage(list);
 		model.put(Constant.PAGE_LIST, pageList);
-		model.put(Constant.PAGE_URL, "/amdin/queryVacate/queryIndex");
+		model.put(Constant.PAGE_URL, "/admin/queryVacate/queryIndex");
 		return layout.layout("queryVacate",MENU_ID);
 	}
 }

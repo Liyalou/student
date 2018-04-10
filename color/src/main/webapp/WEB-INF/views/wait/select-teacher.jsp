@@ -40,7 +40,7 @@
                     <tbody>
                         <c:forEach items="${teacherList}" var="teacher">
                             <tr>
-                                <td><input type="radio" value="${teacher.teacherUserId}" name="teacherUserId" ></td>
+                                <td><input required="required" type="radio" value="${teacher.teacherUserId}" name="teacherUserId" ></td>
                                 <td>${teacher.teachTeacherName}</td>
                                 <td>${teacher.teachTeacherSex}</td>
                                 <td>${teacher.teachTeacherIdCard}</td>

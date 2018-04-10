@@ -33,7 +33,6 @@ public class QuerySalaryController {
 	
 	@Autowired
 	private SalaryManageService salaryManageService;
-	
 	@RequestMapping("/querySalaryIndex")
 	public ModelAndView querySalaryIndex(ModelMap model,Page<SalaryManage> page,
 			String userName,String starCreateTime,String endCreateTime){
