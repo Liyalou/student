@@ -331,19 +331,25 @@
   <select id="getStudentRecordList" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from e_student_record
-    where student_is_vaild = '1'
+    from e_student_record AS r left join e_teacher_class as c on r.student_class_id = c.school_class_id
+    where r.student_is_vaild = '1'
     <if test="userName !=null and userName !=''">
-    	and student_record_name LIKE CONCAT('%',#{userName,jdbcType=VARCHAR},'%')
+    	and r.student_record_name LIKE CONCAT('%',#{userName,jdbcType=VARCHAR},'%')
     </if>
-    <if test="teacherType != 2">
-        and student_class_id IN
+    <if test="userId !=null and userId !=''">
+    	and c.teacher_user_id = #{userId,jdbcType=VARCHAR}
+    </if>
+    GROUP BY r.student_record_id
+    order by r.student_create_time desc
+    <!-- <if test="teacherType != 2">
+        and r.student_class_id IN
         <if test="classIdList !=null and classIdList.size>0">
         	<foreach collection="classIdList" item="classId" index="index" open="(" close=")" separator=",">
 	            #{classId,jdbcType=VARCHAR}
 	        </foreach>
         </if>
-    </if>
+    </if> -->
+    
   </select>
   
   <select id="getStudentByClassId" parameterType="java.lang.String" resultMap="BaseResultMap">

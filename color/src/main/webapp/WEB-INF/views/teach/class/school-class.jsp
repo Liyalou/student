@@ -14,7 +14,9 @@
 					<div class="col-xs-3">		
 						<button type="button" id="search_teacher" class="btn btn-info btn-sm"><i class="ace-icon glyphicon glyphicon-search"></i> 查询</button>
 						<button type="button" onclick="window.location.reload()" class="btn btn-success btn-sm"><i class="icon glyphicon glyphicon-repeat"></i> 显示全部</button>
-						<button id="add_class" class="btn btn-success btn-sm" type="button" title="添加班级"><i class="ace-icon glyphicon glyphicon-plus bigger-110"></i>添加</button>
+						<c:if test="${user.userType == 2 }">
+							<button id="add_class" class="btn btn-success btn-sm" type="button" title="添加班级"><i class="ace-icon glyphicon glyphicon-plus bigger-110"></i>添加</button>
+						</c:if>
 					</div>
 				</div>
 			</form>
@@ -31,6 +33,7 @@
 		<table class="table table-bordered table-hover">
 			<thead>
 				<tr>
+					<th style = "text-align: center;">创建时间</th>
 					<th style = "text-align: center;">年级</th>
 					<th style = "text-align: center;">班级</th>
 					<th style = "text-align: center;">专业</th>
@@ -45,6 +48,7 @@
 			<tbody>
 				<c:forEach items="${pageList.list}" var="schoolClass">
 					<tr>
+						<td>${schoolClass.classCreateTime}</td>
 						<td>${schoolClass.schoolGradeNumber}</td>
 						<td>${schoolClass.schoolClassNumber}</td>
 						<td>${schoolClass.classSpecialty}</td>
@@ -54,10 +58,12 @@
 						<td>${schoolClass.classGraduationTime}</td>
 						<td>${schoolClass.classInstructorUname}</td>
 						<td>
-							<a href="${ctx}/admin/schoolClass/deleteSchoolClass?schoolClassId=${schoolClass.schoolClassId}">删除</a>&nbsp;
-							<a _id="${schoolClass.schoolClassId}" class="modifyClass" href="javaScript:void(0);">修改</a>&nbsp;
-							<a _id="${schoolClass.schoolClassId}" class="infoClass" href="javaScript:void(0);">详情</a>&nbsp;
-							<a _id="${schoolClass.schoolClassId}" class="setTeacher" href="javaScript:void(0);" title="分配任课老师">分配</a>
+							<c:if test="${user.userType == 2 }">
+								<a href="${ctx}/admin/schoolClass/deleteSchoolClass?schoolClassId=${schoolClass.schoolClassId}">删除</a>&nbsp;
+								<a _id="${schoolClass.schoolClassId}" class="modifyClass" href="javaScript:void(0);">修改</a>&nbsp;
+								<a _id="${schoolClass.schoolClassId}" class="setTeacher" href="javaScript:void(0);" title="分配任课老师">分配</a>&nbsp;
+							</c:if>
+							<a _id="${schoolClass.schoolClassId}" class="infoClass" href="javaScript:void(0);">详情</a>
 						</td>
 					</tr>
 				</c:forEach>

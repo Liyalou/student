@@ -14,7 +14,9 @@
 					<div class="col-xs-3">		
 						<button type="button" id="search_student" class="btn btn-info btn-sm"><i class="ace-icon glyphicon glyphicon-search"></i> 查询</button>
 						<button type="button" onclick="window.location.reload()" class="btn btn-success btn-sm"><i class="icon glyphicon glyphicon-repeat"></i> 显示全部</button>
-						<button id="add_class" class="btn btn-success btn-sm" type="button" title="添加学生"><i class="ace-icon glyphicon glyphicon-plus bigger-110"></i>添加</button>
+						<c:if test="${user.userType == 2 }">
+							<button id="add_class" class="btn btn-success btn-sm" type="button" title="添加学生"><i class="ace-icon glyphicon glyphicon-plus bigger-110"></i>添加</button>
+						</c:if>
 					</div>
 				</div>
 			</form>
@@ -31,6 +33,8 @@
 		<table class="table table-bordered table-hover">
 			<thead>
 				<tr>
+					<th style = "text-align: center;">创建时间</th>
+					<th style = "text-align: center;">班级名称</th>
 					<th style = "text-align: center;">姓名</th>
 					<th style = "text-align: center;">性别</th>
 					<th style = "text-align: center;">出生年月</th>
@@ -38,13 +42,14 @@
 					<th style = "text-align: center;">民族</th>
 					<th style = "text-align: center;">籍贯</th>
 					<th style = "text-align: center;">联系电话</th>
-					<th style = "text-align: center;">班级名称</th>
 					<th style = "text-align: center;">操作</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${pageList.list}" var="student">
 					<tr>
+						<td>${student.studentCreateTime}</td>
+						<td>${student.studentClassName}</td>
 						<td>${student.studentRecordName}</td>
 						<td>${student.studentRecordSex}</td>
 						<td>${student.studentBirthYears}</td>
@@ -52,9 +57,11 @@
 						<td>${student.studentRecordNation}</td>
 						<td>${student.studentNativePlace}</td>
 						<td>${student.studentPhone}</td>
-						<td>${student.studentClassName}</td>
-						<td><a href="${ctx}/admin/studentRecord/deleteStudent?studentRecordId=${student.studentRecordId}">删除</a>&nbsp;
-						<a _id="${student.studentRecordId}" class="modifyStudent" href="javaScript:void(0);">修改</a>&nbsp;
+						<td>
+						<c:if test="${user.userType == 2 }">
+							<a href="${ctx}/admin/studentRecord/deleteStudent?studentRecordId=${student.studentRecordId}">删除</a>&nbsp;
+							<a _id="${student.studentRecordId}" class="modifyStudent" href="javaScript:void(0);">修改</a>&nbsp;
+						</c:if>
 						<a _id="${student.studentRecordId}" class="infoStudent" href="javaScript:void(0);">详情</a></td>
 					</tr>
 				</c:forEach>

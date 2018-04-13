@@ -65,11 +65,11 @@ public class StudentRecordService {
 	public Map<String,Object> getStudentRecordCondition(Map<String,Object> conditionMap){
 		User user = UserToken.getLoginUser();
 		conditionMap.put("userId", user.getUserId());
-		conditionMap.put("teacherType", user.getUserType());
+		/*conditionMap.put("teacherType", user.getUserType());
 		List<String> classIdList = teacherClassMapper.getClassIdByUserId(conditionMap);
 		if(classIdList !=null && classIdList.size()>0){
 			conditionMap.put("classIdList", classIdList);
-		}
+		}*/
 		return conditionMap;
 	}
 	

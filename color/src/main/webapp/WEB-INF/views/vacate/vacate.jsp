@@ -14,7 +14,9 @@
 					<div class="col-xs-3">		
 						<button type="button" id="search_student" class="btn btn-info btn-sm"><i class="ace-icon glyphicon glyphicon-search"></i> 查询</button>
 						<button type="button" onclick="window.location.reload()" class="btn btn-success btn-sm"><i class="icon glyphicon glyphicon-repeat"></i> 显示全部</button>		
-						<button id="add_vacation" class="btn btn-success btn-sm" type="button" title="请假申请"><i class="ace-icon glyphicon glyphicon-plus bigger-110"></i>添加</button>				
+						<c:if test="${user.userType == 5}">
+							<button id="add_vacation" class="btn btn-success btn-sm" type="button" title="请假申请"><i class="ace-icon glyphicon glyphicon-plus bigger-110"></i>添加</button>
+						</c:if>
 					</div>
 				</div>
 				<div class="form-group">
@@ -74,10 +76,12 @@
 							</c:if>
 						</td>
 						<td>
-							<c:if test="${vacation.vacateState == 0}">
-								<a href="${ctx}/admin/studentVacate/deleteTeacher?studentVacateId=${vacation.studentVacateId}">删除</a>&nbsp;
-								<a _id="${vacation.studentVacateId}" class="approvalVacation" href="javaScript:void(0);">请假审批</a>&nbsp;
-								<a _id="${vacation.studentVacateId}" class="modifyVacation" href="javaScript:void(0);">修改</a>&nbsp;
+							<c:if test="${user.userType == 5}">
+								<c:if test="${vacation.vacateState == 0}">
+									<a href="${ctx}/admin/studentVacate/deleteTeacher?studentVacateId=${vacation.studentVacateId}">删除</a>&nbsp;
+									<a _id="${vacation.studentVacateId}" class="approvalVacation" href="javaScript:void(0);">请假审批</a>&nbsp;
+									<a _id="${vacation.studentVacateId}" class="modifyVacation" href="javaScript:void(0);">修改</a>&nbsp;
+								</c:if>
 							</c:if>
 							<a _id="${vacation.studentVacateId}" class="infoVacation" href="javaScript:void(0);">详情</a>
 						</td>

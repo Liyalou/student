@@ -61,7 +61,9 @@
 						</td>
 						<td>${wait.waitCreateTime}</td>
 						<td>
-							<a href="javaScript:void(0);" id="${wait.waitDealId}" class="infoVacation">查看</a>&nbsp;
+							<c:if test="${user.userType == 2}">
+								<a href="javaScript:void(0);" id="${wait.waitDealId}" class="infoVacation">查看</a>
+							</c:if>
 						</td>
 					</tr>
 				</c:forEach>

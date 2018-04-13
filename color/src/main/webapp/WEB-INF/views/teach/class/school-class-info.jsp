@@ -60,7 +60,9 @@
 	                    <th style = "text-align: center;">身份号</th>
 	                    <th style = "text-align: center;">联系电话</th>
 	                    <th style = "text-align: center;">职位</th>
-	                    <th style = "text-align: center;">操作</th>
+	                    <c:if test="${user.userType == 2 }">
+	                    	<th style = "text-align: center;">操作</th>
+	                    </c:if>
 	                </tr>
 	            </thead>
 	            <tbody>
@@ -71,9 +73,11 @@
 	                        <td>${teacher.teachTeacherIdCard}</td>
 	                        <td>${teacher.teachTeacherPhone}</td>
 	                        <td>${teacher.teachTeacherPost}</td>
+	                        <c:if test="${user.userType == 2 }">
 	                        <td>
 	                        	<a href="javaScript:void(0);" schoolClassId=${schoolClass.schoolClassId} teacherId=${teacher.teacherUserId} id="deleteTeacherForClass">删除</a>
 	                        </td>
+	                        </c:if>
 	                    </tr>
 	                </c:forEach>
 	            </tbody>

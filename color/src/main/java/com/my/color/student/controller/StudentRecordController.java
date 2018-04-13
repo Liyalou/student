@@ -24,6 +24,8 @@ import com.my.color.student.dao.po.StudentRecord;
 import com.my.color.student.service.StudentRecordService;
 import com.my.color.teachClass.dao.po.SchoolClass;
 import com.my.color.teachClass.service.SchoolClassService;
+import com.my.color.user.dao.po.User;
+import com.my.color.user.service.UserToken;
 
 /**
  * 学生管理
@@ -57,7 +59,11 @@ public class StudentRecordController {
 	public ModelAndView studentRecordIndex(ModelMap model,Page<StudentRecord> page,BaseCondition condition){
 		try {
 			Map<String,Object> conditionMap = condition.getConditionMap(condition);
-			conditionMap = recordService.getStudentRecordCondition(conditionMap);
+			
+			User user = UserToken.getLoginUser();
+			if(user.getUserType().equals("3")||user.getUserType().equals("4")){
+				conditionMap.put("userId", user.getUserId());
+			}
 			page.startPage(page);
 			List<StudentRecord> list = recordService.getStudentRecordList(conditionMap);
 			PageInfo<StudentRecord> pageList = page.listToPage(list);

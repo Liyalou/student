@@ -69,8 +69,10 @@
 							</c:if>
 						</td>
 						<td>
-							<c:if test="${vacateNotice.noticeIsRead == 2}">
-								<a href="${ctx}/admin/vacateNotice/checkVacate?vacateNoticeId=${vacateNotice.vacateNoticeId}">已读</a>
+							<c:if test="${user.userType == 4}">
+								<c:if test="${vacateNotice.noticeIsRead == 2}">
+									<a href="${ctx}/admin/vacateNotice/checkVacate?vacateNoticeId=${vacateNotice.vacateNoticeId}">已读</a>
+								</c:if>
 							</c:if>
 						</td>
 					</tr>
