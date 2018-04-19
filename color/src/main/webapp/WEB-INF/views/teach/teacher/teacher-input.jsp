@@ -8,6 +8,7 @@
 <div class="form-group" >
     <form id="teachTeacher_form" role="form" method="post" action="${ctx}/admin/teachTeacher/submitTeacher" class="form-horizontal ">
         <input type="hidden" name="teachTeacherId" value="${teachTeacher.teachTeacherId}" />
+        <input type="hidden" name="teacherUserId" value="${teachTeacher.teacherUserId}" />
         <table style="border:none" id="simple-table" class="table table-bordered table-hover" >
             <tr class="form-group" >
                 <td>教务人员类型</td>

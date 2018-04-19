@@ -16,7 +16,6 @@ import com.my.color.role.dao.po.Role;
 import com.my.color.role.service.RoleService;
 import com.my.color.student.dao.StudentRecordMapper;
 import com.my.color.student.dao.po.StudentRecord;
-import com.my.color.teacher.dao.TeacherClassMapper;
 import com.my.color.user.dao.UserRoleMapper;
 import com.my.color.user.dao.po.User;
 import com.my.color.user.dao.po.UserRole;
@@ -43,8 +42,8 @@ public class StudentRecordService {
 	@Autowired
 	private UserRoleMapper userRoleMapper;
 	
-	@Autowired
-	private TeacherClassMapper teacherClassMapper;
+	/*@Autowired
+	private TeacherClassMapper teacherClassMapper;*/
 	
 	public StudentRecord selectByPrimaryKey(String recordId){
 		return studentRecordMapper.selectByPrimaryKey(recordId);
@@ -94,6 +93,7 @@ public class StudentRecordService {
 		user.setUserAccount(studentRecord.getStudentPhone());
 		user.setUserIdCard(studentRecord.getStudentIdCard());
 		user.setUserPhone(studentRecord.getStudentPhone());
+		user.setUserId(studentRecord.getStudentUserId());
 		if(!StringUtils.isEmpty(studentRecord.getStudentRecordId())){
 			studentRecord.setStudentLastUptime(DateUtils.getTime());
 			studentRecord.setStudentLastUpuid(UserToken.getLoginUser().getUserId());

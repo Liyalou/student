@@ -8,6 +8,7 @@
 <div class="form-group" >
     <form id="studentRecord_form" role="form" method="post" action="${ctx}/admin/studentRecord/submitStudent" class="form-horizontal ">
         <input type="hidden" name="studentRecordId" value="${studentRecord.studentRecordId}" />
+        <input type="hidden" name="studentUserId" value="${studentRecord.studentUserId}" />
         <table style="border:none" id="simple-table" class="table table-bordered table-hover" >
             <tr class="form-group" >
             	<td>班级名称</td>

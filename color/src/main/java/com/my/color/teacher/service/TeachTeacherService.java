@@ -81,7 +81,7 @@ public class TeachTeacherService {
 		user.setUserAccount(teachTeacher.getTeachTeacherPhone());
 		user.setUserIdCard(teachTeacher.getTeachTeacherIdCard());
 		user.setUserPhone(teachTeacher.getTeachTeacherPhone());
-		
+		user.setUserId(teachTeacher.getTeacherUserId());
 		if(!StringUtils.isEmpty(teachTeacher.getTeachTeacherId())){
 			teachTeacher.setTeacherUpdateTime(DateUtils.getTime());
 			teachTeacher.setTeacherUpdateUserId(UserToken.getLoginUser().getUserId());
