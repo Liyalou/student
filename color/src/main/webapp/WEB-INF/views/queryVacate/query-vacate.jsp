@@ -46,6 +46,7 @@
 		<table class="table table-bordered table-hover">
 			<thead>
 				<tr>
+					<th style = "text-align: center;">申请时间</th>
 					<th style = "text-align: center;">学生姓名</th>
 					<th style = "text-align: center;">班级名称</th>
 					<th style = "text-align: center;">请假类型</th>
@@ -53,11 +54,13 @@
 					<th style = "text-align: center;">开始时间</th>
 					<th style = "text-align: center;">结束时间</th>
 					<th style = "text-align: center;">辅导员</th>
+					<th style = "text-align: center;">请假状态</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${pageList.list}" var="vacation">
 					<tr>
+						<td>${vacation.vacateCreateTime}</td>
 						<td>${vacation.vacateUserName}</td>
 						<td>${vacation.studentClassName}</td>
 						<td>
@@ -72,6 +75,17 @@
 						<td>${vacation.vacateStartTime}</td>
 						<td>${vacation.vacateEndTime}</td>
 						<td>${vacation.studentInstructorUname}</td>
+						<td>
+							<c:if test="${vacation.vacateState == 1}">
+								待审批
+							</c:if>
+							<c:if test="${vacation.vacateState == 2}">
+								同意
+							</c:if>
+							<c:if test="${vacation.vacateState == 3}">
+								不同意
+							</c:if>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
