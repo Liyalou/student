@@ -8,7 +8,7 @@ pageEncoding="UTF-8"%>
 <html lang="zh-CN">
 <head>
 	<meta charset="utf-8">
-    <title>嘉义大学后台管理系统</title>
+    <title>大学考勤管理系统</title>
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -38,8 +38,8 @@ pageEncoding="UTF-8"%>
 		<div class="dialog" style="margin-top: 0em;padding-top:15em;">
 			<div class="center">
 				<h1>
-					<span style="font-size:30px;font-family: georgia, serif;"><Strong>嘉义大学</Strong></span>
-					<span style="font-size:20px;">后台管理系统</span>
+					<!-- <span style="font-size:30px;font-family: georgia, serif;"><Strong></Strong></span>  -->
+					<span style="font-size:30px;margin-left: 2.3em;font-family: georgia, serif;"><Strong>大学考勤管理系统</Strong></span>
 				</h1>
 			</div>
 			<div class="block" style="border-radius: 5px;">
