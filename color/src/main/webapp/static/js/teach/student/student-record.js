@@ -26,12 +26,21 @@ var Tables={
             $("body").load(ctx+'/admin/studentRecord/index?userName='+studentUserName,function(){
 
             });
-
         });
         //班级选择
         $("#studentClassId").on('change',function() {
-            var studentClassName=$(this).find("option:selected").attr('studentClassName')
+            var studentClassName=$(this).find("option:selected").attr('studentClassName');
             $("#studentClassName").val(studentClassName)
         });
+        
+        $("#download").click(function(){
+        	location.href=ctx+"/admin/studentRecord/downloadfile";
+        })
+        
+        $("#upload").on('click', function(event) {
+            $("#uploadStudent").load(ctx+'/admin/studentRecord/uploadStudentPage',function(){
+                $("#uploadStudent").modal('show');
+            })
+        }); 
     }
 }

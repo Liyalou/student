@@ -16,6 +16,8 @@
 						<button type="button" onclick="window.location.reload()" class="btn btn-success btn-sm"><i class="icon glyphicon glyphicon-repeat"></i> 显示全部</button>
 						<c:if test="${user.userType == 2 }">
 							<button id="add_class" class="btn btn-success btn-sm" type="button" title="添加学生"><i class="ace-icon glyphicon glyphicon-plus bigger-110"></i>添加</button>
+							<button id="download" class="btn btn-success btn-sm" type="button" title="下载模板"><i class="ace-icon glyphicon glyphicon-save bigger-110"></i>下载</button>
+							<button id="upload" class="btn btn-success btn-sm" type="button" title="导入学生"><i class="ace-icon glyphicon glyphicon-open bigger-110"></i>导入</button>
 						</c:if>
 					</div>
 				</div>
@@ -27,6 +29,9 @@
 		<div class="alert alert-${alertType}">
 			<button type="button" class="close" data-dismiss="alert">×</button>
 			<strong>提示:</strong>${alertMsg}
+			<c:if test="${not empty failureStudentRecord}">
+				导入失败的学生有：${failureStudentRecord}
+			</c:if>
 		</div>
 	</c:if>
 	<div class="well table-responsive" style="background-color: white;">
@@ -70,3 +75,5 @@
 	    <jsp:include page="/WEB-INF/views/common/pagination.jsp"/>
 	</div>
 </div>
+
+<div id="uploadStudent" class="modal"  data-show="false" data-backdrop='static'></div>

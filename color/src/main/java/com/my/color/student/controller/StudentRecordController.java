@@ -26,7 +26,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -37,6 +36,9 @@ import com.my.color.base.common.BaseCondition;
 import com.my.color.base.common.Constant;
 import com.my.color.base.layout.MainLayout;
 import com.my.color.base.page.Page;
+import com.my.color.base.util.DateUtils;
+import com.my.color.base.util.MessageUtils;
+import com.my.color.base.util.PasswordUtils;
 import com.my.color.base.util.StringUtils;
 import com.my.color.base.util.UUIDUtils;
 import com.my.color.student.dao.po.StudentRecord;
@@ -44,6 +46,7 @@ import com.my.color.student.service.StudentRecordService;
 import com.my.color.teachClass.dao.po.SchoolClass;
 import com.my.color.teachClass.service.SchoolClassService;
 import com.my.color.user.dao.po.User;
+import com.my.color.user.service.UserService;
 import com.my.color.user.service.UserToken;
 
 /**
@@ -65,6 +68,10 @@ public class StudentRecordController {
 	
 	@Autowired
 	private SchoolClassService schoolClassService;
+	
+	
+	@Autowired
+	private UserService userService;
 	
 	/**
 	 * 列表添加查询
@@ -109,6 +116,7 @@ public class StudentRecordController {
 			studentRecord =  recordService.selectByPrimaryKey(studentRecordId);
 		}
 		Map<String,Object> conditionMap = new HashMap<String,Object>();
+		//conditionMap.put("userId", UserToken.getLoginUser().getUserId());
 		List<SchoolClass> classList = schoolClassService.getSchoolClassList(conditionMap);
 		model.put("studentRecord", studentRecord);
 		model.put("classList", classList);//班级集合
@@ -168,10 +176,8 @@ public class StudentRecordController {
 		return layout.layout("teach/student/student-record-info",MENU_ID);
 	}
 	
-	
 	/**
 	 * 下载
-	 * @param salesFileId
 	 * @return
 	 * @throws Exception 
 	 */
@@ -188,10 +194,19 @@ public class StudentRecordController {
         return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), headers, HttpStatus.OK);
 	} 
 	
-	@ResponseBody
+	/**
+	 * 导入
+	 * @param attributes
+	 * @param request
+	 * @param file
+	 * @param studentClassId
+	 * @param studentClassName
+	 * @return
+	 * @throws Exception
+	 */
     @RequestMapping("/readexcel")
-    public boolean readExcel(@RequestParam("file") CommonsMultipartFile file, String bidFileName, String tablenameNotice) throws Exception {
-        boolean result = false;
+    public RedirectView readExcel(RedirectAttributes attributes,HttpServletRequest request,@RequestParam("file") CommonsMultipartFile file, 
+    		String studentClassId, String studentClassName) throws Exception {
         InputStream inputStream = file.getInputStream();
         String name = file.getOriginalFilename();
         Workbook workbook = null;
@@ -207,59 +222,115 @@ public class StudentRecordController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+        StringBuffer buffer = new StringBuffer();
         for (int s = 0; s < 1; s++) {
             Sheet sheet = workbook.getSheetAt(s);
             int rowCount = sheet.getPhysicalNumberOfRows(); // 获取总行数
             for (int r = 0; r < rowCount; r++) {
+            	String userId = UUIDUtils.getUUID();
             	StudentRecord studentRecord = new StudentRecord();
-            	
-            	
+            	studentRecord.setStudentRecordId(UUIDUtils.getUUID());
+            	studentRecord.setStudentUserId(userId);
+            	studentRecord.setStudentIsVaild("1");
+            	studentRecord.setStudentCreateTime(DateUtils.getTime());
+            	studentRecord.setStudentCreateUid(UserToken.getLoginUser().getUserId());
+            	studentRecord.setStudentCreateUname(UserToken.getLoginUser().getUserName());
+            	studentRecord.setStudentClassId(studentClassId);
+            	studentRecord.setStudentClassName(studentClassName);
             	User user = new User();
-            	
-            	
+            	user.setUserId(userId);
+            	user.setUserType("5");
+            	user.setUserLoginNumber(0);
+            	user.setUserIsValid("1");
+            	user.setUserCreateTime(DateUtils.getTime());
                 Row row = sheet.getRow(r);
                 if (row != null) {
                     int cellCount = row.getPhysicalNumberOfCells(); // 获取总列数
-                    
-                    
-                    
-                    if (cellCount == 5) {
-                        
-                        Cell cell0 = row.getCell(0);//获取审查内容
-                        String v = cell0.getStringCellValue();
-                        
-                        Cell cell1 = row.getCell(1);//获取审查标准
+                    Cell cell0 = row.getCell(0);
+                    if(cellCount == 11 || cellCount > 11){
+                    	
+                        if(StringUtils.isEmpty(cell0.getStringCellValue())){
+                        	studentRecord.setStudentRecordName(cell0.getStringCellValue());
+                        	user.setUserName(cell0.getStringCellValue());
+                        }
+                        Cell cell1 = row.getCell(1);
+                        if (!StringUtils.isEmpty(cell1.getStringCellValue())) {
+                        	studentRecord.setStudentRecordSex(cell1.getStringCellValue());
+                        	user.setUserSex(cell1.getStringCellValue());
+                        }
+                        Cell cell2 = row.getCell(2);
                         try {
-                            if (!StringUtils.isEmpty(cell1.getStringCellValue())) {
-                            	
-                            }
-                        } catch (Exception e) {
-                            double d = cell1.getNumericCellValue();
-                        }
-                        Cell cell2 = row.getCell(2);//获取审核
-                        if (!StringUtils.isEmpty(cell2.getStringCellValue())) {
-                        	
-                        }
-                        Cell cell3 = row.getCell(3);//获取通知整改记录
+							if (!StringUtils.isEmpty(cell2.getStringCellValue())) {
+								studentRecord.setStudentRecordHeight(Integer.valueOf(cell2.getStringCellValue()));
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+                        Cell cell3 = row.getCell(3);
                         if (!StringUtils.isEmpty(cell3.getStringCellValue())) {
-                        	
+                        	studentRecord.setStudentBirthYears(cell3.getStringCellValue());
                         }
-                        Cell cell4 = row.getCell(4);//获取备注
+                        Cell cell4 = row.getCell(4);
                         if (!StringUtils.isEmpty(cell4.getStringCellValue())) {
-                        	
+                        	studentRecord.setStudentIdCard(cell4.getStringCellValue());
+                        	user.setUserIdCard(cell4.getStringCellValue());
                         }
-                        
-                        result = true;
-                    } else {
-                        result = false;
+                        Cell cell5 = row.getCell(5);
+                        if (!StringUtils.isEmpty(cell5.getStringCellValue())) {
+                        	studentRecord.setStudentNativePlace(cell5.getStringCellValue());
+                        }
+                        Cell cell6 = row.getCell(6);
+                        if (!StringUtils.isEmpty(cell6.getStringCellValue())) {
+                        	studentRecord.setStudentRecordNation(cell6.getStringCellValue());
+                        }
+                        Cell cell7 = row.getCell(7);
+                        if (!StringUtils.isEmpty(cell7.getStringCellValue())) {
+                        	studentRecord.setStudentPhone(cell7.getStringCellValue());
+                        	user.setUserAccount(cell7.getStringCellValue());
+                        	user.setUserPhone(cell7.getStringCellValue());
+                        	user.setUserPassword(PasswordUtils.SHA1("123456", cell7.getStringCellValue()));
+                        }else{
+                        	buffer.append(cell0.getStringCellValue()).append(";");
+                        	break;
+                        }
+                        Cell cell8 = row.getCell(8);
+                        if (!StringUtils.isEmpty(cell8.getStringCellValue())) {
+                        	studentRecord.setStudentPatriarchPhone(cell8.getStringCellValue());
+                        }
+                        Cell cell9 = row.getCell(9);
+                        if (!StringUtils.isEmpty(cell9.getStringCellValue())) {
+                        	studentRecord.setStudentFamilyAddress(cell9.getStringCellValue());
+                        }
+                        Cell cell10 = row.getCell(10);
+                        if (!StringUtils.isEmpty(cell10.getStringCellValue())) {
+                        	studentRecord.setStudentRemark(cell10.getStringCellValue());
+                        }
+                        recordService.insertSelective(studentRecord);
+                        userService.insertSelective(user);
+                    }else{
+                    	buffer.append(cell0.getStringCellValue()).append(";");
                     }
                 }
             }
         }
-        
         inputStream.close();
         workbook.close();
-        return result;
+        attributes.addFlashAttribute("failureStudentRecord", buffer.toString());
+        MessageUtils.getMessage(attributes, 1);
+        return new RedirectView(request.getContextPath()+"/admin/studentRecord/index");
     }
+    
+    /**
+     * 导入弹窗
+     * @param model
+     * @return
+     */
+    @RequestMapping("/uploadStudentPage")
+	public ModelAndView uploadStudentPage(ModelMap model){
+    	Map<String,Object> conditionMap = new HashMap<String,Object>();
+    	//conditionMap.put("userId", UserToken.getLoginUser().getUserId());
+		List<SchoolClass> classList = schoolClassService.getSchoolClassList(conditionMap);
+		model.put("classList", classList);//班级集合	
+		return layout.layout("teach/student/upload-student-record");
+	}
 }

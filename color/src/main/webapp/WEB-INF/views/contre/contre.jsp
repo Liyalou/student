@@ -11,10 +11,16 @@
 	.table .lefttd{text-align:left}
 </style>
 <div class="page-content">
+	<c:if test="${not empty alertType}">
+		<div class="alert alert-${alertType}">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+			<strong>提示:</strong>${alertMsg}
+		</div>
+	</c:if>
 	<div class="block">
 		<a href="javascript:void(0)" class="block-heading" data-toggle="collapse">个人信息</a>
 		<div id="page-stats" class="block-body collapse in">
-			<table class="table msg" >
+			<table class="table table-bordered table-hover" >
 				<tr>
 					<td class="righttd"><label>登录账号：</label></td>
 					<td class="lefttd">${user.userAccount }</td>
@@ -52,11 +58,15 @@
 							学生
 						</c:if>
 		          	</td>
+		          	<td class="righttd"><label>操作：</label></td>
+		          	<td class="lefttd">
+		          		<a href="javascript:void(0)" class="block-heading" data-toggle="collapse" id="update">修改密码</a>
+		          	</td>
 				</tr>
 			</table>
 		</div>
 	</div>
 </div>
-
+<div id="updatePassword" class="modal"  data-show="false" data-backdrop='static'></div>
 
 
