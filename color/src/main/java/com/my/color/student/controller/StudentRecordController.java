@@ -3,6 +3,7 @@ package com.my.color.student.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -26,6 +28,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -37,7 +40,6 @@ import com.my.color.base.common.Constant;
 import com.my.color.base.layout.MainLayout;
 import com.my.color.base.page.Page;
 import com.my.color.base.util.DateUtils;
-import com.my.color.base.util.MessageUtils;
 import com.my.color.base.util.PasswordUtils;
 import com.my.color.base.util.StringUtils;
 import com.my.color.base.util.UUIDUtils;
@@ -68,7 +70,6 @@ public class StudentRecordController {
 	
 	@Autowired
 	private SchoolClassService schoolClassService;
-	
 	
 	@Autowired
 	private UserService userService;
@@ -207,6 +208,9 @@ public class StudentRecordController {
     @RequestMapping("/readexcel")
     public RedirectView readExcel(RedirectAttributes attributes,HttpServletRequest request,@RequestParam("file") CommonsMultipartFile file, 
     		String studentClassId, String studentClassName) throws Exception {
+    	int failureNumber = 0;
+    	StringBuffer stringBuffer = new StringBuffer();
+    	SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
         InputStream inputStream = file.getInputStream();
         String name = file.getOriginalFilename();
         Workbook workbook = null;
@@ -222,12 +226,13 @@ public class StudentRecordController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        StringBuffer buffer = new StringBuffer();
-        for (int s = 0; s < 1; s++) {
-            Sheet sheet = workbook.getSheetAt(s);
-            int rowCount = sheet.getPhysicalNumberOfRows(); // 获取总行数
-            for (int r = 0; r < rowCount; r++) {
-            	String userId = UUIDUtils.getUUID();
+        int sheetCount = workbook.getNumberOfSheets(); // Sheet的数量
+		for (int s = 0; s < sheetCount; s++) {
+			Sheet sheet = workbook.getSheetAt(s);
+			int rowCount = sheet.getPhysicalNumberOfRows(); // 获取总行数
+			// 遍历每一行
+			for (int r = 0; r < rowCount; r++) {
+				String userId = UUIDUtils.getUUID();
             	StudentRecord studentRecord = new StudentRecord();
             	studentRecord.setStudentRecordId(UUIDUtils.getUUID());
             	studentRecord.setStudentUserId(userId);
@@ -243,80 +248,139 @@ public class StudentRecordController {
             	user.setUserLoginNumber(0);
             	user.setUserIsValid("1");
             	user.setUserCreateTime(DateUtils.getTime());
-                Row row = sheet.getRow(r);
-                if (row != null) {
-                    int cellCount = row.getPhysicalNumberOfCells(); // 获取总列数
-                    Cell cell0 = row.getCell(0);
-                    if(cellCount == 11 || cellCount > 11){
-                    	
-                        if(StringUtils.isEmpty(cell0.getStringCellValue())){
-                        	studentRecord.setStudentRecordName(cell0.getStringCellValue());
-                        	user.setUserName(cell0.getStringCellValue());
-                        }
-                        Cell cell1 = row.getCell(1);
-                        if (!StringUtils.isEmpty(cell1.getStringCellValue())) {
-                        	studentRecord.setStudentRecordSex(cell1.getStringCellValue());
-                        	user.setUserSex(cell1.getStringCellValue());
-                        }
-                        Cell cell2 = row.getCell(2);
-                        try {
-							if (!StringUtils.isEmpty(cell2.getStringCellValue())) {
-								studentRecord.setStudentRecordHeight(Integer.valueOf(cell2.getStringCellValue()));
+				Row row = sheet.getRow(r + 1);
+				if (row != null) {
+					int cellCount = row.getPhysicalNumberOfCells(); // 获取总列数
+					// 遍历每一列
+					int i = 0;
+					for (int c = 0; c < cellCount + 1; c++) {
+						Cell cell = row.getCell(c);
+						String cellValue = null;
+						if (cell != null) {
+							cell.setCellType(Cell.CELL_TYPE_STRING);
+							int cellType = cell.getCellType();
+							if (cellType == Cell.CELL_TYPE_NUMERIC) {
+								if (DateUtil.isCellDateFormatted(cell)) {
+									cellValue = fmt.format(cell.getDateCellValue()); // 日期型
+								} else {
+									cellValue = String.valueOf(cell.getNumericCellValue()); // 数字
+								}
+							}
+							if (cellType == Cell.CELL_TYPE_STRING) {
+								cellValue = cell.getStringCellValue();
+							}
+						}
+						try {
+							switch (i) {
+							case 0:
+								if (!StringUtils.isEmpty(cellValue)) {
+									studentRecord.setStudentRecordName(cellValue);
+				                	user.setUserName(cellValue);								
+								}
+								++i;
+								break;
+							case 1:
+								if (!StringUtils.isEmpty(cellValue)) {
+									studentRecord.setStudentPhone(cellValue);
+				                	user.setUserAccount(cellValue);
+				                	user.setUserPhone(cellValue);
+				                	user.setUserPassword(PasswordUtils.SHA1("123456", cellValue));
+								}
+								++i;
+								break;
+							case 3:
+								if (!StringUtils.isEmpty(cellValue)) {										
+									studentRecord.setStudentRecordHeight(Integer.valueOf(cellValue));
+								}
+								++i;
+								break;
+							case 4:
+								if (!StringUtils.isEmpty(cellValue)) {
+									studentRecord.setStudentBirthYears(cellValue);
+								}
+								++i;
+								break;
+							case 5:
+								if (!StringUtils.isEmpty(cellValue)) {
+									studentRecord.setStudentIdCard(cellValue);
+			                    	user.setUserIdCard(cellValue);
+								}
+								++i;
+								break;
+							case 6:
+								if (!StringUtils.isEmpty(cellValue)) {
+									studentRecord.setStudentNativePlace(cellValue);
+								}
+								++i;
+								break;
+							case 7:
+								if (!StringUtils.isEmpty(cellValue)) {
+									studentRecord.setStudentRecordNation(cellValue);																				
+								}
+								++i;
+								break;
+							case 2:
+								if (!StringUtils.isEmpty(cellValue)) {
+									studentRecord.setStudentRecordSex(cellValue);
+			                    	user.setUserSex(cellValue);
+								}
+								++i;
+								break;
+							case 8:
+								if (!StringUtils.isEmpty(cellValue)) {			
+									studentRecord.setStudentPatriarchPhone(cellValue);
+								}
+								++i;
+								break;
+							case 9:
+								if (!StringUtils.isEmpty(cellValue)) {
+									studentRecord.setStudentFamilyAddress(cellValue);
+								}
+								++i;
+								break;
+							case 10:
+								if (!StringUtils.isEmpty(cellValue)) {
+									studentRecord.setStudentRemark(cellValue);
+								}
+								++i;
+								break;
+							default:
+								break;
 							}
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
-                        Cell cell3 = row.getCell(3);
-                        if (!StringUtils.isEmpty(cell3.getStringCellValue())) {
-                        	studentRecord.setStudentBirthYears(cell3.getStringCellValue());
-                        }
-                        Cell cell4 = row.getCell(4);
-                        if (!StringUtils.isEmpty(cell4.getStringCellValue())) {
-                        	studentRecord.setStudentIdCard(cell4.getStringCellValue());
-                        	user.setUserIdCard(cell4.getStringCellValue());
-                        }
-                        Cell cell5 = row.getCell(5);
-                        if (!StringUtils.isEmpty(cell5.getStringCellValue())) {
-                        	studentRecord.setStudentNativePlace(cell5.getStringCellValue());
-                        }
-                        Cell cell6 = row.getCell(6);
-                        if (!StringUtils.isEmpty(cell6.getStringCellValue())) {
-                        	studentRecord.setStudentRecordNation(cell6.getStringCellValue());
-                        }
-                        Cell cell7 = row.getCell(7);
-                        if (!StringUtils.isEmpty(cell7.getStringCellValue())) {
-                        	studentRecord.setStudentPhone(cell7.getStringCellValue());
-                        	user.setUserAccount(cell7.getStringCellValue());
-                        	user.setUserPhone(cell7.getStringCellValue());
-                        	user.setUserPassword(PasswordUtils.SHA1("123456", cell7.getStringCellValue()));
-                        }else{
-                        	buffer.append(cell0.getStringCellValue()).append(";");
-                        	break;
-                        }
-                        Cell cell8 = row.getCell(8);
-                        if (!StringUtils.isEmpty(cell8.getStringCellValue())) {
-                        	studentRecord.setStudentPatriarchPhone(cell8.getStringCellValue());
-                        }
-                        Cell cell9 = row.getCell(9);
-                        if (!StringUtils.isEmpty(cell9.getStringCellValue())) {
-                        	studentRecord.setStudentFamilyAddress(cell9.getStringCellValue());
-                        }
-                        Cell cell10 = row.getCell(10);
-                        if (!StringUtils.isEmpty(cell10.getStringCellValue())) {
-                        	studentRecord.setStudentRemark(cell10.getStringCellValue());
-                        }
-                        recordService.insertSelective(studentRecord);
-                        userService.insertSelective(user);
-                    }else{
-                    	buffer.append(cell0.getStringCellValue()).append(";");
-                    }
-                }
-            }
-        }
+					}
+					if(user.getUserPhone() != null && user.getUserName() != null){
+						 User newUser = userService.getUserByAccount(user.getUserPhone());
+						 if(newUser == null){
+							 recordService.insertSelective(studentRecord);
+				             userService.insertSelective(user);
+						 }else{
+							 failureNumber++;
+							 stringBuffer.append(user.getUserName()).append(":").append("电话号码重复;");
+						 }
+					}else{
+						failureNumber++;
+						if(user.getUserPhone() == null){
+							stringBuffer.append(user.getUserName()).append(":").append("电话号码不能为空;");
+						}
+						if(user.getUserName() == null){
+							stringBuffer.append(user.getUserPhone()).append(":").append("姓名不能为空;");
+						}
+					}
+				}
+			}
+		}
         inputStream.close();
         workbook.close();
-        attributes.addFlashAttribute("failureStudentRecord", buffer.toString());
-        MessageUtils.getMessage(attributes, 1);
+        if(failureNumber>0){
+        	attributes.addFlashAttribute("alertMsg", "失败个数："+failureNumber+";"+stringBuffer.toString());
+        	attributes.addFlashAttribute("alertType", "danger");
+        }else{
+        	attributes.addFlashAttribute("alertMsg", "操作成功");
+        	attributes.addFlashAttribute("alertType", Constant.ALERT_SUCCESS);
+        }
         return new RedirectView(request.getContextPath()+"/admin/studentRecord/index");
     }
     

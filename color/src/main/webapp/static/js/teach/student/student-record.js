@@ -39,7 +39,41 @@ var Tables={
         
         $("#upload").on('click', function(event) {
             $("#uploadStudent").load(ctx+'/admin/studentRecord/uploadStudentPage',function(){
-                $("#uploadStudent").modal('show');
+                $("#uploadStudent").modal('show');  
+//                studentClassId = function() {
+//                    return $("#studentClassId").val();
+//                };
+//                studentClassName = function() {
+//                    return $("#studentClassName").val();
+//                };
+//                //文件上传初始化id为input-id的输入框
+//                $("#file-input").fileinput({
+//                    //中文
+//                    language:'zh',
+//                    //后台接收的url
+//                    uploadUrl:ctx+'/admin/studentRecord/readexcel',
+//                    //异步
+//                    uploadAsync:true,
+//                    //预览
+//                    showPreview:false,
+//                    //最大上传
+//                    maxFileCount:5,
+//                    allowedFileExtensions:[ 'xlsx'],
+//                    maxFileSize:10000,
+//                    uploadExtraData: function(previewId, index) {   //额外参数的关键点         
+//                    	var obj = {};
+//                        obj.studentClassId = studentClassId();
+//                        obj.studentClassName = studentClassName();
+//                        return obj;
+//                    }
+//                }).on("fileuploaded", function(event, data){
+//                	if(!data.response.status){
+//                		alert('提示：'+data.response.errorMessage);
+//                	}else{
+//                		alert('失败个数：'+data.response.failureNumber+';'+data.response.stringBuffer);
+//                        $('body').load(ctx+'/admin/studentRecord/index');
+//                	}
+//                });
             })
         }); 
     }
