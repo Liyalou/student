@@ -38,6 +38,7 @@
 		<table class="table table-bordered table-hover">
 			<thead>
 				<tr>
+					<th style = "text-align: center;">创建时间</th>
 					<th style = "text-align: center;">姓名</th>
 					<th style = "text-align: center;">请假类型</th>
 					<th style = "text-align: center;">节次/天数</th>
@@ -51,6 +52,7 @@
 			<tbody>
 				<c:forEach items="${pageList.list}" var="vacation">
 					<tr>
+						<td>${vacation.vacateCreateTime}</td>
 						<td>${vacation.vacateUserName}</td>
 						<td>
 							<c:if test="${vacation.vacateType == 1}">

@@ -41,10 +41,32 @@
             <strong>提示:</strong>${alertMsg}
         </div>
     </c:if>
+    	<div class="row" >
+		<div class="col-xs-2">
+			<label  class="col-xs-4 control-label  no-padding-right">迟到/次：</label>
+			<div class="col-xs-8">
+				${salaryStatus1}
+			</div>
+		</div>
+		<div class="col-xs-2">
+			<label  class="col-xs-5 control-label  no-padding-right">请假/次：</label>
+			<div class="col-xs-7">
+				${salaryStatus2}
+			</div>
+		</div>
+		<div class="col-xs-2">
+			<label  class="col-xs-5 control-label  no-padding-right">旷课/次：</label>
+			<div class="col-xs-7">
+				${salaryStatus3}
+			</div>
+		</div>
+	</div>
+    
 	<div class="well table-responsive" style="background-color: white;">
 		<table class="table table-bordered table-hover">
 			<thead>
 				<tr>
+					<th style = "text-align: center;">创建时间</th>
 					<th style = "text-align: center;">学生姓名</th>
 					<th style = "text-align: center;">班级名称</th>
 					<th style = "text-align: center;">考勤时间</th>
@@ -58,6 +80,7 @@
 			<tbody>
 				<c:forEach items="${pageList.list}" var="SalaryManage">
 					<tr>
+						<td>${SalaryManage.salaryCreateTime}</td>
 						<td>${SalaryManage.studentUserName}</td>
 						<td>${SalaryManage.salaryClassName}</td>
 						<td>${SalaryManage.salaryTime}</td>

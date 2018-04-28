@@ -26,4 +26,5 @@ public interface SalaryManageMapper {
     
     
     List<SalaryManage> getSalaryManageList(Map<String,Object> conditionMap);
+    
 }

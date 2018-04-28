@@ -43,14 +43,16 @@ public class QueryVacateController {
 			conditionMap.put("studentClassName", studentClassName);
 		}
 		if(!StringUtils.isEmpty(starCreateTime)){
-			conditionMap.put("starCreateTime", starCreateTime);
+			conditionMap.put("startCreateTime", starCreateTime);
 		}
 		if(!StringUtils.isEmpty(endCreateTime)){
 			conditionMap.put("endCreateTime", endCreateTime);
 		}
+		Integer vacateNumber = studentVacateService.getStudentVacateNumber(conditionMap);
 		page.startPage(page);
 		List<StudentVacate> list = studentVacateService.getStudentVacateList(conditionMap);
 		PageInfo<StudentVacate> pageList = page.listToPage(list);
+		model.put("vacateNumber", vacateNumber);
 		model.put(Constant.PAGE_LIST, pageList);
 		model.put(Constant.PAGE_URL, "/admin/queryVacate/queryIndex");
 		return layout.layout("queryVacate",MENU_ID);

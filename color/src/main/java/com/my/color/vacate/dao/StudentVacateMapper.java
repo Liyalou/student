@@ -26,4 +26,7 @@ public interface StudentVacateMapper {
     
     
     List<StudentVacate> getStudentVacateList(Map<String,Object> conditionMap);
+    
+    
+    Integer getStudentVacateNumber(Map<String,Object> conditionMap);
 }

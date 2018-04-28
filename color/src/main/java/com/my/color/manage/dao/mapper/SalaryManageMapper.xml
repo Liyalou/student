@@ -293,5 +293,12 @@
             #{classId,jdbcType=VARCHAR}
         </foreach>
     </if>
+    <if test="startCreateTime !=null and startCreateTime !=''">
+    	and salary_create_time &gt;= str_to_date(#{startCreateTime},'%Y-%m-%d')
+    </if>
+    <if test="endCreateTime !=null and endCreateTime !=''">
+    	and salary_create_time &lt;= DATE_ADD(str_to_date(#{endCreateTime},'%Y-%m-%d'),INTERVAL 1 DAY)
+    </if>
+    order by salary_create_time desc
   </select>
 </mapper>

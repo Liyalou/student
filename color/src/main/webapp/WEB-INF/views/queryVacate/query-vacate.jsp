@@ -42,6 +42,14 @@
             <strong>提示:</strong>${alertMsg}
         </div>
     </c:if>
+    <div class="row" >
+		<div class="col-xs-2">
+			<label  class="col-xs-5 control-label  no-padding-right">请假/次：</label>
+			<div class="col-xs-7">
+				${vacateNumber}
+			</div>
+		</div>
+	</div>
 	<div class="well table-responsive" style="background-color: white;">
 		<table class="table table-bordered table-hover">
 			<thead>

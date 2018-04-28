@@ -58,6 +58,10 @@ public class StudentVacateService {
 		return studentVacateMapper.getStudentVacateList(conditionMap);
 	}
 	
+	public Integer getStudentVacateNumber(Map<String,Object> conditionMap){
+		return studentVacateMapper.getStudentVacateNumber(conditionMap);
+	}
+	
 	/**
 	 * 保存修改
 	 * @param role

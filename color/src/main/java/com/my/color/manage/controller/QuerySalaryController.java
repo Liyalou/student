@@ -41,14 +41,30 @@ public class QuerySalaryController {
 			conditionMap.put("userName", userName);
 		}
 		if(!StringUtils.isEmpty(starCreateTime)){
-			conditionMap.put("starCreateTime", starCreateTime);
+			conditionMap.put("startCreateTime", starCreateTime);
 		}
 		if(!StringUtils.isEmpty(endCreateTime)){
 			conditionMap.put("endCreateTime", endCreateTime);
 		}
 		page.startPage(page);
+		Integer salaryStatus1 = 0;
+		Integer salaryStatus2 = 0;
+		Integer salaryStatus3 = 0;
 		List<SalaryManage> list = salaryManageService.getSalaryManageList(conditionMap);
+		for (SalaryManage salaryManage : list) {
+			String salaryStatus = salaryManage.getSalaryStatus();
+			if(salaryStatus.equals("1")){
+				salaryStatus1++;
+			}else if (salaryStatus.equals("2")){
+				salaryStatus2++;
+			}else{
+				salaryStatus3++;
+			}
+		}
 		PageInfo<SalaryManage> pageList = page.listToPage(list);
+		model.put("salaryStatus1", salaryStatus1);
+		model.put("salaryStatus2", salaryStatus2);
+		model.put("salaryStatus3", salaryStatus3);
 		model.put(Constant.PAGE_LIST, pageList);
 		model.put(Constant.PAGE_URL, "/admin/querySalary/querySalaryIndex");
 		return layout.layout("querySalary",MENU_ID);

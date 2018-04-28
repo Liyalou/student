@@ -33,6 +33,7 @@
 		<table class="table table-bordered table-hover">
 			<thead>
 				<tr>
+					<th style = "text-align: center;">创建时间</th>
 					<th style = "text-align: center;">班级名称</th>
 					<th style = "text-align: center;">学生姓名</th>
 					<th style = "text-align: center;">考勤时间</th>
@@ -47,6 +48,7 @@
 			<tbody>
 				<c:forEach items="${pageList.list}" var="SalaryManage">
 					<tr>
+						<td>${SalaryManage.salaryCreateTime}</td>
 						<td>${SalaryManage.salaryClassName}</td>
 						<td>${SalaryManage.studentUserName}</td>
 						<td>${SalaryManage.salaryTime}</td>
