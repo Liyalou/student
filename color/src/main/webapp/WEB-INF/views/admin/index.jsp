@@ -55,7 +55,7 @@ pageEncoding="UTF-8"%>
 							<input type="password" class="form-control" id="password" name="password" >
 						</div>
 						<div class="form-group">
-							<p class="text-right" style="font-size: 12px;"><a>忘记密码</a></p>
+							<p class="text-right" style="font-size: 12px;" onclick = "alterMsg()"><a>忘记密码</a></p>
 							<button type="submit" class="btn btn-default form-control">登&nbsp;录</button>
 						</div>
 						<div class="form-group">
@@ -83,6 +83,10 @@ $(function(){
 		}
 	});
 });
+
+function alterMsg(){
+	alert("请联系教务处");
+}
 
 </script>
 </html>
