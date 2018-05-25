@@ -3,7 +3,14 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <div class="col-sm-12 center">
-    <strong style="font-size:24px">添加教务老师</strong>
+    <c:choose>
+        <c:when test='${empty teachTeacher.teachTeacherId}'>
+            <strong style="font-size:24px">添加教务老师</strong>
+        </c:when>
+        <c:otherwise>
+            <strong style="font-size:24px">修改教务老师</strong>
+        </c:otherwise>
+    </c:choose>
 </div>
 <div class="form-group" >
     <form id="teachTeacher_form" role="form" method="post" action="${ctx}/admin/teachTeacher/submitTeacher" class="form-horizontal ">

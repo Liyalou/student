@@ -3,7 +3,14 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <div class="col-sm-12 center">
-    <strong style="font-size:24px">请假申请</strong>
+    <c:choose>
+        <c:when test='${empty studentVacate.studentVacateId}'>
+            <strong style="font-size:24px">添加请假申请</strong>
+        </c:when>
+        <c:otherwise>
+            <strong style="font-size:24px">修改请假申请</strong>
+        </c:otherwise>
+    </c:choose>
 </div>
 <div class="form-group" >
     <form id="teachTeacher_form" role="form" method="post" action="${ctx}/admin/studentVacate/submitStudentVacate" class="form-horizontal ">

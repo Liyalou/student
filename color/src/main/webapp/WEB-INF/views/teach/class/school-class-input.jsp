@@ -3,8 +3,16 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <div class="col-sm-12 center">
-    <strong style="font-size:24px">添加班级</strong>
+    <c:choose>
+        <c:when test='${empty schoolClass.schoolClassId}'>
+            <strong style="font-size:24px">添加班级</strong>
+        </c:when>
+        <c:otherwise>
+            <strong style="font-size:24px">修改班级</strong>
+        </c:otherwise>
+    </c:choose>
 </div>
+
 <div class="form-group" >
     <form id="schoolClass_form" role="form" method="post" action="${ctx}/admin/schoolClass/submitSchoolClass" class="form-horizontal ">
         <input type="hidden" name="schoolClassId" value="${schoolClass.schoolClassId}"/>
